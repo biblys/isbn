@@ -58,6 +58,6 @@
 		</form>
 		
 	<br />
-	<a href="http://nokto.net/tag/ISBNc">More info (french)</a> | <a>Source on Github</a><br />
+	<a href="readme.md">Readme</a> | <a href="http://nokto.net/php-isbn-class/">More info (french)</a> | <a href="https://github.com/iwazaru/php-isbn-class">Source on Github</a><br />
 	</body>
 </html>
