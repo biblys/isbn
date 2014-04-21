@@ -38,28 +38,31 @@
 				$_groups, // XML ranges file groups
 				$_agency; // ISBN Agency
 		
-		public function __construct($code)
+		public function __construct($code = NULL)
 		{
-			$this->_input = $code;
-			
-			// Load ISBN ranges from XML file
-			$this->loadRanges(self::ISBN_RANGES_FILE);
-			
-			// Remove hyphens and check characters
-			$code = $this->removeHyphens($code);
-			
-			// Remove checksum and check length
-			$code = $this->removeChecksum($code);
-			
-			// Remove (and set) product code
-			$code = $this->removeProductCode($code);
-			
-			// Remove (and save) country code
-			$code = $this->removeCountryCode($code);
-			
-			// Remove (and save) publisher code
-			$this->removePublisherCode($code);
-			
+			if (!empty($code))
+			{
+				$this->_input = $code;
+	
+				// Load ISBN ranges from XML file
+				$this->loadRanges(self::ISBN_RANGES_FILE);
+	
+				// Remove hyphens and check characters
+				$code = $this->removeHyphens($code);
+	
+				// Remove checksum and check length
+				$code = $this->removeChecksum($code);
+	
+				// Remove (and set) product code
+				$code = $this->removeProductCode($code);
+	
+				// Remove (and save) country code
+				$code = $this->removeCountryCode($code);
+	
+				// Remove (and save) publisher code
+				$this->removePublisherCode($code);
+			}
+
 		}
 		
 		/* Check methods */
@@ -266,7 +269,8 @@
 			{
 				$code = $this->getProduct().$this->getCountry().$this->getPublisher().$this->getPublication();
 				$c = str_split($code);
-				$sum = (10 - ((($c[1] + $c[3] + $c[5] + $c[7] + $c[9] + $c[11]) * 3) + ($c[0] + $c[2] + $c[4] + $c[6] + $c[8] + $c[10]) % 10)) % 10;
+				$sum = (($c[1] + $c[3] + $c[5] + $c[7] + $c[9] + $c[11]) * 3) + ($c[0] + $c[2] + $c[4] + $c[6] + $c[8] + $c[10]);
+				$sum = (10 - ($sum % 10)) % 10;
 			}
 			
 			$this->setChecksum($sum);

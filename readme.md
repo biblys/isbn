@@ -49,5 +49,8 @@ Usage
 Changelog
 ---------
 
-1.0 (19/04/2014)
+1.0.1 (21/04/2014)
+- EAN-13 checksum character calculation bug fix
+
+1.0.0 (19/04/2014)
 - first release
