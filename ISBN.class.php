@@ -54,14 +54,19 @@
 				// Remove checksum and check length
 				$code = $this->removeChecksum($code);
 	
-				// Remove (and set) product code
-				$code = $this->removeProductCode($code);
+				// Don't go on with parsing if length is invalid
+				if ($this->isValid())
+				{
 	
-				// Remove (and save) country code
-				$code = $this->removeCountryCode($code);
-	
-				// Remove (and save) publisher code
-				$this->removePublisherCode($code);
+					// Remove (and set) product code
+					$code = $this->removeProductCode($code);
+		
+					// Remove (and save) country code
+					$code = $this->removeCountryCode($code);
+		
+					// Remove (and save) publisher code
+					$this->removePublisherCode($code);
+				}
 			}
 			else 
 			{
