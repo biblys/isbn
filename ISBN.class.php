@@ -62,6 +62,7 @@
 				// Remove (and save) publisher code
 				$this->removePublisherCode($code);
 			}
+			else $this->setValid(false);
 
 		}
 		
