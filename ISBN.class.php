@@ -21,7 +21,8 @@
 		const ISBN_RANGES_FILE = 'range.xml';
 		
 		// Error messages (for localization)
-		const ERROR_INVALID_CHARACTERS = 'Invalid characters in the code',
+		const ERROR_EMPTY = 'No code provided',
+			  ERROR_INVALID_CHARACTERS = 'Invalid characters in the code',
 			  ERROR_INVALID_LENGTH = 'Code is too short or too long',
 			  ERROR_INVALID_COUNTRY = 'Country code unknown';
 		
@@ -62,7 +63,11 @@
 				// Remove (and save) publisher code
 				$this->removePublisherCode($code);
 			}
-			else $this->setValid(false);
+			else 
+			{
+				$this->addError(self::ERROR_EMPTY);
+				$this->setValid(false);
+			}
 
 		}
 		
