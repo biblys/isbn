@@ -147,7 +147,7 @@
 			if (!is_numeric($code))
 			{
 				$this->setValid(false);
-				$this->addError(self::ERROR_UNWANTED_CHARACTERS);
+				$this->addError(self::ERROR_INVALID_CHARACTERS);
 			}
 			
 			return $code;
