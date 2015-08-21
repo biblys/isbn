@@ -29,6 +29,7 @@ class testEuroTax extends PHPUnit_Framework_TestCase
     
     public function testFormatIsbn10()
     {
-        $this->assertEquals($this->isbn->format('ISBN-10'), "2-207-25804-1");
+        $isbn10 = new ISBN('9783464603529');
+        $this->assertEquals($isbn10->format('ISBN-10'), "3-464-60352-0");
     }
 }
