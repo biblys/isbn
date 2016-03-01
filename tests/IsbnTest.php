@@ -1,35 +1,41 @@
-<?php 
+<?php
 
-require_once __DIR__ . '/../ISBN.class.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-class testEuroTax extends PHPUnit_Framework_TestCase
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Biblys\Isbn\Isbn as Isbn;
+
+class testIsbn extends PHPUnit_Framework_TestCase
 {
     protected $isbn;
-    
+
     public function setUp()
     {
-        $this->isbn = new ISBN('9782207258040');
+        $this->isbn = new Isbn('9782207258040');
     }
-    
+
     public function testIsValid()
     {
         $this->assertTrue($this->isbn->isValid());
     }
-    
+
     public function testIsNotValid()
     {
-        $invalid = new ISBN('5780AAC728440');
+        $invalid = new Isbn('5780AAC728440');
         $this->assertFalse($invalid->isValid());
     }
-    
+
     public function testFormatIsbn13()
     {
         $this->assertEquals($this->isbn->format('ISBN-13'), "978-2-207-25804-0");
     }
-    
+
     public function testFormatIsbn10()
     {
-        $isbn10 = new ISBN('9783464603529');
+        $isbn10 = new Isbn('9783464603529');
         $this->assertEquals($isbn10->format('ISBN-10'), "3-464-60352-0");
     }
 }
