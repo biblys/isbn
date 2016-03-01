@@ -12,7 +12,7 @@ This package can be used to :
 
 Install with composer:
 
-`composer require biblys/isbn:dev-master`
+`composer require biblys/isbn:~2.0`
 
 
 ## Test
@@ -58,13 +58,16 @@ if ($isbn->isValid()) {
 
 ## Changelog
 
-1.1 (21/08/2015)
+2.0.0 (2016-03-01)
+* Revamped library as a Composer package
+
+1.1.0 (2015-08-21)
 * Fixed ISBN-10 checksum character calculation (thanks to @thinkmobilede)
 * Added phpunit tests
 * Updated ISBN XML ranges file
 
-1.0.1 (21/04/2014)
+1.0.1 (2014-04-21)
 * EAN-13 checksum character calculation bug fix
 
-1.0.0 (19/04/2014)
+1.0.0 (2014-04-19)
 * First release
