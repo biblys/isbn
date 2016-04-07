@@ -1,5 +1,6 @@
-biblys/isbn
-===========
+# biblys/isbn
+
+[![Build Status](https://travis-ci.org/biblys/isbn.svg?branch=master)](https://travis-ci.org/biblys/isbn)
 
 This package can be used to :  
 * validate an ISBN code
