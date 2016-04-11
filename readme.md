@@ -1,5 +1,6 @@
-biblys/isbn
-===========
+# biblys/isbn
+
+[![Build Status](https://travis-ci.org/biblys/isbn.svg?branch=master)](https://travis-ci.org/biblys/isbn)
 
 This package can be used to :  
 * validate an ISBN code
@@ -20,7 +21,7 @@ Install with composer:
 Run tests with PHPUnit:
 
 * `composer install`
-* `phpunit tests/`
+* `composer test`
 
 
 ## Usage
@@ -57,6 +58,10 @@ if ($isbn->isValid()) {
 
 
 ## Changelog
+
+2.0.1 (2016-03-01)
+* Added LICENSE file and copyright information
+* Added Travis configuration file 
 
 2.0.0 (2016-03-01)
 * Revamped library as a Composer package
