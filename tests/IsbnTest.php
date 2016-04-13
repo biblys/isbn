@@ -48,4 +48,12 @@ class testIsbn extends PHPUnit_Framework_TestCase
         $isbn10 = new Isbn('9783464603529');
         $this->assertEquals($isbn10->format('ISBN-10'), "3-464-60352-0");
     }
+
+    public function testMauritiusRange()
+    {
+        $isbn = new Isbn('9786130971311');
+        $this->assertEquals($isbn->format('ISBN-13'), "978-613-0-97131-1");
+    }
+
+
 }

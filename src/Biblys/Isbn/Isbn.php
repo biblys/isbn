@@ -33,14 +33,16 @@ class Isbn
 			$_groups, // XML ranges file groups
 			$_agency; // ISBN Agency
 
+	/**
+	 * @var Ranges
+	 */
+	private $ranges = NULL;
+
 	public function __construct($code = NULL)
 	{
 		if (!empty($code))
 		{
 			$this->_input = $code;
-
-			// Load ISBN ranges from XML file
-			$this->loadRanges();
 
 			// Remove hyphens and check characters
 			$code = $this->removeHyphens($code);
@@ -66,6 +68,19 @@ class Isbn
 			$this->setValid(false);
 		}
 
+	}
+
+	/**
+	 * Gets a class that knows about the ISBN ranges
+	 *
+	 * @return Ranges
+	 */
+	public function getRanges()
+	{
+		if ($this->ranges !== NULL) {
+			return $this->ranges;
+		}
+		return $this->ranges = new Ranges();
 	}
 
 	/* Check methods */
@@ -193,7 +208,7 @@ class Isbn
 		$first7 = substr($code,0,7);
 
 		// Select the right set of rules according to the product code
-		foreach ($this->_prefixes as $p)
+		foreach ($this->getRanges()->getPrefixes() as $p)
 		{
 			if ($p['Prefix'] == $this->getProduct())
 			{
@@ -229,7 +244,7 @@ class Isbn
 		$first7 = substr($code,0,7);
 
 		// Select the right set of rules according to the agency (product + country code)
-		foreach ($this->_groups as $g)
+		foreach ($this->getRanges()->getGroups() as $g)
 		{
 			if ($g['Prefix'] == $this->getProduct().'-'.$this->getCountry())
 			{
@@ -283,12 +298,6 @@ class Isbn
 
 
 	/* SETTERS */
-
-	private function loadRanges()
-	{
-		$this->_prefixes = Ranges::getPrefixes();
-		$this->_groups = Ranges::getGroups();
-	}
 
 	private function setProduct($product)
 	{
