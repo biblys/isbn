@@ -1,4 +1,18 @@
-<?php # generated automatically by update-ranges.php, do not edit manually! 
+<?php 
+/*
+ *
+ * This file is generated automatically by update-ranges.php, do not edit
+ * manually! See README.md for more info. 
+ *
+ * This file is part of the biblys/isbn package.
+ *
+ * (c) Clément Bourgoin
+ *
+ * This package is Open Source Software. For the full copyright and license
+ * information, please view the LICENSE file which was distributed with this
+ * source code.
+ */
+
 $groups = array (
   0 => 
   array (
