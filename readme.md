@@ -13,7 +13,9 @@ This package can be used to :
 
 Install with composer:
 
-`composer require biblys/isbn:~2.0`
+```
+$ composer require biblys/isbn:~2.0
+```
 
 ## Usage
 
@@ -52,9 +54,10 @@ if ($isbn->isValid()) {
 
 Run tests with PHPUnit:
 
-* `composer install`
-* `composer test`
-
+```
+$ composer install
+$ composer test
+```
 
 ## ISBN ranges update
 
@@ -64,9 +67,10 @@ happens, this library must be updated. If a range update is necessary, please
 open an issue on Github. You can also open a pull request after updating
 the ranges your self with the following commands:
 
-* `composer install`
-* `composer run update-ranges`
-
+```
+$ composer install
+$ composer run update-ranges
+```
 
 ## Changelog
 
