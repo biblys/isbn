@@ -24,6 +24,17 @@ Run tests with PHPUnit:
 * `composer test`
 
 
+## ISBN ranges update
+
+New ISBN ranges may be added from time to time by the 
+[International ISBN Agency](https://www.isbn-international.org/). Whenever it
+happens, this library must be updated. If a range update is necessary, please
+open an issue on Github. You can also open a pull request after updating
+the ranges your self with the following commands:
+
+* `composer install`
+* `composer run update-ranges`
+
 ## Usage
 
 ```php
