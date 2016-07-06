@@ -25,25 +25,25 @@ $ composer require biblys/isbn:~2.0
 use Biblys\Isbn\Isbn as Isbn;
 
 // Create an ISBN object from an EAN code
-$isbn = new Isbn('9791091146098'); 
+$isbn = new Isbn('9791091146098');
 
 // Check if input is a valid ISBN code
 if ($isbn->isValid()) {
-  
+
   // Print the code in ISBN-13 format
 	echo $isbn->format('ISBN-13');
-  
+
   // Print the code in ISBN-10 format
 	echo $isbn->format('ISBN-10');
-  
+
   // Print the checksum digit
 	echo $isbn->getChecksum();
-  
+
   // Print the registration agency
 	echo $isbn->getAgency();
-  
+
 } else {
-  
+
   // Show validation errors
 	echo $isbn->getErrors();
 }
@@ -61,7 +61,7 @@ $ composer test
 
 ## ISBN ranges update
 
-New ISBN ranges may be added from time to time by the 
+New ISBN ranges may be added from time to time by the
 [International ISBN Agency](https://www.isbn-international.org/). Whenever it
 happens, this library must be updated. If a range update is necessary, please
 open an issue on Github. You can also open a pull request after updating
@@ -74,12 +74,15 @@ $ composer run update-ranges
 
 ## Changelog
 
+2.0.3 (2016-07-06)
+* Added 978-99978 range for Mongolia
+
 2.0.2 (2016-04-12)
 * Fixed [#3](https://github.com/biblys/isbn/issues/3): Bug in the 978-613 range
 * Added a composer script to update ISBN ranges from isbn-international.org
 
 2.0.1 (2016-03-01)
-* Fixed ([#2](https://github.com/biblys/isbn/issues/2)):
+* Fixed [#2](https://github.com/biblys/isbn/issues/2):
 added LICENSE file and copyright information
 * Added Travis configuration file
 
@@ -87,8 +90,8 @@ added LICENSE file and copyright information
 * Revamped library as a Composer package
 
 1.1.0 (2015-08-21)
-* Fixed [#1](https://github.com/biblys/isbn/issues/1) 
-ISBN-10 checksum character calculation 
+* Fixed [#1](https://github.com/biblys/isbn/issues/1):
+ISBN-10 checksum character calculation
 * Added phpunit tests
 * Updated ISBN XML ranges file
 
