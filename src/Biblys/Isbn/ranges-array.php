@@ -1,6 +1,5 @@
 <?php 
 /*
- *
  * This file is generated automatically by update-ranges.php, do not edit
  * manually! See README.md for more info. 
  *
@@ -7900,6 +7899,32 @@ $groups = array (
   ),
   224 => 
   array (
+    'Prefix' => '978-99978',
+    'Agency' => 'Mongolia',
+    'Rules' => 
+    array (
+      'Rule' => 
+      array (
+        0 => 
+        array (
+          'Range' => '0000000-4999999',
+          'Length' => '1',
+        ),
+        1 => 
+        array (
+          'Range' => '5000000-7999999',
+          'Length' => '2',
+        ),
+        2 => 
+        array (
+          'Range' => '8000000-9999999',
+          'Length' => '3',
+        ),
+      ),
+    ),
+  ),
+  225 => 
+  array (
     'Prefix' => '979-10',
     'Agency' => 'France',
     'Rules' => 
@@ -7934,7 +7959,7 @@ $groups = array (
       ),
     ),
   ),
-  225 => 
+  226 => 
   array (
     'Prefix' => '979-11',
     'Agency' => 'Korea, Republic',
@@ -7970,7 +7995,7 @@ $groups = array (
       ),
     ),
   ),
-  226 => 
+  227 => 
   array (
     'Prefix' => '979-12',
     'Agency' => 'Italy',
