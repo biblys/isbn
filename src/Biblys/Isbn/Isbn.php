@@ -246,28 +246,28 @@ class Isbn
 		// Select the right set of rules according to the agency (product + country code)
 		foreach ($this->getRanges()->getGroups() as $g)
 		{
-			if ($g['Prefix'] == $this->getProduct().'-'.$this->getCountry())
-			{
-				$rules = $g['Rules']['Rule'];
-				$this->setAgency($g['Agency']);
-				break;
-			}
-		}
+			if ($g['Prefix'] <> $this->getProduct().'-'.$this->getCountry()) {
+			    continue;
+            }
 
-		// Select the right rule
-		foreach ($rules as $r)
-		{
-			$ra = explode('-',$r['Range']);
-			if ($first7 >= $ra[0] && $first7 <= $ra[1])
-			{
-				$length = $r['Length'];
-				break;
-			}
-		}
+            $rules = $g['Rules']['Rule'];
+            $this->setAgency($g['Agency']);
 
-		$this->setPublisher(substr($code,0,$length));
-		$this->setPublication(substr($code,$length));
+            // Select the right rule
+            foreach ($rules as $r)
+            {
+                $ra = explode('-',$r['Range']);
+                if ($first7 < $ra[0] || $first7 > $ra[1]) {
+                    continue;
+                }
 
+                $length = $r['Length'];
+                $this->setPublisher(substr($code,0,$length));
+                $this->setPublication(substr($code,$length));
+                break;
+            }
+            break;
+        }
 	}
 
 	/**
