@@ -55,5 +55,12 @@ class testIsbn extends PHPUnit_Framework_TestCase
         $this->assertEquals($isbn->format('ISBN-13'), "978-613-0-97131-1");
     }
 
+    public function testUnknownPrefix()
+    {
+        // Should not raise an error
+        $isbn = new Isbn('9790706801940');
+        $this->assertInternalType('bool', $isbn->isValid());
+    }
+
 
 }

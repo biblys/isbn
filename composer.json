@@ -1,8 +1,8 @@
 {
     "name": "biblys/isbn",
     "description": "A PHP library to convert and validate ISBN & EAN",
-    "time": "2016-07-06",
-    "keywords": ["ISBN", "Ean", "Book"],
+    "time": "2017-06-29",
+    "keywords": ["ISBN", "EAN", "Book"],
     "license": "MIT",
     "homepage": "https://github.com/biblys/isbn",
     "authors": [
