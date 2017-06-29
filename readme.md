@@ -74,6 +74,9 @@ $ composer run update-ranges
 
 ## Changelog
 
+2.0.4 (2017-06-29)
+* Fixed error when no rule is found (eg. for ISBN 9790706801940)
+
 2.0.3 (2016-07-06)
 * Added 978-99978 range for Mongolia
 
