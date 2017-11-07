@@ -28,6 +28,6 @@
     },
     "scripts": {
       "test": "vendor/bin/phpunit tests",
-      "update-ranges": "php update-ranges.php"
+      "update-ranges": "php bin/update-ranges.php"
     }
 }

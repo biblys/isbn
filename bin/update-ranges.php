@@ -50,7 +50,7 @@ foreach ($groups as &$group) {
     }
 }
 
-$file = dirname(__FILE__) . '/src/Biblys/Isbn/ranges-array.php';
+$file = dirname(__FILE__) . '/../src/Biblys/Isbn/ranges-array.php';
 echo "Saving to $file...\n";
 
 file_put_contents($file,
