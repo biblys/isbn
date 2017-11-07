@@ -74,6 +74,9 @@ $ composer run update-ranges
 
 ## Changelog
 
+2.0.5 (2017-11-07)
+* Update ISBN ranges
+
 2.0.4 (2017-06-29)
 * Fixed error when no rule is found (eg. for ISBN 9790706801940)
 

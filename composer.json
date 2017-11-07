@@ -1,7 +1,7 @@
 {
     "name": "biblys/isbn",
     "description": "A PHP library to convert and validate ISBN & EAN",
-    "time": "2017-06-29",
+    "time": "2017-11-07",
     "keywords": ["ISBN", "EAN", "Book"],
     "license": "MIT",
     "homepage": "https://github.com/biblys/isbn",
@@ -28,6 +28,6 @@
     },
     "scripts": {
       "test": "vendor/bin/phpunit tests",
-      "update-ranges": "php update-ranges.php"
+      "update-ranges": "php bin/update-ranges.php"
     }
 }
