@@ -62,5 +62,9 @@ class testIsbn extends PHPUnit_Framework_TestCase
         $this->assertInternalType('bool', $isbn->isValid());
     }
 
-
+    public function testIsbn10WithChecksumX()
+    {
+        $isbn = new ISBN('80-7203-717-X');
+        $this->assertTrue($isbn->isValid());
+    }
 }
