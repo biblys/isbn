@@ -151,7 +151,7 @@ class Isbn
 		$code = str_replace($replacements,'',$code);
 
 		// Check for unwanted characters
-		if (!is_numeric($code))
+    if (!is_numeric($code) && !(is_numeric(substr($code, 0, -1)) && strtoupper(substr($code, -1)) == 'X'))
 		{
 			$this->setValid(false);
 			$this->addError(self::ERROR_INVALID_CHARACTERS);
