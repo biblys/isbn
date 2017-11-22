@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/biblys/isbn.svg?branch=master)](https://travis-ci.org/biblys/isbn)
 
-This package can be used to :  
+This package can be used to :
 * validate an ISBN code
 * convert codes between ISBN-10, ISBN-13 and EAN (without hyphens) formats
 * calculate the checksum digit
@@ -13,51 +13,45 @@ This package can be used to :
 
 Install with composer:
 
-```
-$ composer require biblys/isbn:~2.0
-```
+    $ composer require biblys/isbn:~2.0
 
 ## Usage
 
-```php
-<?php
+    <?php
 
-use Biblys\Isbn\Isbn as Isbn;
+    use Biblys\Isbn\Isbn as Isbn;
 
-// Create an ISBN object from an EAN code
-$isbn = new Isbn('9791091146098');
+    // Create an ISBN object from an EAN code
+    $isbn = new Isbn('9791091146098');
 
-// Check if input is a valid ISBN code
-if ($isbn->isValid()) {
+    // Check if input is a valid ISBN code
+    if ($isbn->isValid()) {
 
-  // Print the code in ISBN-13 format
-	echo $isbn->format('ISBN-13');
+      // Print the code in ISBN-13 format
+      echo $isbn->format('ISBN-13');
 
-  // Print the code in ISBN-10 format
-	echo $isbn->format('ISBN-10');
+      // Print the code in ISBN-10 format
+      echo $isbn->format('ISBN-10');
 
-  // Print the checksum digit
-	echo $isbn->getChecksum();
+      // Print the checksum digit
+      echo $isbn->getChecksum();
 
-  // Print the registration agency
-	echo $isbn->getAgency();
+      // Print the registration agency
+      echo $isbn->getAgency();
 
-} else {
+    } else {
 
-  // Show validation errors
-	echo $isbn->getErrors();
-}
-```
+      // Show validation errors
+      echo $isbn->getErrors();
+    }
 
 
 ## Test
 
 Run tests with PHPUnit:
 
-```
-$ composer install
-$ composer test
-```
+    $ composer install
+    $ composer test
 
 ## ISBN ranges update
 
@@ -67,12 +61,14 @@ happens, this library must be updated. If a range update is necessary, please
 open an issue on Github. You can also open a pull request after updating
 the ranges your self with the following commands:
 
-```
-$ composer install
-$ composer run update-ranges
-```
+    $ composer install
+    $ composer run update-ranges
 
 ## Changelog
+
+2.0.6 (2017-11-22)
+* Fixed [#6](https://github.com/biblys/isbn/issues/6): Error when validating ISBN-10 with
+X as a checksum digit
 
 2.0.5 (2017-11-07)
 * Update ISBN ranges
