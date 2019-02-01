@@ -17,33 +17,35 @@ Install with composer:
 
 ## Usage
 
-    <?php
+```php
+<?php
 
-    use Biblys\Isbn\Isbn as Isbn;
+use Biblys\Isbn\Isbn as Isbn;
 
-    // Create an ISBN object from an EAN code
-    $isbn = new Isbn('9791091146098');
+// Create an ISBN object from an EAN code
+$isbn = new Isbn('9791091146098');
 
-    // Check if input is a valid ISBN code
-    if ($isbn->isValid()) {
+// Check if input is a valid ISBN code
+if ($isbn->isValid()) {
 
-      // Print the code in ISBN-13 format
-      echo $isbn->format('ISBN-13');
+  // Print the code in ISBN-13 format
+  echo $isbn->format('ISBN-13');
 
-      // Print the code in ISBN-10 format
-      echo $isbn->format('ISBN-10');
+  // Print the code in ISBN-10 format
+  echo $isbn->format('ISBN-10');
 
-      // Print the checksum digit
-      echo $isbn->getChecksum();
+  // Print the checksum digit
+  echo $isbn->getChecksum();
 
-      // Print the registration agency
-      echo $isbn->getAgency();
+  // Print the registration agency
+  echo $isbn->getAgency();
 
-    } else {
+} else {
 
-      // Show validation errors
-      echo $isbn->getErrors();
-    }
+  // Show validation errors
+  echo $isbn->getErrors();
+}
+```
 
 
 ## Test
@@ -53,16 +55,19 @@ Run tests with PHPUnit:
     $ composer install
     $ composer test
 
+
 ## ISBN ranges update
 
 New ISBN ranges may be added from time to time by the
 [International ISBN Agency](https://www.isbn-international.org/). Whenever it
 happens, this library must be updated. If a range update is necessary, please
-open an issue on Github. You can also open a pull request after updating
-the ranges your self with the following commands:
+open an issue on Github. 
+You can also open a pull request after updating the ranges your self with the 
+following commands:
 
     $ composer install
     $ composer run update-ranges
+
 
 ## Changelog
 
