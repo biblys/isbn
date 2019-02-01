@@ -68,7 +68,7 @@ following commands:
 
 ## Changelog
 
-### DEV
+### 2.0.7 (2019-02-01)
 
 - Attempts to format an invalid ISBN will now throw an Exception
 - Fixed considering ISBNs with an invalid product code as valid
