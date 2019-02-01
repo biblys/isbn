@@ -38,6 +38,13 @@ class testIsbn extends PHPUnit_Framework_TestCase
         $this->assertFalse($invalid->isValid());
     }
 
+    public function testInvalidIsbn()
+    {
+        $isbn = new Isbn("6897896354577");
+        $this->assertFalse($isbn->isValid());
+        $this->assertEquals($isbn->getErrors(), '[6897896354577] Product code should be 978 or 979');
+    }
+
     public function testFormatIsbn13()
     {
         $this->assertEquals($this->isbn->format('ISBN-13'), "978-2-207-25804-0");
