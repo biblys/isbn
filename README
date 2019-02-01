@@ -70,8 +70,9 @@ following commands:
 
 ### DEV
 
+- Attempts to format an invalid ISBN will now throw an Exception
+- Fixed considering ISBNs with an invalid product code as valid
 - Updated ISBN ranges
-- Fixed considering ISBN with invalid product code as valid
 
 ### 2.0.6 (2017-11-22)
 
