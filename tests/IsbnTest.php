@@ -38,6 +38,13 @@ class testIsbn extends PHPUnit_Framework_TestCase
         $this->assertFalse($invalid->isValid());
     }
 
+    public function testInvalidIsbn()
+    {
+        $isbn = new Isbn("6897896354577");
+        $this->assertFalse($isbn->isValid());
+        $this->assertEquals($isbn->getErrors(), '[6897896354577] Product code should be 978 or 979');
+    }
+
     public function testFormatIsbn13()
     {
         $this->assertEquals($this->isbn->format('ISBN-13'), "978-2-207-25804-0");
@@ -66,5 +73,15 @@ class testIsbn extends PHPUnit_Framework_TestCase
     {
         $isbn = new ISBN('80-7203-717-X');
         $this->assertTrue($isbn->isValid());
+    }
+
+    /**
+     * @expectedException Exception
+     * @expectedExceptionMessage Cannot format invalid ISBN: [6897896354577] Product code should be 978 or 979
+     */
+    public function testFormatingInvalidIsbn()
+    {
+        $isbn = new Isbn('6897896354577');
+        $isbn13 = $isbn->format('EAN');
     }
 }

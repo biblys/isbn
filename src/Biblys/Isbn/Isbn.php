@@ -18,6 +18,7 @@ class Isbn
 	const ERROR_EMPTY = 'No code provided',
 		  ERROR_INVALID_CHARACTERS = 'Invalid characters in the code',
 		  ERROR_INVALID_LENGTH = 'Code is too short or too long',
+		  ERROR_INVALID_PRODUCT_CODE = 'Product code should be 978 or 979',
 		  ERROR_INVALID_COUNTRY = 'Country code unknown';
 
 	private $_product, // GS1 Product Code (978 or 979 for books)
@@ -101,6 +102,10 @@ class Isbn
 	 */
 	public function format($format = 'EAN')
 	{
+		if (!$this->isValid()) {
+			throw new \Exception('Cannot format invalid ISBN: '.$this->getErrors());
+		}
+
 		$this->calculateChecksum($format);
 
 		$A = $this->getProduct();
@@ -151,8 +156,9 @@ class Isbn
 		$code = str_replace($replacements,'',$code);
 
 		// Check for unwanted characters
-    if (!is_numeric($code) && !(is_numeric(substr($code, 0, -1)) && strtoupper(substr($code, -1)) == 'X'))
-		{
+		if (!is_numeric($code) 
+			&& !(is_numeric(substr($code, 0, -1)) 
+			&& strtoupper(substr($code, -1)) == 'X')) {
 			$this->setValid(false);
 			$this->addError(self::ERROR_INVALID_CHARACTERS);
 		}
@@ -188,13 +194,26 @@ class Isbn
 	 */
 	private function removeProductCode($code)
 	{
+
 		$first3 = substr($code,0,3);
-		if ($first3 == 978 || $first3 == 979) {
-			$this->setProduct($first3);
-			$code = substr($code,3);
-		} else {
+		
+		// For ISBN-10, product code is always 978
+		if (strlen($code) == 9) {
 			$this->setProduct(978);
 		}
+
+		// ISBN-13: check that product code is 978 or 979
+		elseif ($first3 == 978 || $first3 == 979) {
+			$this->setProduct($first3);
+			$code = substr($code, 3);
+		} 
+		
+		// Product code is Invalid
+		else {
+			$this->setValid(false);
+			$this->addError(self::ERROR_INVALID_PRODUCT_CODE);
+		}
+		
 		return $code;
 	}
 
@@ -215,6 +234,11 @@ class Isbn
 				$rules = $p['Rules']['Rule'];
 				break;
 			}
+		}
+
+		// If product code was not found, cannot proceed
+		if (empty($rules)) {
+			return null;
 		}
 
 		// Select the right rule
