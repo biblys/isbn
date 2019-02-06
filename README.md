@@ -70,7 +70,9 @@ following commands:
 
 ### DEV
 
-- Fixed considering ISBNs with an invalid country code as valid
+- Fixed [#7] ISBNs with invalid product code or country code are considered
+  valid
+- Added PHP versions 7.1 & 7.2 to travis config file
 
 ### 2.0.7 (2019-02-01)
 
@@ -80,8 +82,8 @@ following commands:
 
 ### 2.0.6 (2017-11-22)
 
-- Fixed [#6](https://github.com/biblys/isbn/issues/6): Error when validating ISBN-10 with
-  X as a checksum digit
+- Fixed [#6](https://github.com/biblys/isbn/issues/6): Error when validating
+  ISBN-10 with X as a checksum digit
 
 ### 2.0.5 (2017-11-07)
 
