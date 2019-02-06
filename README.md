@@ -68,6 +68,10 @@ following commands:
 
 ## Changelog
 
+### DEV
+
+- Fixed considering ISBNs with an invalid country code as valid
+
 ### 2.0.7 (2019-02-01)
 
 - Attempts to format an invalid ISBN will now throw an Exception
