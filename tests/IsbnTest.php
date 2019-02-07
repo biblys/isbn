@@ -38,6 +38,13 @@ class testIsbn extends PHPUnit_Framework_TestCase
         $this->assertFalse($invalid->isValid());
     }
 
+    public function testInvalidIsbn()
+    {
+        $isbn = new Isbn("6897896354577");
+        $this->assertFalse($isbn->isValid());
+        $this->assertEquals($isbn->getErrors(), '[6897896354577] Product code should be 978 or 979');
+    }
+
     public function testFormatIsbn13()
     {
         $this->assertEquals($this->isbn->format('ISBN-13'), "978-2-207-25804-0");
@@ -62,5 +69,30 @@ class testIsbn extends PHPUnit_Framework_TestCase
         $this->assertInternalType('bool', $isbn->isValid());
     }
 
+    public function testIsbn10WithChecksumX()
+    {
+        $isbn = new ISBN('80-7203-717-X');
+        $this->assertTrue($isbn->isValid());
+    }
 
+    /**
+     * @expectedException Exception
+     * @expectedExceptionMessage Cannot format invalid ISBN: [6897896354577] Product code should be 978 or 979
+     */
+    public function testIsbnWithInvalidProductCode()
+    {
+        $isbn = new Isbn('6897896354577');
+        $this->assertFalse($isbn->isValid());
+        $isbn13 = $isbn->format('EAN');
+    }
+
+    /**
+     * @expectedException Exception
+     * @expectedExceptionMessage Cannot format invalid ISBN: [9798887382562] Country code is unknown
+     */
+    public function testIsbnWithInvalidCountryCode() {
+        $isbn = new Isbn('9798887382562');
+        $this->assertFalse($isbn->isValid());
+        $this->assertEquals($isbn->format('EAN'), '9798887382562');
+    }
 }
