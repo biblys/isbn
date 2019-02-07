@@ -68,10 +68,10 @@ following commands:
 
 ## Changelog
 
-### DEV
+### 2.0.8
 
-- Fixed [#7] ISBNs with invalid product code or country code are considered
-  valid
+- Fixed [#7](https://github.com/biblys/isbn/issues/7) ISBNs with invalid product
+  code or country code are considered valid
 - Added PHP versions 7.1 & 7.2 to travis config file
 
 ### 2.0.7 (2019-02-01)
