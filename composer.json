@@ -1,33 +1,37 @@
 {
-    "name": "biblys/isbn",
-    "description": "A PHP library to convert and validate ISBNs & EANs",
-    "time": "2019-02-01",
-    "keywords": ["ISBN", "EAN", "Book"],
-    "license": "MIT",
-    "homepage": "https://github.com/biblys/isbn",
-    "authors": [
-        {
-            "name": "Clement Bourgoin",
-            "email": "cb@nokto.net"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/biblys/isbn/issues"
-    },
-    "require": {
-        "php": ">=5.3.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.2",
-        "guzzlehttp/guzzle": "^6.2"
-    },
-    "autoload": {
-        "psr-0": {
-            "Biblys": "src/"
-        }
-    },
-    "scripts": {
-      "test": "vendor/bin/phpunit tests",
-      "update-ranges": "php bin/update-ranges.php"
+  "name": "biblys/isbn",
+  "description": "A PHP library to convert and validate ISBNs & EANs",
+  "time": "2019-02-07",
+  "keywords": [
+    "ISBN",
+    "EAN",
+    "Book"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/biblys/isbn",
+  "authors": [
+    {
+      "name": "Clement Bourgoin",
+      "email": "cb@nokto.net"
     }
+  ],
+  "support": {
+    "issues": "https://github.com/biblys/isbn/issues"
+  },
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.2",
+    "guzzlehttp/guzzle": "^6.2"
+  },
+  "autoload": {
+    "psr-0": {
+      "Biblys": "src/"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit tests",
+    "update-ranges": "php bin/update-ranges.php"
+  }
 }
