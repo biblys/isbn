@@ -54,6 +54,10 @@ Run tests with PHPUnit:
     $ composer install
     $ composer test
 
+Run tests in a docker container:
+
+    $ composer docker
+
 ## ISBN ranges update
 
 New ISBN ranges may be added from time to time by the

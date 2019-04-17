@@ -32,6 +32,7 @@
   },
   "scripts": {
     "test": "vendor/bin/phpunit tests",
-    "update-ranges": "php bin/update-ranges.php"
+    "update-ranges": "php bin/update-ranges.php",
+    "docker": "docker run --rm --volume $PWD:/app --volume $COMPOSER_HOME:/tmp composer /bin/bash -c \"composer install && composer test\""
   }
 }
