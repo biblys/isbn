@@ -90,9 +90,31 @@ class testIsbn extends PHPUnit_Framework_TestCase
      * @expectedException Exception
      * @expectedExceptionMessage Cannot format invalid ISBN: [9798887382562] Country code is unknown
      */
-    public function testIsbnWithInvalidCountryCode() {
+    public function testIsbnWithInvalidCountryCode() 
+    {
         $isbn = new Isbn('9798887382562');
         $this->assertFalse($isbn->isValid());
         $this->assertEquals($isbn->format('EAN'), '9798887382562');
+    }
+
+    /**
+     * Validate method should return true for a valid ISBN
+     */
+    public function testValidateValidIsbn()
+    {
+        $isbn = new Isbn('9782843449499');
+        $this->assertTrue($isbn->validate());   
+    }
+
+    /**
+     * Validate method should throw of an invalid ISBN
+     * 
+     * @expectedException Exception
+     * @expectedExceptionMessage Product code should be 978 or 979
+     */
+    public function testValidateInvalidIsbn()
+    {
+        $isbn = new Isbn('6752843449499');
+        $isbn->validate();
     }
 }

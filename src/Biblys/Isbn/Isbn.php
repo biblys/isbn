@@ -387,4 +387,14 @@ class Isbn
         }
         return $errors;
     }
+
+    public function validate()
+    {
+        $errors = $this->_errors;
+        if ($errors) {
+            throw new \Exception($errors[0]);
+        }
+
+        return true;
+    }
 }
