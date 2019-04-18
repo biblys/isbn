@@ -14,391 +14,387 @@ namespace Biblys\Isbn;
 
 class Isbn
 {
-	// Error messages (for localization)
-	const ERROR_EMPTY = 'No code provided',
-		  ERROR_INVALID_CHARACTERS = 'Invalid characters in the code',
-		  ERROR_INVALID_LENGTH = 'Code is too short or too long',
-		  ERROR_INVALID_PRODUCT_CODE = 'Product code should be 978 or 979',
-		  ERROR_INVALID_COUNTRY_CODE = 'Country code is unknown';
+    // Error messages (for localization)
+    const ERROR_EMPTY = 'No code provided',
+          ERROR_INVALID_CHARACTERS = 'Invalid characters in the code',
+          ERROR_INVALID_LENGTH = 'Code is too short or too long',
+          ERROR_INVALID_PRODUCT_CODE = 'Product code should be 978 or 979',
+          ERROR_INVALID_COUNTRY_CODE = 'Country code is unknown';
 
-	private $_product, // GS1 Product Code (978 or 979 for books)
-			$_country, // Registrant group (country) code
-			$_publisher, // Registrant (publisher) Code
-			$_publication, // Publication code
-			$_checksum, // Checksum character
-			$_input, // Input code
-			$_isValid = true, // Is the code a valid ISBN
-			$_errors = array(), // Why is the code invalid
-			$_format = 'EAN', // Output format
-			$_prefixes, // XML ranges file prefixes
-			$_groups, // XML ranges file groups
-			$_agency; // ISBN Agency
+    private $_product;
+    // GS1 Product Code (978 or 979 for books)
+    private $_country;
+    // Registrant group (country) code
+    private $_publisher;
+    // Registrant (publisher) Code
+    private $_publication;
+    // Publication code
+    private $_checksum;
+    // Checksum character
+    private $_input;
+    // Input code
+    private $_isValid = true;
+    // Is the code a valid ISBN
+    private $_errors = array();
+    // Why is the code invalid
+    private $_format = 'EAN';
+    // Output format
+    private $_prefixes;
+    // XML ranges file prefixes
+    private $_groups;
+    // XML ranges file groups
+            private $_agency; // ISBN Agency
 
-	/**
-	 * @var Ranges
-	 */
-	private $ranges = NULL;
+    /**
+     * @var Ranges
+     */
+    private $ranges = null;
 
-	public function __construct($code = NULL)
-	{
-		if (!empty($code))
-		{
-			$this->_input = $code;
+    public function __construct($code = null)
+    {
+        if (!empty($code)) {
+            $this->_input = $code;
 
-			// Remove hyphens and check characters
-			$code = $this->removeHyphens($code);
+            // Remove hyphens and check characters
+            $code = $this->removeHyphens($code);
 
-			// Remove checksum and check length
-			$code = $this->removeChecksum($code);
+            // Remove checksum and check length
+            $code = $this->removeChecksum($code);
 
-			if ($this->isValid())
-			{
-				// Remove (and set) product code
-				$code = $this->removeProductCode($code);
+            if ($this->isValid()) {
+                // Remove (and set) product code
+                $code = $this->removeProductCode($code);
 
-				// Remove (and save) country code
-				$code = $this->removeCountryCode($code);
+                // Remove (and save) country code
+                $code = $this->removeCountryCode($code);
 
-				// Remove (and save) publisher code
-				$this->removePublisherCode($code);
-			}
-		}
-		else
-		{
-			$this->addError(self::ERROR_EMPTY);
-			$this->setValid(false);
-		}
+                // Remove (and save) publisher code
+                $this->removePublisherCode($code);
+            }
+        } else {
+            $this->addError(self::ERROR_EMPTY);
+            $this->setValid(false);
+        }
+    }
 
-	}
+    /**
+     * Gets a class that knows about the ISBN ranges
+     *
+     * @return Ranges
+     */
+    public function getRanges()
+    {
+        if ($this->ranges !== null) {
+            return $this->ranges;
+        }
+        return $this->ranges = new Ranges();
+    }
 
-	/**
-	 * Gets a class that knows about the ISBN ranges
-	 *
-	 * @return Ranges
-	 */
-	public function getRanges()
-	{
-		if ($this->ranges !== NULL) {
-			return $this->ranges;
-		}
-		return $this->ranges = new Ranges();
-	}
+    /* Check methods */
 
-	/* Check methods */
+    /**
+     * Check if ISBN is valid
+     */
+    public function isValid()
+    {
+        return (bool) $this->_isValid;
+    }
 
-	/**
-	 * Check if ISBN is valid
-	 */
-	public function isValid()
-	{
-		return (bool) $this->_isValid;
-	}
+    /* Format methods */
 
-	/* Format methods */
+    /**
+     * Format an ISBN according to specified format
+     * @param string $format (ISBN-10, ISBN-13, EAN)
+     */
+    public function format($format = 'EAN')
+    {
+        if (!$this->isValid()) {
+            throw new \Exception('Cannot format invalid ISBN: '.$this->getErrors());
+        }
 
-	/**
-	 * Format an ISBN according to specified format
-	 * @param string $format (ISBN-10, ISBN-13, EAN)
-	 */
-	public function format($format = 'EAN')
-	{
-		if (!$this->isValid()) {
-			throw new \Exception('Cannot format invalid ISBN: '.$this->getErrors());
-		}
+        $this->calculateChecksum($format);
 
-		$this->calculateChecksum($format);
+        $A = $this->getProduct();
+        $B = $this->getCountry();
+        $C = $this->getPublisher();
+        $D = $this->getPublication();
+        $E = $this->getChecksum();
 
-		$A = $this->getProduct();
-		$B = $this->getCountry();
-		$C = $this->getPublisher();
-		$D = $this->getPublication();
-		$E = $this->getChecksum();
+        if ($format == 'ISBN-10') {
+            return $B.'-'.$C.'-'.$D.'-'.$E;
+        } elseif ($format == 'ISBN-13' || $format == 'ISBN') {
+            return $A.'-'.$B.'-'.$C.'-'.$D.'-'.$E;
+        } else {
+            return $A.$B.$C.$D.$E;
+        }
+    }
 
-		if($format == 'ISBN-10')
-		{
-			return $B.'-'.$C.'-'.$D.'-'.$E;
-		}
-		elseif($format == 'ISBN-13' || $format == 'ISBN')
-		{
-			return $A.'-'.$B.'-'.$C.'-'.$D.'-'.$E;
-		}
-		else
-		{
-			return $A.$B.$C.$D.$E;
-		}
-	}
+    // Private methods
 
-	// Private methods
+    /**
+     * Set ISBN Validity
+     */
+    private function setValid($isValid)
+    {
+        $this->_isValid = (bool) $isValid;
+    }
 
-	/**
-	 * Set ISBN Validity
-	 */
-	private function setValid($isValid)
-	{
-		$this->_isValid = (bool) $isValid;
-	}
+    /**
+     * Add to error log
+     */
+    private function addError($error)
+    {
+        $this->_errors[] = (string) $error;
+    }
 
-	/**
-	 * Add to error log
-	 */
-	private function addError($error)
-	{
-		$this->_errors[] = (string) $error;
-	}
+    /**
+     * Delete '-', '_' and ' '
+     */
+    private function removeHyphens($code)
+    {
+        // Remove Hyphens and others characters
+        $replacements = array('-','_',' ');
+        $code = str_replace($replacements, '', $code);
 
-	/**
-	 * Delete '-', '_' and ' '
-	 */
-	private function removeHyphens($code)
-	{
-		// Remove Hyphens and others characters
-		$replacements = array('-','_',' ');
-		$code = str_replace($replacements,'',$code);
+        // Check for unwanted characters
+        if (!is_numeric($code)
+            && !(is_numeric(substr($code, 0, -1))
+            && strtoupper(substr($code, -1)) == 'X')) {
+            $this->setValid(false);
+            $this->addError(self::ERROR_INVALID_CHARACTERS);
+        }
 
-		// Check for unwanted characters
-		if (!is_numeric($code) 
-			&& !(is_numeric(substr($code, 0, -1)) 
-			&& strtoupper(substr($code, -1)) == 'X')) {
-			$this->setValid(false);
-			$this->addError(self::ERROR_INVALID_CHARACTERS);
-		}
+        return $code;
+    }
 
-		return $code;
-	}
+    /**
+     * Remove checksum character if present
+     */
+    private function removeChecksum($code)
+    {
+        $length = strlen($code);
+        if ($length == 13 || $length == 10) {
+            $code = substr_replace($code, "", -1);
+            return $code;
+        } elseif ($length == 12 || $length == 9) {
+            return $code;
+        } else {
+            $this->setValid(false);
+            $this->addError(self::ERROR_INVALID_LENGTH);
+            return $code;
+        }
+    }
 
-	/**
-	 * Remove checksum character if present
-	 */
-	private function removeChecksum($code)
-	{
-		$length = strlen($code);
-		if ($length == 13 || $length == 10)
-		{
-			$code = substr_replace($code,"",-1);
-			return $code;
-		}
-		elseif ($length == 12 || $length == 9)
-		{
-			return $code;
-		}
-		else
-		{
-			$this->setValid(false);
-			$this->addError(self::ERROR_INVALID_LENGTH);
-			return $code;
-		}
-	}
+    /**
+     * Remove first three characters if 978 or 979 and save Product Code
+     */
+    private function removeProductCode($code)
+    {
+        $first3 = substr($code, 0, 3);
 
-	/**
-	 * Remove first three characters if 978 or 979 and save Product Code
-	 */
-	private function removeProductCode($code)
-	{
+        // For ISBN-10, product code is always 978
+        if (strlen($code) == 9) {
+            $this->setProduct(978);
+        }
 
-		$first3 = substr($code,0,3);
-		
-		// For ISBN-10, product code is always 978
-		if (strlen($code) == 9) {
-			$this->setProduct(978);
-		}
+        // ISBN-13: check that product code is 978 or 979
+        elseif ($first3 == 978 || $first3 == 979) {
+            $this->setProduct($first3);
+            $code = substr($code, 3);
+        }
 
-		// ISBN-13: check that product code is 978 or 979
-		elseif ($first3 == 978 || $first3 == 979) {
-			$this->setProduct($first3);
-			$code = substr($code, 3);
-		} 
-		
-		// Product code is Invalid
-		else {
-			$this->setValid(false);
-			$this->addError(self::ERROR_INVALID_PRODUCT_CODE);
-		}
-		
-		return $code;
-	}
+        // Product code is Invalid
+        else {
+            $this->setValid(false);
+            $this->addError(self::ERROR_INVALID_PRODUCT_CODE);
+        }
 
-	/**
-	 * Remove and save Country Code
-	 */
-	private function removeCountryCode($code)
-	{
+        return $code;
+    }
 
-		// Get the seven first digits
-		$first7 = substr($code,0,7);
+    /**
+     * Remove and save Country Code
+     */
+    private function removeCountryCode($code)
+    {
 
-		// Select the right set of rules according to the product code
-		foreach ($this->getRanges()->getPrefixes() as $p)
-		{
-			if ($p['Prefix'] == $this->getProduct())
-			{
-				$rules = $p['Rules']['Rule'];
-				break;
-			}
-		}
+        // Get the seven first digits
+        $first7 = substr($code, 0, 7);
 
-		// If product code was not found, cannot proceed
-		if (empty($rules)) {
-			return null;
-		}
+        // Select the right set of rules according to the product code
+        foreach ($this->getRanges()->getPrefixes() as $p) {
+            if ($p['Prefix'] == $this->getProduct()) {
+                $rules = $p['Rules']['Rule'];
+                break;
+            }
+        }
 
-		// Select the right rule
-		foreach ($rules as $r)
-		{
-			$ra = explode('-',$r['Range']);
-			if ($first7 >= $ra[0] && $first7 <= $ra[1])
-			{
-				$length = $r['Length'];
-				break;
-			}
-		}
+        // If product code was not found, cannot proceed
+        if (empty($rules)) {
+            return null;
+        }
 
-		// Country code is invalid
-		if ($length === "0") {
-			$this->setValid(false);
-			$this->addError(self::ERROR_INVALID_COUNTRY_CODE);
-			return $code;
-		}
+        // Select the right rule
+        foreach ($rules as $r) {
+            $ra = explode('-', $r['Range']);
+            if ($first7 >= $ra[0] && $first7 <= $ra[1]) {
+                $length = $r['Length'];
+                break;
+            }
+        }
 
-		$this->setCountry(substr($code,0,$length));
-		$code = substr($code,$length);
+        // Country code is invalid
+        if ($length === "0") {
+            $this->setValid(false);
+            $this->addError(self::ERROR_INVALID_COUNTRY_CODE);
+            return $code;
+        }
 
-		return $code;
-	}
+        $this->setCountry(substr($code, 0, $length));
+        $code = substr($code, $length);
 
-	/**
-	 * Remove and save Publisher Code and Publication Code
-	 */
-	private function removePublisherCode($code)
-	{
+        return $code;
+    }
 
-		// Get the seven first digits
-		$first7 = substr($code,0,7);
+    /**
+     * Remove and save Publisher Code and Publication Code
+     */
+    private function removePublisherCode($code)
+    {
 
-		// Select the right set of rules according to the agency (product + country code)
-		foreach ($this->getRanges()->getGroups() as $g)
-		{
-			if ($g['Prefix'] <> $this->getProduct().'-'.$this->getCountry()) {
-			    continue;
+        // Get the seven first digits
+        $first7 = substr($code, 0, 7);
+
+        // Select the right set of rules according to the agency (product + country code)
+        foreach ($this->getRanges()->getGroups() as $g) {
+            if ($g['Prefix'] <> $this->getProduct().'-'.$this->getCountry()) {
+                continue;
             }
 
             $rules = $g['Rules']['Rule'];
             $this->setAgency($g['Agency']);
 
             // Select the right rule
-            foreach ($rules as $r)
-            {
-                $ra = explode('-',$r['Range']);
+            foreach ($rules as $r) {
+                $ra = explode('-', $r['Range']);
                 if ($first7 < $ra[0] || $first7 > $ra[1]) {
                     continue;
                 }
 
                 $length = $r['Length'];
-                $this->setPublisher(substr($code,0,$length));
-                $this->setPublication(substr($code,$length));
+                $this->setPublisher(substr($code, 0, $length));
+                $this->setPublication(substr($code, $length));
                 break;
             }
             break;
         }
-	}
+    }
 
-	/**
-	 * Calculate checksum character
-	 */
-	private function calculateChecksum($format = 'EAN')
-	{
-		$sum = null;
+    /**
+     * Calculate checksum character
+     */
+    private function calculateChecksum($format = 'EAN')
+    {
+        $sum = null;
 
-		if ($format == 'ISBN-10')
-		{
-			$code = $this->getCountry().$this->getPublisher().$this->getPublication();
-			$c = str_split($code);
-			$sum = (11 - (($c[0] * 10) + ($c[1] * 9) + ($c[2] * 8) + ($c[3] * 7) + ($c[4] * 6) + ($c[5] * 5) + ($c[6] * 4) + ($c[7] * 3) + ($c[8] * 2)) % 11) % 11;
-			if($sum == 10) $sum = 'X';
-		}
-		else
-		{
-			$code = $this->getProduct().$this->getCountry().$this->getPublisher().$this->getPublication();
-			$c = str_split($code);
-			$sum = (($c[1] + $c[3] + $c[5] + $c[7] + $c[9] + $c[11]) * 3) + ($c[0] + $c[2] + $c[4] + $c[6] + $c[8] + $c[10]);
-			$sum = (10 - ($sum % 10)) % 10;
-		}
+        if ($format == 'ISBN-10') {
+            $code = $this->getCountry().$this->getPublisher().$this->getPublication();
+            $c = str_split($code);
+            $sum = (11 - (($c[0] * 10) + ($c[1] * 9) + ($c[2] * 8) + ($c[3] * 7) + ($c[4] * 6) + ($c[5] * 5) + ($c[6] * 4) + ($c[7] * 3) + ($c[8] * 2)) % 11) % 11;
+            if ($sum == 10) {
+                $sum = 'X';
+            }
+        } else {
+            $code = $this->getProduct().$this->getCountry().$this->getPublisher().$this->getPublication();
+            $c = str_split($code);
+            $sum = (($c[1] + $c[3] + $c[5] + $c[7] + $c[9] + $c[11]) * 3) + ($c[0] + $c[2] + $c[4] + $c[6] + $c[8] + $c[10]);
+            $sum = (10 - ($sum % 10)) % 10;
+        }
 
-		$this->setChecksum($sum);
-
-	}
+        $this->setChecksum($sum);
+    }
 
 
-	/* SETTERS */
+    /* SETTERS */
 
-	private function setProduct($product)
-	{
-		$this->_product = $product;
-	}
+    private function setProduct($product)
+    {
+        $this->_product = $product;
+    }
 
-	private function setCountry($country)
-	{
-		$this->_country = $country;
-	}
+    private function setCountry($country)
+    {
+        $this->_country = $country;
+    }
 
-	private function setPublisher($publisher)
-	{
-		$this->_publisher = $publisher;
-	}
+    private function setPublisher($publisher)
+    {
+        $this->_publisher = $publisher;
+    }
 
-	private function setPublication($publication)
-	{
-		$this->_publication = $publication;
-	}
+    private function setPublication($publication)
+    {
+        $this->_publication = $publication;
+    }
 
-	private function setChecksum($checksum)
-	{
-		$this->_checksum = $checksum;
-	}
+    private function setChecksum($checksum)
+    {
+        $this->_checksum = $checksum;
+    }
 
-	private function setAgency($agency)
-	{
-		$this->_agency = $agency;
-	}
+    private function setAgency($agency)
+    {
+        $this->_agency = $agency;
+    }
 
-	/* GETTERS */
+    /* GETTERS */
 
-	public function getProduct()
-	{
-		return $this->_product;
-	}
+    public function getProduct()
+    {
+        return $this->_product;
+    }
 
-	public function getCountry()
-	{
-		return $this->_country;
-	}
+    public function getCountry()
+    {
+        return $this->_country;
+    }
 
-	public function getPublisher()
-	{
-		return $this->_publisher;
-	}
+    public function getPublisher()
+    {
+        return $this->_publisher;
+    }
 
-	public function getPublication()
-	{
-		return $this->_publication;
-	}
+    public function getPublication()
+    {
+        return $this->_publication;
+    }
 
-	public function getChecksum()
-	{
-		return $this->_checksum;
-	}
+    public function getChecksum()
+    {
+        return $this->_checksum;
+    }
 
-	public function getAgency()
-	{
-		return $this->_agency;
-	}
+    public function getAgency()
+    {
+        return $this->_agency;
+    }
 
-	public function getErrors()
-	{
-		$errors = '['.$this->_input.']';
-		foreach ($this->_errors as $e)
-		{
-			$errors .= ' '.$e;
-		}
-		return $errors;
-	}
+    public function getErrors()
+    {
+        $errors = '['.$this->_input.']';
+        foreach ($this->_errors as $e) {
+            $errors .= ' '.$e;
+        }
+        return $errors;
+    }
+
+    public function validate()
+    {
+        $errors = $this->_errors;
+        if ($errors) {
+            throw new \Exception($errors[0]);
+        }
+
+        return true;
+    }
 }

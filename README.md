@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/biblys/isbn.svg?branch=master)](https://travis-ci.org/biblys/isbn)
 
-This package can be used to :
+This package can be used to:
 
 - validate an ISBN code
 - convert codes between ISBN-10, ISBN-13 and EAN (without hyphens) formats
@@ -13,37 +13,29 @@ This package can be used to :
 
 Install with composer:
 
-    $ composer require biblys/isbn:~2.0
+```console
+composer require biblys/isbn:^2.1.0
+```
 
 ## Usage
+
+Use case: converting an EAN (9782843449499) to an ISBN-13 (978-2-84344-949-9).
 
 ```php
 <?php
 
 use Biblys\Isbn\Isbn as Isbn;
 
-// Create an ISBN object from an EAN code
-$isbn = new Isbn('9791091146098');
+$isbn = new Isbn('9782843449499');
 
-// Check if input is a valid ISBN code
-if ($isbn->isValid()) {
+$isbn = new Isbn($ean);
 
-  // Print the code in ISBN-13 format
-  echo $isbn->format('ISBN-13');
-
-  // Print the code in ISBN-10 format
-  echo $isbn->format('ISBN-10');
-
-  // Print the checksum digit
-  echo $isbn->getChecksum();
-
-  // Print the registration agency
-  echo $isbn->getAgency();
-
-} else {
-
-  // Show validation errors
-  echo $isbn->getErrors();
+try {
+    $isbn->validate();
+    $isbn13 = $isbn->format("ISBN-13");
+    echo "ISBN-13: $isbn13";
+} catch(Exception $e) {
+    echo "An error occured while parsing $ean: ".$e->getMessage();
 }
 ```
 
@@ -51,8 +43,16 @@ if ($isbn->isValid()) {
 
 Run tests with PHPUnit:
 
-    $ composer install
-    $ composer test
+```console
+composer install
+composer test
+```
+
+Run tests in a docker container:
+
+```console
+composer docker
+```
 
 ## ISBN ranges update
 
@@ -63,14 +63,23 @@ open an issue on Github.
 You can also open a pull request after updating the ranges your self with the
 following commands:
 
-    $ composer install
-    $ composer run update-ranges
+```console
+composer install
+composer run update-ranges
+```
 
 ## Changelog
 
-### 2.0.8
+### 2.1.0 (2019-04-18)
 
-- Fixed [#7](https://github.com/biblys/isbn/issues/7) ISBNs with invalid product
+- Added a `validate` method that throws an Exception on ISBN validation errors
+- Fixed [#9] Improve error output
+- Added composer scripts to run tests and update ranges in a Docker container
+- Updated ISBN ranges
+
+### 2.0.8 (2019-02-07)
+
+- Fixed [#7](https://github.com/biblys/isbn/issues/7): ISBNs with invalid product
   code or country code are considered valid
 - Added PHP versions 7.1 & 7.2 to travis config file
 
