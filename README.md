@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/biblys/isbn.svg?branch=master)](https://travis-ci.org/biblys/isbn)
 
-This package can be used to :
+This package can be used to:
 
 - validate an ISBN code
 - convert codes between ISBN-10, ISBN-13 and EAN (without hyphens) formats
@@ -14,7 +14,7 @@ This package can be used to :
 Install with composer:
 
 ```console
-composer require biblys/isbn:~2.0
+composer require biblys/isbn:^2.1.0
 ```
 
 ## Usage
@@ -69,6 +69,13 @@ composer run update-ranges
 ```
 
 ## Changelog
+
+### 2.1.0 (2019-04-18)
+
+- Added a `validate` method that throws an Exception on ISBN validation errors
+- Fixed [#9] Improve error output
+- Added composer scripts to run tests and update ranges in a Docker container
+- Updated ISBN ranges
 
 ### 2.0.8 (2019-02-07)
 
