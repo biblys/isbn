@@ -191,7 +191,7 @@ class Isbn
     private function removeProductCode($code)
     {
         $first3 = substr($code, 0, 3);
-        
+
         // For ISBN-10, product code is always 978
         if (strlen($code) == 9) {
             $this->setProduct(978);
@@ -202,13 +202,13 @@ class Isbn
             $this->setProduct($first3);
             $code = substr($code, 3);
         }
-        
+
         // Product code is Invalid
         else {
             $this->setValid(false);
             $this->addError(self::ERROR_INVALID_PRODUCT_CODE);
         }
-        
+
         return $code;
     }
 
