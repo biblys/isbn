@@ -14,7 +14,7 @@ This package can be used to:
 Install with composer:
 
 ```console
-composer require biblys/isbn:^2.1.0
+composer require biblys/isbn:^2.1.1
 ```
 
 ## Usage
@@ -69,6 +69,11 @@ composer run update-ranges
 ```
 
 ## Changelog
+
+### 2.1.1 (2019-07-17)
+
+- Upgrade dependencies
+- Upgrade PHPUnit to 8.3
 
 ### 2.1.0 (2019-04-18)
 
