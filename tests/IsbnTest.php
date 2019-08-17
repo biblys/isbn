@@ -17,12 +17,13 @@ error_reporting(E_ALL);
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Biblys\Isbn\Isbn as Isbn;
+use PHPUnit\Framework\TestCase;
 
-class testIsbn extends PHPUnit_Framework_TestCase
+class testIsbn extends TestCase
 {
     protected $isbn;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->isbn = new Isbn('9782207258040');
     }
@@ -36,6 +37,13 @@ class testIsbn extends PHPUnit_Framework_TestCase
     {
         $invalid = new Isbn('5780AAC728440');
         $this->assertFalse($invalid->isValid());
+    }
+
+    public function testInvalidIsbn()
+    {
+        $isbn = new Isbn("6897896354577");
+        $this->assertFalse($isbn->isValid());
+        $this->assertEquals($isbn->getErrors(), '[6897896354577] Product code should be 978 or 979');
     }
 
     public function testFormatIsbn13()
@@ -59,12 +67,50 @@ class testIsbn extends PHPUnit_Framework_TestCase
     {
         // Should not raise an error
         $isbn = new Isbn('9790706801940');
-        $this->assertInternalType('bool', $isbn->isValid());
+        $this->assertIsBool($isbn->isValid());
     }
 
     public function testIsbn10WithChecksumX()
     {
         $isbn = new ISBN('80-7203-717-X');
         $this->assertTrue($isbn->isValid());
+    }
+
+    public function testIsbnWithInvalidProductCode()
+    {
+        $this->expectException("Exception");
+        $this->expectExceptionMessage("Cannot format invalid ISBN: [6897896354577] Product code should be 978 or 979");
+        $isbn = new Isbn('6897896354577');
+        $this->assertFalse($isbn->isValid());
+        $isbn13 = $isbn->format('EAN');
+    }
+
+    public function testIsbnWithInvalidCountryCode()
+    {
+        $this->expectException("Exception");
+        $this->expectExceptionMessage("Cannot format invalid ISBN: [9798887382562] Country code is unknown");
+        $isbn = new Isbn('9798887382562');
+        $this->assertFalse($isbn->isValid());
+        $this->assertEquals($isbn->format('EAN'), '9798887382562');
+    }
+
+    /**
+     * Validate method should return true for a valid ISBN
+     */
+    public function testValidateValidIsbn()
+    {
+        $isbn = new Isbn('9782843449499');
+        $this->assertTrue($isbn->validate());
+    }
+
+    /**
+     * Validate method should throw of an invalid ISBN
+     */
+    public function testValidateInvalidIsbn()
+    {
+        $this->expectException("Exception");
+        $this->expectExceptionMessage("Product code should be 978 or 979");
+        $isbn = new Isbn('6752843449499');
+        $isbn->validate();
     }
 }
