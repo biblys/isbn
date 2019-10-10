@@ -28,8 +28,6 @@ use Biblys\Isbn\Isbn as Isbn;
 
 $isbn = new Isbn('9782843449499');
 
-$isbn = new Isbn($ean);
-
 try {
     $isbn->validate();
     $isbn13 = $isbn->format("ISBN-13");
