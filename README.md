@@ -25,8 +25,10 @@ Use case: converting an EAN (9782843449499) to an ISBN-13 (978-2-84344-949-9).
 <?php
 
 use Biblys\Isbn\Isbn as Isbn;
+// require_once __DIR__.'/vendor/autoload.php';
 
-$isbn = new Isbn('9782843449499');
+$ean = '9782843449499';
+$isbn = new Isbn($ean);
 
 try {
     $isbn->validate();
