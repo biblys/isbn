@@ -72,7 +72,7 @@ class Isbn
                 $this->removePublisherCode($code);
             }
         } else {
-            $this->addError(self::ERROR_EMPTY);
+            $this->addError(static::ERROR_EMPTY);
             $this->setValid(false);
         }
     }
@@ -161,7 +161,7 @@ class Isbn
             && !(is_numeric(substr($code, 0, -1))
             && strtoupper(substr($code, -1)) == 'X')) {
             $this->setValid(false);
-            $this->addError(self::ERROR_INVALID_CHARACTERS);
+            $this->addError(static::ERROR_INVALID_CHARACTERS);
         }
 
         return $code;
@@ -180,7 +180,7 @@ class Isbn
             return $code;
         } else {
             $this->setValid(false);
-            $this->addError(self::ERROR_INVALID_LENGTH);
+            $this->addError(static::ERROR_INVALID_LENGTH);
             return $code;
         }
     }
@@ -206,7 +206,7 @@ class Isbn
         // Product code is Invalid
         else {
             $this->setValid(false);
-            $this->addError(self::ERROR_INVALID_PRODUCT_CODE);
+            $this->addError(static::ERROR_INVALID_PRODUCT_CODE);
         }
 
         return $code;
@@ -244,9 +244,9 @@ class Isbn
         }
 
         // Country code is invalid
-        if ($length === "0") {
+        if (!isset($length) || $length === "0") {
             $this->setValid(false);
-            $this->addError(self::ERROR_INVALID_COUNTRY_CODE);
+            $this->addError(static::ERROR_INVALID_COUNTRY_CODE);
             return $code;
         }
 
