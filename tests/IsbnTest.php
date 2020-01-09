@@ -113,4 +113,14 @@ class testIsbn extends TestCase
         $isbn = new Isbn('6752843449499');
         $isbn->validate();
     }
+
+    /**
+     * Validate method should not throw for a mexican ISBN
+     */
+    public function testValidateMexicanIsbn()
+    {
+      $isbn = new Isbn("9700764923");
+      $this->assertTrue($isbn->isValid());
+      $this->assertEquals($isbn->format("ISBN-13"), "978-970-07-6492-4");
+    }
 }
