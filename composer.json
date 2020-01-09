@@ -1,7 +1,7 @@
 {
   "name": "biblys/isbn",
   "description": "A PHP library to convert and validate ISBNs & EANs",
-  "time": "2019-10-13",
+  "time": "2020-01-09",
   "keywords": [
     "ISBN",
     "EAN",
@@ -19,10 +19,10 @@
     "issues": "https://github.com/biblys/isbn/issues"
   },
   "require": {
-    "php": ">=7.1.0"
+    "php": "^7.1 || ^7.2"
   },
   "require-dev": {
-    "phpunit/phpunit": "^7.1 || ^8.3",
+    "phpunit/phpunit": "^7 || ^8",
     "guzzlehttp/guzzle": "^6.2"
   },
   "autoload": {

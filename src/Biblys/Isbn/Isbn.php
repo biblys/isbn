@@ -261,9 +261,9 @@ class Isbn
      */
     private function removePublisherCode($code)
     {
-
-        // Get the seven first digits
+        // Get the seven first digits or less
         $first7 = substr($code, 0, 7);
+        $codeLength = strlen($first7);
 
         // Select the right set of rules according to the agency (product + country code)
         foreach ($this->getRanges()->getGroups() as $g) {
@@ -275,13 +275,21 @@ class Isbn
             $this->setAgency($g['Agency']);
 
             // Select the right rule
-            foreach ($rules as $r) {
-                $ra = explode('-', $r['Range']);
-                if ($first7 < $ra[0] || $first7 > $ra[1]) {
+            foreach ($rules as $rule) {
+
+                // Get min and max value in range
+                // and trim values to match code length
+                $range = explode('-', $rule['Range']);
+                $min = substr($range[0], 0, $codeLength);
+                $max = substr($range[1], 0, $codeLength);
+
+                // If first 7 digits is smaller than min
+                // or greater than max, continue to next rule
+                if ($first7 < $min || $first7 > $max) {
                     continue;
                 }
 
-                $length = $r['Length'];
+                $length = $rule['Length'];
                 $this->setPublisher(substr($code, 0, $length));
                 $this->setPublication(substr($code, $length));
                 break;

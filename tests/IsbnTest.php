@@ -88,10 +88,10 @@ class testIsbn extends TestCase
     public function testIsbnWithInvalidCountryCode()
     {
         $this->expectException("Exception");
-        $this->expectExceptionMessage("Cannot format invalid ISBN: [9798887382562] Country code is unknown");
-        $isbn = new Isbn('9798887382562');
+        $this->expectExceptionMessage("Cannot format invalid ISBN: [9792887382562] Country code is unknown");
+        $isbn = new Isbn('9792887382562');
         $this->assertFalse($isbn->isValid());
-        $this->assertEquals($isbn->format('EAN'), '9798887382562');
+        $this->assertEquals($isbn->format('EAN'), '9792887382562');
     }
 
     /**
@@ -112,5 +112,15 @@ class testIsbn extends TestCase
         $this->expectExceptionMessage("Product code should be 978 or 979");
         $isbn = new Isbn('6752843449499');
         $isbn->validate();
+    }
+
+    /**
+     * Validate method should not throw for a mexican ISBN
+     */
+    public function testValidateMexicanIsbn()
+    {
+      $isbn = new Isbn("9700764923");
+      $this->assertTrue($isbn->isValid());
+      $this->assertEquals($isbn->format("ISBN-13"), "978-970-07-6492-4");
     }
 }
