@@ -52,29 +52,35 @@ class Isbn
 
     public function __construct($code = null)
     {
-        if (!empty($code)) {
-            $this->_input = $code;
+        $this->_input = $code;
 
-            // Remove hyphens and check characters
-            $code = $this->removeHyphens($code);
-
-            // Remove checksum and check length
-            $code = $this->removeChecksum($code);
-
-            if ($this->isValid()) {
-                // Remove (and set) product code
-                $code = $this->removeProductCode($code);
-
-                // Remove (and save) country code
-                $code = $this->removeCountryCode($code);
-
-                // Remove (and save) publisher code
-                $this->removePublisherCode($code);
-            }
-        } else {
+        // If input is empty
+        if (empty($code)) {
             $this->addError(static::ERROR_EMPTY);
             $this->setValid(false);
+            return;
         }
+
+        // Remove hyphens and check characters
+        $code = $this->removeHyphens($code);
+
+        // Remove checksum and check length
+        $code = $this->removeChecksum($code);
+
+        // At that point, code should be digits only
+        if (!is_numeric($code)) {
+            $this->setValid(false);
+            $this->addError(static::ERROR_INVALID_CHARACTERS);
+        }
+
+        // Remove (and save) product code
+        $code = $this->removeProductCode($code);
+
+        // Remove (and save) country code
+        $code = $this->removeCountryCode($code);
+
+        // Remove (and save) publisher code
+        $this->removePublisherCode($code);
     }
 
     /**
@@ -155,14 +161,6 @@ class Isbn
         // Remove Hyphens and others characters
         $replacements = array('-','_',' ');
         $code = str_replace($replacements, '', $code);
-
-        // Check for unwanted characters
-        if (!is_numeric($code)
-            && !(is_numeric(substr($code, 0, -1))
-            && strtoupper(substr($code, -1)) == 'X')) {
-            $this->setValid(false);
-            $this->addError(static::ERROR_INVALID_CHARACTERS);
-        }
 
         return $code;
     }
