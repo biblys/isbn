@@ -123,4 +123,17 @@ class testIsbn extends TestCase
       $this->assertTrue($isbn->isValid());
       $this->assertEquals($isbn->format("ISBN-13"), "978-970-07-6492-4");
     }
+
+    /**
+     * Invalid ISBN should not be validated
+     * Github issue #22: https://github.com/biblys/isbn/issues/22
+     */
+    public function testOtherInvalidIsbn()
+    {
+        $this->expectException("Exception");
+        $this->expectExceptionMessage("Invalid characters in the code");
+        
+        $isbn = new Isbn("34995031X");
+        $isbn->validate();
+    }
 }
