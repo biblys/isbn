@@ -14,7 +14,7 @@ This package can be used to:
 Install with composer:
 
 ```console
-composer require biblys/isbn:^2.1.3
+composer require biblys/isbn:^2.1.4
 ```
 
 ## Usage
