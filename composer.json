@@ -19,10 +19,10 @@
     "issues": "https://github.com/biblys/isbn/issues"
   },
   "require": {
-    "php": "^7.1 || ^7.2"
+    "php": "^7.1"
   },
   "require-dev": {
-    "phpunit/phpunit": "^7 || ^8",
+    "phpunit/phpunit": "^6 || ^7 || ^8",
     "guzzlehttp/guzzle": "^6.2"
   },
   "autoload": {
@@ -33,7 +33,11 @@
   "scripts": {
     "test": "vendor/bin/phpunit tests",
     "update-ranges": "php bin/update-ranges.php",
-    "docker:test": "docker run --rm --volume $PWD:/app --volume $COMPOSER_HOME:/tmp composer /bin/bash -c \"composer install && composer test\"",
-    "docker:update-ranges": "docker run --rm --volume $PWD:/app --volume $COMPOSER_HOME:/tmp composer /bin/bash -c \"composer install && composer update-ranges\""
+    "docker:install": 
+      "docker run --rm -v $PWD:/app prooph/composer:${PHP_VERSION:-7.4} install",
+    "docker:test": 
+      "@composer docker:install && docker run --rm -v $PWD:/app prooph/composer:${PHP_VERSION:-7.4} test",
+    "docker:update-ranges": 
+      "@composer docker:install && docker run --rm -v $PWD:/app prooph/composer:${PHP_VERSION:-7.4} update-ranges"
   }
 }

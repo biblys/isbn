@@ -51,7 +51,13 @@ composer test
 Run tests in a docker container:
 
 ```console
-composer docker
+composer docker:test
+```
+
+Run tests in a docker container using a specific PHP version:
+
+```console
+PHP_VERSION=7.1 composer docker:test
 ```
 
 ## ISBN ranges update
@@ -66,6 +72,12 @@ following commands:
 ```console
 composer install
 composer run update-ranges
+```
+
+Or using a docker container:
+
+```console
+composer docker:update-ranges
 ```
 
 ## Changelog
