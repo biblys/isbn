@@ -75,16 +75,24 @@ workflows:
     - "php 7.1":
         filters:
           branches:
-            only: develop
+            only:
+              - master
+              - develop
     - "php 7.2":
         filters:
           branches:
-            only: develop
+            only:
+              - master
+              - develop
     - "php 7.3":
         filters:
           branches:
-            only: develop
+            only:
+              - master
+              - develop
     - "php 7.4":
         filters:
           branches:
-            only: develop
+            only:
+              - master
+              - develop

@@ -1,6 +1,6 @@
 # biblys/isbn
 
-[![Build Status](https://travis-ci.org/biblys/isbn.svg?branch=master)](https://travis-ci.org/biblys/isbn)
+[![CircleCI](https://circleci.com/gh/biblys/isbn.svg?style=shield)](https://circleci.com/gh/biblys/isbn)
 
 This package can be used to:
 
