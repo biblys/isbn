@@ -1,0 +1,90 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+version: 2
+jobs:
+  "php 7.1":
+    docker:
+      - image: circleci/php:7.1
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - php71-dependencies-{{ checksum "composer.lock" }}
+      - run: composer install -n --prefer-dist
+      - save_cache:
+          key: php71-dependencies-{{ checksum "composer.lock" }}
+          paths:
+            - ./vendor
+      - run: composer test
+
+  "php 7.2":
+    docker:
+      - image: circleci/php:7.2
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - php72-dependencies-{{ checksum "composer.lock" }}
+      - run: composer install -n --prefer-dist
+      - save_cache:
+          key: php72-dependencies-{{ checksum "composer.lock" }}
+          paths:
+            - ./vendor
+      - run: composer test
+
+  "php 7.3":
+    docker:
+      - image: circleci/php:7.3
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - php73-dependencies-{{ checksum "composer.lock" }}
+      - run: composer install -n --prefer-dist
+      - save_cache:
+          key: php73-dependencies-{{ checksum "composer.lock" }}
+          paths:
+            - ./vendor
+      - run: composer test
+
+  "php 7.4":
+    docker:
+      - image: circleci/php:7.4
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - php74-dependencies-{{ checksum "composer.lock" }}
+      - run: composer install -n --prefer-dist
+      - save_cache:
+          key: php74-dependencies-{{ checksum "composer.lock" }}
+          paths:
+            - ./vendor
+      - run: composer test
+
+workflows:
+  version: 2
+  main:
+    jobs:
+    - "php 7.1":
+        filters:
+          branches:
+            only: develop
+    - "php 7.2":
+        filters:
+          branches:
+            only: develop
+    - "php 7.3":
+        filters:
+          branches:
+            only: develop
+    - "php 7.4":
+        filters:
+          branches:
+            only: develop
