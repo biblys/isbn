@@ -70,7 +70,7 @@ jobs:
 
 workflows:
   version: 2
-  main:
+  tests:
     jobs:
     - "php 7.1":
         filters:
