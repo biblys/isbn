@@ -63,45 +63,55 @@ $groups = array (
         ),
         8 => 
         array (
-          'Range' => '6400000-6479999',
+          'Range' => '6400000-6449999',
           'Length' => '3',
         ),
         9 => 
         array (
-          'Range' => '6480000-6489999',
+          'Range' => '6450000-6459999',
           'Length' => '7',
         ),
         10 => 
         array (
-          'Range' => '6490000-6549999',
+          'Range' => '6460000-6479999',
           'Length' => '3',
         ),
         11 => 
         array (
-          'Range' => '6550000-6559999',
-          'Length' => '4',
+          'Range' => '6480000-6489999',
+          'Length' => '7',
         ),
         12 => 
         array (
-          'Range' => '6560000-6999999',
+          'Range' => '6490000-6549999',
           'Length' => '3',
         ),
         13 => 
         array (
-          'Range' => '7000000-8499999',
+          'Range' => '6550000-6559999',
           'Length' => '4',
         ),
         14 => 
         array (
+          'Range' => '6560000-6999999',
+          'Length' => '3',
+        ),
+        15 => 
+        array (
+          'Range' => '7000000-8499999',
+          'Length' => '4',
+        ),
+        16 => 
+        array (
           'Range' => '8500000-8999999',
           'Length' => '5',
         ),
-        15 => 
+        17 => 
         array (
           'Range' => '9000000-9499999',
           'Length' => '6',
         ),
-        16 => 
+        18 => 
         array (
           'Range' => '9500000-9999999',
           'Length' => '7',
@@ -124,142 +134,187 @@ $groups = array (
         ),
         1 => 
         array (
-          'Range' => '0100000-0699999',
+          'Range' => '0100000-0299999',
           'Length' => '2',
         ),
         2 => 
         array (
+          'Range' => '0300000-0349999',
+          'Length' => '3',
+        ),
+        3 => 
+        array (
+          'Range' => '0350000-0399999',
+          'Length' => '4',
+        ),
+        4 => 
+        array (
+          'Range' => '0400000-0699999',
+          'Length' => '2',
+        ),
+        5 => 
+        array (
           'Range' => '0700000-0999999',
           'Length' => '4',
         ),
-        3 => 
+        6 => 
         array (
           'Range' => '1000000-3979999',
           'Length' => '3',
         ),
-        4 => 
+        7 => 
         array (
           'Range' => '3980000-5499999',
           'Length' => '4',
         ),
-        5 => 
+        8 => 
         array (
           'Range' => '5500000-6499999',
           'Length' => '5',
         ),
-        6 => 
+        9 => 
         array (
           'Range' => '6500000-6799999',
           'Length' => '4',
         ),
-        7 => 
+        10 => 
         array (
           'Range' => '6800000-6859999',
           'Length' => '5',
         ),
-        8 => 
+        11 => 
         array (
           'Range' => '6860000-7139999',
           'Length' => '4',
         ),
-        9 => 
+        12 => 
         array (
           'Range' => '7140000-7169999',
           'Length' => '3',
         ),
-        10 => 
+        13 => 
         array (
           'Range' => '7170000-7319999',
           'Length' => '4',
         ),
-        11 => 
+        14 => 
         array (
           'Range' => '7320000-7399999',
           'Length' => '7',
         ),
-        12 => 
+        15 => 
         array (
           'Range' => '7400000-7749999',
           'Length' => '5',
         ),
-        13 => 
+        16 => 
         array (
           'Range' => '7750000-7753999',
           'Length' => '7',
         ),
-        14 => 
+        17 => 
         array (
           'Range' => '7754000-7763999',
           'Length' => '5',
         ),
-        15 => 
+        18 => 
         array (
           'Range' => '7764000-7764999',
           'Length' => '7',
         ),
-        16 => 
+        19 => 
         array (
           'Range' => '7765000-7769999',
           'Length' => '5',
         ),
-        17 => 
+        20 => 
         array (
           'Range' => '7770000-7776999',
           'Length' => '7',
         ),
-        18 => 
+        21 => 
         array (
           'Range' => '7777000-7899999',
           'Length' => '5',
         ),
-        19 => 
+        22 => 
         array (
           'Range' => '7900000-7999999',
           'Length' => '4',
         ),
-        20 => 
+        23 => 
         array (
-          'Range' => '8000000-8671999',
+          'Range' => '8000000-8004999',
           'Length' => '5',
         ),
-        21 => 
+        24 => 
+        array (
+          'Range' => '8005000-8049999',
+          'Length' => '5',
+        ),
+        25 => 
+        array (
+          'Range' => '8050000-8379999',
+          'Length' => '5',
+        ),
+        26 => 
+        array (
+          'Range' => '8380000-8384999',
+          'Length' => '7',
+        ),
+        27 => 
+        array (
+          'Range' => '8385000-8671999',
+          'Length' => '5',
+        ),
+        28 => 
         array (
           'Range' => '8672000-8675999',
           'Length' => '4',
         ),
-        22 => 
+        29 => 
         array (
           'Range' => '8676000-8697999',
           'Length' => '5',
         ),
-        23 => 
+        30 => 
         array (
           'Range' => '8698000-9159999',
           'Length' => '6',
         ),
-        24 => 
+        31 => 
         array (
           'Range' => '9160000-9165059',
           'Length' => '7',
         ),
-        25 => 
+        32 => 
         array (
           'Range' => '9165060-9729999',
           'Length' => '6',
         ),
-        26 => 
+        33 => 
         array (
           'Range' => '9730000-9877999',
           'Length' => '4',
         ),
-        27 => 
+        34 => 
         array (
-          'Range' => '9878000-9989999',
+          'Range' => '9878000-9911499',
           'Length' => '6',
         ),
-        28 => 
+        35 => 
         array (
-          'Range' => '9990000-9999999',
+          'Range' => '9911500-9911999',
+          'Length' => '7',
+        ),
+        36 => 
+        array (
+          'Range' => '9912000-9989899',
+          'Length' => '6',
+        ),
+        37 => 
+        array (
+          'Range' => '9989900-9999999',
           'Length' => '7',
         ),
       ),
@@ -980,7 +1035,7 @@ $groups = array (
   14 => 
   array (
     'Prefix' => '978-608',
-    'Agency' => 'Macedonia',
+    'Agency' => 'North Macedonia',
     'Rules' => 
     array (
       'Rule' => 
@@ -1095,8 +1150,13 @@ $groups = array (
         ),
         4 => 
         array (
-          'Range' => '5000000-9999999',
-          'Length' => '2',
+          'Range' => '5000000-5149999',
+          'Length' => '4',
+        ),
+        5 => 
+        array (
+          'Range' => '5150000-9999999',
+          'Length' => '0',
         ),
       ),
     ),
@@ -1400,12 +1460,12 @@ $groups = array (
         ),
         4 => 
         array (
-          'Range' => '6000000-7499999',
+          'Range' => '6000000-7999999',
           'Length' => '4',
         ),
         5 => 
         array (
-          'Range' => '7500000-9499999',
+          'Range' => '8000000-9499999',
           'Length' => '0',
         ),
         6 => 
@@ -1436,17 +1496,17 @@ $groups = array (
         ),
         2 => 
         array (
-          'Range' => '2000000-2999999',
+          'Range' => '2000000-3999999',
           'Length' => '3',
         ),
         3 => 
         array (
-          'Range' => '3000000-6999999',
+          'Range' => '4000000-6499999',
           'Length' => '0',
         ),
         4 => 
         array (
-          'Range' => '7000000-7999999',
+          'Range' => '6500000-7999999',
           'Length' => '4',
         ),
         5 => 
@@ -1559,48 +1619,78 @@ $groups = array (
       array (
         0 => 
         array (
-          'Range' => '0000000-2999999',
-          'Length' => '0',
+          'Range' => '0000000-0199999',
+          'Length' => '2',
         ),
         1 => 
+        array (
+          'Range' => '0200000-2499999',
+          'Length' => '0',
+        ),
+        2 => 
+        array (
+          'Range' => '2500000-2999999',
+          'Length' => '3',
+        ),
+        3 => 
         array (
           'Range' => '3000000-3029999',
           'Length' => '3',
         ),
-        2 => 
+        4 => 
         array (
           'Range' => '3030000-4999999',
           'Length' => '0',
         ),
-        3 => 
+        5 => 
         array (
           'Range' => '5000000-5129999',
           'Length' => '4',
         ),
-        4 => 
-        array (
-          'Range' => '5130000-7999999',
-          'Length' => '0',
-        ),
-        5 => 
-        array (
-          'Range' => '8000000-8182499',
-          'Length' => '5',
-        ),
         6 => 
         array (
-          'Range' => '8182500-8999999',
+          'Range' => '5130000-5499999',
           'Length' => '0',
         ),
         7 => 
         array (
-          'Range' => '9000000-9024499',
-          'Length' => '6',
+          'Range' => '5500000-5999999',
+          'Length' => '4',
         ),
         8 => 
         array (
-          'Range' => '9024500-9999999',
+          'Range' => '6000000-7999999',
           'Length' => '0',
+        ),
+        9 => 
+        array (
+          'Range' => '8000000-8182499',
+          'Length' => '5',
+        ),
+        10 => 
+        array (
+          'Range' => '8182500-8599999',
+          'Length' => '0',
+        ),
+        11 => 
+        array (
+          'Range' => '8600000-8999999',
+          'Length' => '5',
+        ),
+        12 => 
+        array (
+          'Range' => '9000000-9024499',
+          'Length' => '6',
+        ),
+        13 => 
+        array (
+          'Range' => '9024500-9899999',
+          'Length' => '0',
+        ),
+        14 => 
+        array (
+          'Range' => '9900000-9999999',
+          'Length' => '6',
         ),
       ),
     ),
@@ -2612,7 +2702,7 @@ $groups = array (
   51 => 
   array (
     'Prefix' => '978-953',
-    'Agency' => 'Croatia',
+    'Agency' => 'Croatia	',
     'Rules' => 
     array (
       'Rule' => 
@@ -2904,40 +2994,45 @@ $groups = array (
       array (
         0 => 
         array (
-          'Range' => '0000000-5099999',
+          'Range' => '0000000-4899999',
           'Length' => '2',
         ),
         1 => 
         array (
+          'Range' => '4900000-5099999',
+          'Length' => '3',
+        ),
+        2 => 
+        array (
           'Range' => '5100000-5199999',
           'Length' => '4',
         ),
-        2 => 
+        3 => 
         array (
           'Range' => '5200000-5399999',
           'Length' => '5',
         ),
-        3 => 
+        4 => 
         array (
           'Range' => '5400000-5599999',
           'Length' => '4',
         ),
-        4 => 
+        5 => 
         array (
           'Range' => '5600000-5999999',
           'Length' => '5',
         ),
-        5 => 
+        6 => 
         array (
           'Range' => '6000000-7999999',
           'Length' => '3',
         ),
-        6 => 
+        7 => 
         array (
           'Range' => '8000000-9499999',
           'Length' => '4',
         ),
-        7 => 
+        8 => 
         array (
           'Range' => '9500000-9999999',
           'Length' => '5',
@@ -3057,12 +3152,12 @@ $groups = array (
         ),
         3 => 
         array (
-          'Range' => '9000000-9499999',
+          'Range' => '9000000-9599999',
           'Length' => '5',
         ),
         4 => 
         array (
-          'Range' => '9500000-9999999',
+          'Range' => '9600000-9999999',
           'Length' => '0',
         ),
       ),
@@ -3348,35 +3443,45 @@ $groups = array (
         ),
         4 => 
         array (
-          'Range' => '2500000-2999999',
-          'Length' => '0',
+          'Range' => '2500000-2549999',
+          'Length' => '3',
         ),
         5 => 
         array (
-          'Range' => '3000000-4999999',
-          'Length' => '3',
+          'Range' => '2550000-2899999',
+          'Length' => '0',
         ),
         6 => 
         array (
-          'Range' => '5000000-5999999',
+          'Range' => '2900000-2999999',
           'Length' => '4',
         ),
         7 => 
         array (
+          'Range' => '3000000-4999999',
+          'Length' => '3',
+        ),
+        8 => 
+        array (
+          'Range' => '5000000-5999999',
+          'Length' => '4',
+        ),
+        9 => 
+        array (
           'Range' => '6000000-8999999',
           'Length' => '2',
         ),
-        8 => 
+        10 => 
         array (
           'Range' => '9000000-9899999',
           'Length' => '3',
         ),
-        9 => 
+        11 => 
         array (
           'Range' => '9900000-9989999',
           'Length' => '4',
         ),
-        10 => 
+        12 => 
         array (
           'Range' => '9990000-9999999',
           'Length' => '5',
@@ -3435,25 +3540,35 @@ $groups = array (
         ),
         1 => 
         array (
-          'Range' => '2000000-2299999',
+          'Range' => '2000000-2099999',
           'Length' => '2',
         ),
         2 => 
         array (
+          'Range' => '2100000-2199999',
+          'Length' => '3',
+        ),
+        3 => 
+        array (
+          'Range' => '2200000-2299999',
+          'Length' => '4',
+        ),
+        4 => 
+        array (
           'Range' => '2300000-2399999',
           'Length' => '5',
         ),
-        3 => 
+        5 => 
         array (
           'Range' => '2400000-3999999',
           'Length' => '2',
         ),
-        4 => 
+        6 => 
         array (
           'Range' => '4000000-7499999',
           'Length' => '3',
         ),
-        5 => 
+        7 => 
         array (
           'Range' => '7500000-9999999',
           'Length' => '4',
@@ -4320,25 +4435,35 @@ $groups = array (
         ),
         1 => 
         array (
-          'Range' => '2000000-5399999',
+          'Range' => '2000000-3499999',
           'Length' => '2',
         ),
         2 => 
         array (
-          'Range' => '5400000-5499999',
+          'Range' => '3500000-3699999',
           'Length' => '5',
         ),
         3 => 
         array (
+          'Range' => '3700000-5299999',
+          'Length' => '2',
+        ),
+        4 => 
+        array (
+          'Range' => '5300000-5499999',
+          'Length' => '5',
+        ),
+        5 => 
+        array (
           'Range' => '5500000-7999999',
           'Length' => '3',
         ),
-        4 => 
+        6 => 
         array (
           'Range' => '8000000-9499999',
           'Length' => '4',
         ),
-        5 => 
+        7 => 
         array (
           'Range' => '9500000-9999999',
           'Length' => '5',
@@ -4347,6 +4472,47 @@ $groups = array (
     ),
   ),
   88 => 
+  array (
+    'Prefix' => '978-9914',
+    'Agency' => 'Kenya',
+    'Rules' => 
+    array (
+      'Rule' => 
+      array (
+        0 => 
+        array (
+          'Range' => '0000000-3999999',
+          'Length' => '0',
+        ),
+        1 => 
+        array (
+          'Range' => '4000000-4499999',
+          'Length' => '2',
+        ),
+        2 => 
+        array (
+          'Range' => '4500000-6999999',
+          'Length' => '0',
+        ),
+        3 => 
+        array (
+          'Range' => '7000000-7499999',
+          'Length' => '3',
+        ),
+        4 => 
+        array (
+          'Range' => '7500000-9849999',
+          'Length' => '0',
+        ),
+        5 => 
+        array (
+          'Range' => '9850000-9999999',
+          'Length' => '4',
+        ),
+      ),
+    ),
+  ),
+  89 => 
   array (
     'Prefix' => '978-9915',
     'Agency' => 'Uruguay',
@@ -4387,7 +4553,7 @@ $groups = array (
       ),
     ),
   ),
-  89 => 
+  90 => 
   array (
     'Prefix' => '978-9916',
     'Agency' => 'Estonia',
@@ -4433,7 +4599,7 @@ $groups = array (
       ),
     ),
   ),
-  90 => 
+  91 => 
   array (
     'Prefix' => '978-9917',
     'Agency' => 'Bolivia',
@@ -4479,7 +4645,7 @@ $groups = array (
       ),
     ),
   ),
-  91 => 
+  92 => 
   array (
     'Prefix' => '978-9918',
     'Agency' => 'Malta',
@@ -4525,7 +4691,7 @@ $groups = array (
       ),
     ),
   ),
-  92 => 
+  93 => 
   array (
     'Prefix' => '978-9919',
     'Agency' => 'Mongolia',
@@ -4566,7 +4732,7 @@ $groups = array (
       ),
     ),
   ),
-  93 => 
+  94 => 
   array (
     'Prefix' => '978-9920',
     'Agency' => 'Morocco',
@@ -4576,38 +4742,38 @@ $groups = array (
       array (
         0 => 
         array (
-          'Range' => '0000000-3499999',
+          'Range' => '0000000-3199999',
           'Length' => '0',
         ),
         1 => 
         array (
-          'Range' => '3500000-3999999',
+          'Range' => '3200000-3999999',
           'Length' => '2',
         ),
         2 => 
         array (
-          'Range' => '4000000-5999999',
+          'Range' => '4000000-5499999',
           'Length' => '0',
         ),
         3 => 
         array (
-          'Range' => '6000000-7999999',
+          'Range' => '5500000-7999999',
           'Length' => '3',
         ),
         4 => 
         array (
-          'Range' => '8000000-9299999',
+          'Range' => '8000000-8999999',
           'Length' => '0',
         ),
         5 => 
         array (
-          'Range' => '9300000-9999999',
+          'Range' => '9000000-9999999',
           'Length' => '4',
         ),
       ),
     ),
   ),
-  94 => 
+  95 => 
   array (
     'Prefix' => '978-9921',
     'Agency' => 'Kuwait',
@@ -4653,7 +4819,7 @@ $groups = array (
       ),
     ),
   ),
-  95 => 
+  96 => 
   array (
     'Prefix' => '978-9922',
     'Agency' => 'Iraq',
@@ -4694,7 +4860,7 @@ $groups = array (
       ),
     ),
   ),
-  96 => 
+  97 => 
   array (
     'Prefix' => '978-9923',
     'Agency' => 'Jordan',
@@ -4735,7 +4901,7 @@ $groups = array (
       ),
     ),
   ),
-  97 => 
+  98 => 
   array (
     'Prefix' => '978-9924',
     'Agency' => 'Cambodia',
@@ -4776,7 +4942,7 @@ $groups = array (
       ),
     ),
   ),
-  98 => 
+  99 => 
   array (
     'Prefix' => '978-9925',
     'Agency' => 'Cyprus',
@@ -4807,7 +4973,7 @@ $groups = array (
       ),
     ),
   ),
-  99 => 
+  100 => 
   array (
     'Prefix' => '978-9926',
     'Agency' => 'Bosnia and Herzegovina',
@@ -4838,7 +5004,7 @@ $groups = array (
       ),
     ),
   ),
-  100 => 
+  101 => 
   array (
     'Prefix' => '978-9927',
     'Agency' => 'Qatar',
@@ -4869,7 +5035,7 @@ $groups = array (
       ),
     ),
   ),
-  101 => 
+  102 => 
   array (
     'Prefix' => '978-9928',
     'Agency' => 'Albania',
@@ -4900,7 +5066,7 @@ $groups = array (
       ),
     ),
   ),
-  102 => 
+  103 => 
   array (
     'Prefix' => '978-9929',
     'Agency' => 'Guatemala',
@@ -4931,7 +5097,7 @@ $groups = array (
       ),
     ),
   ),
-  103 => 
+  104 => 
   array (
     'Prefix' => '978-9930',
     'Agency' => 'Costa Rica',
@@ -4957,7 +5123,7 @@ $groups = array (
       ),
     ),
   ),
-  104 => 
+  105 => 
   array (
     'Prefix' => '978-9931',
     'Agency' => 'Algeria',
@@ -4983,7 +5149,7 @@ $groups = array (
       ),
     ),
   ),
-  105 => 
+  106 => 
   array (
     'Prefix' => '978-9932',
     'Agency' => 'Lao People\'s Democratic Republic',
@@ -5009,7 +5175,7 @@ $groups = array (
       ),
     ),
   ),
-  106 => 
+  107 => 
   array (
     'Prefix' => '978-9933',
     'Agency' => 'Syria',
@@ -5040,7 +5206,7 @@ $groups = array (
       ),
     ),
   ),
-  107 => 
+  108 => 
   array (
     'Prefix' => '978-9934',
     'Agency' => 'Latvia',
@@ -5071,7 +5237,7 @@ $groups = array (
       ),
     ),
   ),
-  108 => 
+  109 => 
   array (
     'Prefix' => '978-9935',
     'Agency' => 'Iceland',
@@ -5102,7 +5268,7 @@ $groups = array (
       ),
     ),
   ),
-  109 => 
+  110 => 
   array (
     'Prefix' => '978-9936',
     'Agency' => 'Afghanistan',
@@ -5133,7 +5299,7 @@ $groups = array (
       ),
     ),
   ),
-  110 => 
+  111 => 
   array (
     'Prefix' => '978-9937',
     'Agency' => 'Nepal',
@@ -5164,7 +5330,7 @@ $groups = array (
       ),
     ),
   ),
-  111 => 
+  112 => 
   array (
     'Prefix' => '978-9938',
     'Agency' => 'Tunisia',
@@ -5190,7 +5356,7 @@ $groups = array (
       ),
     ),
   ),
-  112 => 
+  113 => 
   array (
     'Prefix' => '978-9939',
     'Agency' => 'Armenia',
@@ -5226,7 +5392,7 @@ $groups = array (
       ),
     ),
   ),
-  113 => 
+  114 => 
   array (
     'Prefix' => '978-9940',
     'Agency' => 'Montenegro',
@@ -5256,18 +5422,13 @@ $groups = array (
         ),
         4 => 
         array (
-          'Range' => '8700000-8999999',
-          'Length' => '4',
-        ),
-        5 => 
-        array (
-          'Range' => '9000000-9999999',
+          'Range' => '8700000-9999999',
           'Length' => '4',
         ),
       ),
     ),
   ),
-  114 => 
+  115 => 
   array (
     'Prefix' => '978-9941',
     'Agency' => 'Georgia',
@@ -5303,7 +5464,7 @@ $groups = array (
       ),
     ),
   ),
-  115 => 
+  116 => 
   array (
     'Prefix' => '978-9942',
     'Agency' => 'Ecuador',
@@ -5339,7 +5500,7 @@ $groups = array (
       ),
     ),
   ),
-  116 => 
+  117 => 
   array (
     'Prefix' => '978-9943',
     'Agency' => 'Uzbekistan',
@@ -5370,7 +5531,7 @@ $groups = array (
       ),
     ),
   ),
-  117 => 
+  118 => 
   array (
     'Prefix' => '978-9944',
     'Agency' => 'Turkey',
@@ -5416,7 +5577,7 @@ $groups = array (
       ),
     ),
   ),
-  118 => 
+  119 => 
   array (
     'Prefix' => '978-9945',
     'Agency' => 'Dominican Republic',
@@ -5451,10 +5612,20 @@ $groups = array (
         ),
         5 => 
         array (
-          'Range' => '5800000-8499999',
+          'Range' => '5800000-7999999',
           'Length' => '3',
         ),
         6 => 
+        array (
+          'Range' => '8000000-8099999',
+          'Length' => '2',
+        ),
+        7 => 
+        array (
+          'Range' => '8100000-8499999',
+          'Length' => '3',
+        ),
+        8 => 
         array (
           'Range' => '8500000-9999999',
           'Length' => '4',
@@ -5462,7 +5633,7 @@ $groups = array (
       ),
     ),
   ),
-  119 => 
+  120 => 
   array (
     'Prefix' => '978-9946',
     'Agency' => 'Korea, P.D.R.',
@@ -5493,7 +5664,7 @@ $groups = array (
       ),
     ),
   ),
-  120 => 
+  121 => 
   array (
     'Prefix' => '978-9947',
     'Agency' => 'Algeria',
@@ -5519,7 +5690,7 @@ $groups = array (
       ),
     ),
   ),
-  121 => 
+  122 => 
   array (
     'Prefix' => '978-9948',
     'Agency' => 'United Arab Emirates',
@@ -5545,7 +5716,7 @@ $groups = array (
       ),
     ),
   ),
-  122 => 
+  123 => 
   array (
     'Prefix' => '978-9949',
     'Agency' => 'Estonia',
@@ -5596,7 +5767,7 @@ $groups = array (
       ),
     ),
   ),
-  123 => 
+  124 => 
   array (
     'Prefix' => '978-9950',
     'Agency' => 'Palestine',
@@ -5622,7 +5793,7 @@ $groups = array (
       ),
     ),
   ),
-  124 => 
+  125 => 
   array (
     'Prefix' => '978-9951',
     'Agency' => 'Kosova',
@@ -5648,7 +5819,7 @@ $groups = array (
       ),
     ),
   ),
-  125 => 
+  126 => 
   array (
     'Prefix' => '978-9952',
     'Agency' => 'Azerbaijan',
@@ -5679,7 +5850,7 @@ $groups = array (
       ),
     ),
   ),
-  126 => 
+  127 => 
   array (
     'Prefix' => '978-9953',
     'Agency' => 'Lebanon',
@@ -5725,7 +5896,7 @@ $groups = array (
       ),
     ),
   ),
-  127 => 
+  128 => 
   array (
     'Prefix' => '978-9954',
     'Agency' => 'Morocco',
@@ -5761,7 +5932,7 @@ $groups = array (
       ),
     ),
   ),
-  128 => 
+  129 => 
   array (
     'Prefix' => '978-9955',
     'Agency' => 'Lithuania',
@@ -5787,7 +5958,7 @@ $groups = array (
       ),
     ),
   ),
-  129 => 
+  130 => 
   array (
     'Prefix' => '978-9956',
     'Agency' => 'Cameroon',
@@ -5818,7 +5989,7 @@ $groups = array (
       ),
     ),
   ),
-  130 => 
+  131 => 
   array (
     'Prefix' => '978-9957',
     'Agency' => 'Jordan',
@@ -5864,7 +6035,7 @@ $groups = array (
       ),
     ),
   ),
-  131 => 
+  132 => 
   array (
     'Prefix' => '978-9958',
     'Agency' => 'Bosnia and Herzegovina',
@@ -5925,7 +6096,7 @@ $groups = array (
       ),
     ),
   ),
-  132 => 
+  133 => 
   array (
     'Prefix' => '978-9959',
     'Agency' => 'Libya',
@@ -5966,7 +6137,7 @@ $groups = array (
       ),
     ),
   ),
-  133 => 
+  134 => 
   array (
     'Prefix' => '978-9960',
     'Agency' => 'Saudi Arabia',
@@ -5992,7 +6163,7 @@ $groups = array (
       ),
     ),
   ),
-  134 => 
+  135 => 
   array (
     'Prefix' => '978-9961',
     'Agency' => 'Algeria',
@@ -6023,7 +6194,7 @@ $groups = array (
       ),
     ),
   ),
-  135 => 
+  136 => 
   array (
     'Prefix' => '978-9962',
     'Agency' => 'Panama',
@@ -6059,7 +6230,7 @@ $groups = array (
       ),
     ),
   ),
-  136 => 
+  137 => 
   array (
     'Prefix' => '978-9963',
     'Agency' => 'Cyprus',
@@ -6110,7 +6281,7 @@ $groups = array (
       ),
     ),
   ),
-  137 => 
+  138 => 
   array (
     'Prefix' => '978-9964',
     'Agency' => 'Ghana',
@@ -6136,7 +6307,7 @@ $groups = array (
       ),
     ),
   ),
-  138 => 
+  139 => 
   array (
     'Prefix' => '978-9965',
     'Agency' => 'Kazakhstan',
@@ -6162,7 +6333,7 @@ $groups = array (
       ),
     ),
   ),
-  139 => 
+  140 => 
   array (
     'Prefix' => '978-9966',
     'Agency' => 'Kenya',
@@ -6228,7 +6399,7 @@ $groups = array (
       ),
     ),
   ),
-  140 => 
+  141 => 
   array (
     'Prefix' => '978-9967',
     'Agency' => 'Kyrgyz Republic',
@@ -6254,7 +6425,7 @@ $groups = array (
       ),
     ),
   ),
-  141 => 
+  142 => 
   array (
     'Prefix' => '978-9968',
     'Agency' => 'Costa Rica',
@@ -6280,7 +6451,7 @@ $groups = array (
       ),
     ),
   ),
-  142 => 
+  143 => 
   array (
     'Prefix' => '978-9970',
     'Agency' => 'Uganda',
@@ -6306,7 +6477,7 @@ $groups = array (
       ),
     ),
   ),
-  143 => 
+  144 => 
   array (
     'Prefix' => '978-9971',
     'Agency' => 'Singapore',
@@ -6337,7 +6508,7 @@ $groups = array (
       ),
     ),
   ),
-  144 => 
+  145 => 
   array (
     'Prefix' => '978-9972',
     'Agency' => 'Peru',
@@ -6383,7 +6554,7 @@ $groups = array (
       ),
     ),
   ),
-  145 => 
+  146 => 
   array (
     'Prefix' => '978-9973',
     'Agency' => 'Tunisia',
@@ -6424,7 +6595,7 @@ $groups = array (
       ),
     ),
   ),
-  146 => 
+  147 => 
   array (
     'Prefix' => '978-9974',
     'Agency' => 'Uruguay',
@@ -6470,7 +6641,7 @@ $groups = array (
       ),
     ),
   ),
-  147 => 
+  148 => 
   array (
     'Prefix' => '978-9975',
     'Agency' => 'Moldova',
@@ -6516,7 +6687,7 @@ $groups = array (
       ),
     ),
   ),
-  148 => 
+  149 => 
   array (
     'Prefix' => '978-9976',
     'Agency' => 'Tanzania',
@@ -6557,7 +6728,7 @@ $groups = array (
       ),
     ),
   ),
-  149 => 
+  150 => 
   array (
     'Prefix' => '978-9977',
     'Agency' => 'Costa Rica',
@@ -6583,7 +6754,7 @@ $groups = array (
       ),
     ),
   ),
-  150 => 
+  151 => 
   array (
     'Prefix' => '978-9978',
     'Agency' => 'Ecuador',
@@ -6619,7 +6790,7 @@ $groups = array (
       ),
     ),
   ),
-  151 => 
+  152 => 
   array (
     'Prefix' => '978-9979',
     'Agency' => 'Iceland',
@@ -6660,7 +6831,7 @@ $groups = array (
       ),
     ),
   ),
-  152 => 
+  153 => 
   array (
     'Prefix' => '978-9980',
     'Agency' => 'Papua New Guinea',
@@ -6691,7 +6862,7 @@ $groups = array (
       ),
     ),
   ),
-  153 => 
+  154 => 
   array (
     'Prefix' => '978-9981',
     'Agency' => 'Morocco',
@@ -6732,7 +6903,7 @@ $groups = array (
       ),
     ),
   ),
-  154 => 
+  155 => 
   array (
     'Prefix' => '978-9982',
     'Agency' => 'Zambia',
@@ -6758,7 +6929,7 @@ $groups = array (
       ),
     ),
   ),
-  155 => 
+  156 => 
   array (
     'Prefix' => '978-9983',
     'Agency' => 'Gambia',
@@ -6789,7 +6960,7 @@ $groups = array (
       ),
     ),
   ),
-  156 => 
+  157 => 
   array (
     'Prefix' => '978-9984',
     'Agency' => 'Latvia',
@@ -6815,7 +6986,7 @@ $groups = array (
       ),
     ),
   ),
-  157 => 
+  158 => 
   array (
     'Prefix' => '978-9985',
     'Agency' => 'Estonia',
@@ -6846,7 +7017,7 @@ $groups = array (
       ),
     ),
   ),
-  158 => 
+  159 => 
   array (
     'Prefix' => '978-9986',
     'Agency' => 'Lithuania',
@@ -6882,7 +7053,7 @@ $groups = array (
       ),
     ),
   ),
-  159 => 
+  160 => 
   array (
     'Prefix' => '978-9987',
     'Agency' => 'Tanzania',
@@ -6908,7 +7079,7 @@ $groups = array (
       ),
     ),
   ),
-  160 => 
+  161 => 
   array (
     'Prefix' => '978-9988',
     'Agency' => 'Ghana',
@@ -6918,12 +7089,12 @@ $groups = array (
       array (
         0 => 
         array (
-          'Range' => '0000000-2999999',
+          'Range' => '0000000-3999999',
           'Length' => '1',
         ),
         1 => 
         array (
-          'Range' => '3000000-5499999',
+          'Range' => '4000000-5499999',
           'Length' => '2',
         ),
         2 => 
@@ -6939,10 +7110,10 @@ $groups = array (
       ),
     ),
   ),
-  161 => 
+  162 => 
   array (
     'Prefix' => '978-9989',
-    'Agency' => 'Macedonia',
+    'Agency' => 'North Macedonia',
     'Rules' => 
     array (
       'Rule' => 
@@ -6980,7 +7151,7 @@ $groups = array (
       ),
     ),
   ),
-  162 => 
+  163 => 
   array (
     'Prefix' => '978-99901',
     'Agency' => 'Bahrain',
@@ -7006,7 +7177,7 @@ $groups = array (
       ),
     ),
   ),
-  163 => 
+  164 => 
   array (
     'Prefix' => '978-99902',
     'Agency' => 'Reserved Agency',
@@ -7022,7 +7193,7 @@ $groups = array (
       ),
     ),
   ),
-  164 => 
+  165 => 
   array (
     'Prefix' => '978-99903',
     'Agency' => 'Mauritius',
@@ -7048,7 +7219,7 @@ $groups = array (
       ),
     ),
   ),
-  165 => 
+  166 => 
   array (
     'Prefix' => '978-99904',
     'Agency' => 'Curaçao',
@@ -7074,7 +7245,7 @@ $groups = array (
       ),
     ),
   ),
-  166 => 
+  167 => 
   array (
     'Prefix' => '978-99905',
     'Agency' => 'Bolivia',
@@ -7100,7 +7271,7 @@ $groups = array (
       ),
     ),
   ),
-  167 => 
+  168 => 
   array (
     'Prefix' => '978-99906',
     'Agency' => 'Kuwait',
@@ -7141,7 +7312,7 @@ $groups = array (
       ),
     ),
   ),
-  168 => 
+  169 => 
   array (
     'Prefix' => '978-99908',
     'Agency' => 'Malawi',
@@ -7167,7 +7338,7 @@ $groups = array (
       ),
     ),
   ),
-  169 => 
+  170 => 
   array (
     'Prefix' => '978-99909',
     'Agency' => 'Malta',
@@ -7193,7 +7364,7 @@ $groups = array (
       ),
     ),
   ),
-  170 => 
+  171 => 
   array (
     'Prefix' => '978-99910',
     'Agency' => 'Sierra Leone',
@@ -7219,7 +7390,7 @@ $groups = array (
       ),
     ),
   ),
-  171 => 
+  172 => 
   array (
     'Prefix' => '978-99911',
     'Agency' => 'Lesotho',
@@ -7240,7 +7411,7 @@ $groups = array (
       ),
     ),
   ),
-  172 => 
+  173 => 
   array (
     'Prefix' => '978-99912',
     'Agency' => 'Botswana',
@@ -7271,7 +7442,7 @@ $groups = array (
       ),
     ),
   ),
-  173 => 
+  174 => 
   array (
     'Prefix' => '978-99913',
     'Agency' => 'Andorra',
@@ -7307,7 +7478,7 @@ $groups = array (
       ),
     ),
   ),
-  174 => 
+  175 => 
   array (
     'Prefix' => '978-99914',
     'Agency' => 'International NGO Publishers',
@@ -7343,7 +7514,7 @@ $groups = array (
       ),
     ),
   ),
-  175 => 
+  176 => 
   array (
     'Prefix' => '978-99915',
     'Agency' => 'Maldives',
@@ -7369,7 +7540,7 @@ $groups = array (
       ),
     ),
   ),
-  176 => 
+  177 => 
   array (
     'Prefix' => '978-99916',
     'Agency' => 'Namibia',
@@ -7395,7 +7566,7 @@ $groups = array (
       ),
     ),
   ),
-  177 => 
+  178 => 
   array (
     'Prefix' => '978-99917',
     'Agency' => 'Brunei Darussalam',
@@ -7410,18 +7581,18 @@ $groups = array (
         ),
         1 => 
         array (
-          'Range' => '3000000-8999999',
+          'Range' => '3000000-8899999',
           'Length' => '2',
         ),
         2 => 
         array (
-          'Range' => '9000000-9999999',
+          'Range' => '8900000-9999999',
           'Length' => '3',
         ),
       ),
     ),
   ),
-  178 => 
+  179 => 
   array (
     'Prefix' => '978-99918',
     'Agency' => 'Faroe Islands',
@@ -7447,7 +7618,7 @@ $groups = array (
       ),
     ),
   ),
-  179 => 
+  180 => 
   array (
     'Prefix' => '978-99919',
     'Agency' => 'Benin',
@@ -7478,7 +7649,7 @@ $groups = array (
       ),
     ),
   ),
-  180 => 
+  181 => 
   array (
     'Prefix' => '978-99920',
     'Agency' => 'Andorra',
@@ -7504,7 +7675,7 @@ $groups = array (
       ),
     ),
   ),
-  181 => 
+  182 => 
   array (
     'Prefix' => '978-99921',
     'Agency' => 'Qatar',
@@ -7540,7 +7711,7 @@ $groups = array (
       ),
     ),
   ),
-  182 => 
+  183 => 
   array (
     'Prefix' => '978-99922',
     'Agency' => 'Guatemala',
@@ -7566,7 +7737,7 @@ $groups = array (
       ),
     ),
   ),
-  183 => 
+  184 => 
   array (
     'Prefix' => '978-99923',
     'Agency' => 'El Salvador',
@@ -7592,7 +7763,7 @@ $groups = array (
       ),
     ),
   ),
-  184 => 
+  185 => 
   array (
     'Prefix' => '978-99924',
     'Agency' => 'Nicaragua',
@@ -7618,7 +7789,7 @@ $groups = array (
       ),
     ),
   ),
-  185 => 
+  186 => 
   array (
     'Prefix' => '978-99925',
     'Agency' => 'Paraguay',
@@ -7628,15 +7799,30 @@ $groups = array (
       array (
         0 => 
         array (
-          'Range' => '0000000-3999999',
+          'Range' => '0000000-0999999',
           'Length' => '1',
         ),
         1 => 
         array (
-          'Range' => '4000000-7999999',
+          'Range' => '1000000-1999999',
           'Length' => '2',
         ),
         2 => 
+        array (
+          'Range' => '2000000-2999999',
+          'Length' => '3',
+        ),
+        3 => 
+        array (
+          'Range' => '3000000-3999999',
+          'Length' => '1',
+        ),
+        4 => 
+        array (
+          'Range' => '4000000-7999999',
+          'Length' => '2',
+        ),
+        5 => 
         array (
           'Range' => '8000000-9999999',
           'Length' => '3',
@@ -7644,7 +7830,7 @@ $groups = array (
       ),
     ),
   ),
-  186 => 
+  187 => 
   array (
     'Prefix' => '978-99926',
     'Agency' => 'Honduras',
@@ -7680,7 +7866,7 @@ $groups = array (
       ),
     ),
   ),
-  187 => 
+  188 => 
   array (
     'Prefix' => '978-99927',
     'Agency' => 'Albania',
@@ -7706,7 +7892,7 @@ $groups = array (
       ),
     ),
   ),
-  188 => 
+  189 => 
   array (
     'Prefix' => '978-99928',
     'Agency' => 'Georgia',
@@ -7732,7 +7918,7 @@ $groups = array (
       ),
     ),
   ),
-  189 => 
+  190 => 
   array (
     'Prefix' => '978-99929',
     'Agency' => 'Mongolia',
@@ -7758,7 +7944,7 @@ $groups = array (
       ),
     ),
   ),
-  190 => 
+  191 => 
   array (
     'Prefix' => '978-99930',
     'Agency' => 'Armenia',
@@ -7784,7 +7970,7 @@ $groups = array (
       ),
     ),
   ),
-  191 => 
+  192 => 
   array (
     'Prefix' => '978-99931',
     'Agency' => 'Seychelles',
@@ -7810,7 +7996,7 @@ $groups = array (
       ),
     ),
   ),
-  192 => 
+  193 => 
   array (
     'Prefix' => '978-99932',
     'Agency' => 'Malta',
@@ -7846,7 +8032,7 @@ $groups = array (
       ),
     ),
   ),
-  193 => 
+  194 => 
   array (
     'Prefix' => '978-99933',
     'Agency' => 'Nepal',
@@ -7872,7 +8058,7 @@ $groups = array (
       ),
     ),
   ),
-  194 => 
+  195 => 
   array (
     'Prefix' => '978-99934',
     'Agency' => 'Dominican Republic',
@@ -7898,7 +8084,7 @@ $groups = array (
       ),
     ),
   ),
-  195 => 
+  196 => 
   array (
     'Prefix' => '978-99935',
     'Agency' => 'Haiti',
@@ -7934,7 +8120,7 @@ $groups = array (
       ),
     ),
   ),
-  196 => 
+  197 => 
   array (
     'Prefix' => '978-99936',
     'Agency' => 'Bhutan',
@@ -7960,7 +8146,7 @@ $groups = array (
       ),
     ),
   ),
-  197 => 
+  198 => 
   array (
     'Prefix' => '978-99937',
     'Agency' => 'Macau',
@@ -7986,7 +8172,7 @@ $groups = array (
       ),
     ),
   ),
-  198 => 
+  199 => 
   array (
     'Prefix' => '978-99938',
     'Agency' => 'Srpska, Republic of',
@@ -8017,7 +8203,7 @@ $groups = array (
       ),
     ),
   ),
-  199 => 
+  200 => 
   array (
     'Prefix' => '978-99939',
     'Agency' => 'Guatemala',
@@ -8043,7 +8229,7 @@ $groups = array (
       ),
     ),
   ),
-  200 => 
+  201 => 
   array (
     'Prefix' => '978-99940',
     'Agency' => 'Georgia',
@@ -8069,7 +8255,7 @@ $groups = array (
       ),
     ),
   ),
-  201 => 
+  202 => 
   array (
     'Prefix' => '978-99941',
     'Agency' => 'Armenia',
@@ -8095,7 +8281,7 @@ $groups = array (
       ),
     ),
   ),
-  202 => 
+  203 => 
   array (
     'Prefix' => '978-99942',
     'Agency' => 'Sudan',
@@ -8121,7 +8307,7 @@ $groups = array (
       ),
     ),
   ),
-  203 => 
+  204 => 
   array (
     'Prefix' => '978-99943',
     'Agency' => 'Albania',
@@ -8147,7 +8333,7 @@ $groups = array (
       ),
     ),
   ),
-  204 => 
+  205 => 
   array (
     'Prefix' => '978-99944',
     'Agency' => 'Ethiopia',
@@ -8173,7 +8359,7 @@ $groups = array (
       ),
     ),
   ),
-  205 => 
+  206 => 
   array (
     'Prefix' => '978-99945',
     'Agency' => 'Namibia',
@@ -8183,12 +8369,12 @@ $groups = array (
       array (
         0 => 
         array (
-          'Range' => '0000000-5999999',
+          'Range' => '0000000-4999999',
           'Length' => '1',
         ),
         1 => 
         array (
-          'Range' => '6000000-8999999',
+          'Range' => '5000000-8999999',
           'Length' => '2',
         ),
         2 => 
@@ -8199,7 +8385,7 @@ $groups = array (
       ),
     ),
   ),
-  206 => 
+  207 => 
   array (
     'Prefix' => '978-99946',
     'Agency' => 'Nepal',
@@ -8225,7 +8411,7 @@ $groups = array (
       ),
     ),
   ),
-  207 => 
+  208 => 
   array (
     'Prefix' => '978-99947',
     'Agency' => 'Tajikistan',
@@ -8251,7 +8437,7 @@ $groups = array (
       ),
     ),
   ),
-  208 => 
+  209 => 
   array (
     'Prefix' => '978-99948',
     'Agency' => 'Eritrea',
@@ -8277,7 +8463,7 @@ $groups = array (
       ),
     ),
   ),
-  209 => 
+  210 => 
   array (
     'Prefix' => '978-99949',
     'Agency' => 'Mauritius',
@@ -8303,7 +8489,7 @@ $groups = array (
       ),
     ),
   ),
-  210 => 
+  211 => 
   array (
     'Prefix' => '978-99950',
     'Agency' => 'Cambodia',
@@ -8329,7 +8515,7 @@ $groups = array (
       ),
     ),
   ),
-  211 => 
+  212 => 
   array (
     'Prefix' => '978-99951',
     'Agency' => 'Reserved Agency',
@@ -8345,7 +8531,7 @@ $groups = array (
       ),
     ),
   ),
-  212 => 
+  213 => 
   array (
     'Prefix' => '978-99952',
     'Agency' => 'Mali',
@@ -8371,7 +8557,7 @@ $groups = array (
       ),
     ),
   ),
-  213 => 
+  214 => 
   array (
     'Prefix' => '978-99953',
     'Agency' => 'Paraguay',
@@ -8402,7 +8588,7 @@ $groups = array (
       ),
     ),
   ),
-  214 => 
+  215 => 
   array (
     'Prefix' => '978-99954',
     'Agency' => 'Bolivia',
@@ -8433,7 +8619,7 @@ $groups = array (
       ),
     ),
   ),
-  215 => 
+  216 => 
   array (
     'Prefix' => '978-99955',
     'Agency' => 'Srpska, Republic of',
@@ -8464,7 +8650,7 @@ $groups = array (
       ),
     ),
   ),
-  216 => 
+  217 => 
   array (
     'Prefix' => '978-99956',
     'Agency' => 'Albania',
@@ -8490,7 +8676,7 @@ $groups = array (
       ),
     ),
   ),
-  217 => 
+  218 => 
   array (
     'Prefix' => '978-99957',
     'Agency' => 'Malta',
@@ -8521,7 +8707,7 @@ $groups = array (
       ),
     ),
   ),
-  218 => 
+  219 => 
   array (
     'Prefix' => '978-99958',
     'Agency' => 'Bahrain',
@@ -8552,7 +8738,7 @@ $groups = array (
       ),
     ),
   ),
-  219 => 
+  220 => 
   array (
     'Prefix' => '978-99959',
     'Agency' => 'Luxembourg',
@@ -8578,7 +8764,7 @@ $groups = array (
       ),
     ),
   ),
-  220 => 
+  221 => 
   array (
     'Prefix' => '978-99960',
     'Agency' => 'Malawi',
@@ -8588,15 +8774,20 @@ $groups = array (
       array (
         0 => 
         array (
-          'Range' => '0000000-0999999',
-          'Length' => '1',
+          'Range' => '0000000-0699999',
+          'Length' => '0',
         ),
         1 => 
+        array (
+          'Range' => '0700000-0999999',
+          'Length' => '3',
+        ),
+        2 => 
         array (
           'Range' => '1000000-9499999',
           'Length' => '2',
         ),
-        2 => 
+        3 => 
         array (
           'Range' => '9500000-9999999',
           'Length' => '3',
@@ -8604,7 +8795,7 @@ $groups = array (
       ),
     ),
   ),
-  221 => 
+  222 => 
   array (
     'Prefix' => '978-99961',
     'Agency' => 'El Salvador',
@@ -8635,7 +8826,7 @@ $groups = array (
       ),
     ),
   ),
-  222 => 
+  223 => 
   array (
     'Prefix' => '978-99962',
     'Agency' => 'Mongolia',
@@ -8661,7 +8852,7 @@ $groups = array (
       ),
     ),
   ),
-  223 => 
+  224 => 
   array (
     'Prefix' => '978-99963',
     'Agency' => 'Cambodia',
@@ -8687,7 +8878,7 @@ $groups = array (
       ),
     ),
   ),
-  224 => 
+  225 => 
   array (
     'Prefix' => '978-99964',
     'Agency' => 'Nicaragua',
@@ -8713,7 +8904,7 @@ $groups = array (
       ),
     ),
   ),
-  225 => 
+  226 => 
   array (
     'Prefix' => '978-99965',
     'Agency' => 'Macau',
@@ -8744,7 +8935,7 @@ $groups = array (
       ),
     ),
   ),
-  226 => 
+  227 => 
   array (
     'Prefix' => '978-99966',
     'Agency' => 'Kuwait',
@@ -8780,7 +8971,7 @@ $groups = array (
       ),
     ),
   ),
-  227 => 
+  228 => 
   array (
     'Prefix' => '978-99967',
     'Agency' => 'Paraguay',
@@ -8806,7 +8997,7 @@ $groups = array (
       ),
     ),
   ),
-  228 => 
+  229 => 
   array (
     'Prefix' => '978-99968',
     'Agency' => 'Botswana',
@@ -8837,7 +9028,7 @@ $groups = array (
       ),
     ),
   ),
-  229 => 
+  230 => 
   array (
     'Prefix' => '978-99969',
     'Agency' => 'Oman',
@@ -8863,7 +9054,7 @@ $groups = array (
       ),
     ),
   ),
-  230 => 
+  231 => 
   array (
     'Prefix' => '978-99970',
     'Agency' => 'Haiti',
@@ -8889,7 +9080,7 @@ $groups = array (
       ),
     ),
   ),
-  231 => 
+  232 => 
   array (
     'Prefix' => '978-99971',
     'Agency' => 'Myanmar',
@@ -8915,7 +9106,7 @@ $groups = array (
       ),
     ),
   ),
-  232 => 
+  233 => 
   array (
     'Prefix' => '978-99972',
     'Agency' => 'Faroe Islands',
@@ -8941,7 +9132,7 @@ $groups = array (
       ),
     ),
   ),
-  233 => 
+  234 => 
   array (
     'Prefix' => '978-99973',
     'Agency' => 'Mongolia',
@@ -8967,7 +9158,7 @@ $groups = array (
       ),
     ),
   ),
-  234 => 
+  235 => 
   array (
     'Prefix' => '978-99974',
     'Agency' => 'Bolivia',
@@ -9013,7 +9204,7 @@ $groups = array (
       ),
     ),
   ),
-  235 => 
+  236 => 
   array (
     'Prefix' => '978-99975',
     'Agency' => 'Tajikistan',
@@ -9044,7 +9235,7 @@ $groups = array (
       ),
     ),
   ),
-  236 => 
+  237 => 
   array (
     'Prefix' => '978-99976',
     'Agency' => 'Srpska, Republic of',
@@ -9080,7 +9271,7 @@ $groups = array (
       ),
     ),
   ),
-  237 => 
+  238 => 
   array (
     'Prefix' => '978-99977',
     'Agency' => 'Rwanda',
@@ -9110,13 +9301,18 @@ $groups = array (
         ),
         4 => 
         array (
-          'Range' => '8000000-9999999',
+          'Range' => '8000000-9949999',
           'Length' => '0',
+        ),
+        5 => 
+        array (
+          'Range' => '9950000-9999999',
+          'Length' => '3',
         ),
       ),
     ),
   ),
-  238 => 
+  239 => 
   array (
     'Prefix' => '978-99978',
     'Agency' => 'Mongolia',
@@ -9142,7 +9338,7 @@ $groups = array (
       ),
     ),
   ),
-  239 => 
+  240 => 
   array (
     'Prefix' => '978-99979',
     'Agency' => 'Honduras',
@@ -9168,7 +9364,7 @@ $groups = array (
       ),
     ),
   ),
-  240 => 
+  241 => 
   array (
     'Prefix' => '978-99980',
     'Agency' => 'Bhutan',
@@ -9204,7 +9400,7 @@ $groups = array (
       ),
     ),
   ),
-  241 => 
+  242 => 
   array (
     'Prefix' => '978-99981',
     'Agency' => 'Macau',
@@ -9224,12 +9420,12 @@ $groups = array (
         ),
         2 => 
         array (
-          'Range' => '3000000-4999999',
+          'Range' => '3000000-5999999',
           'Length' => '2',
         ),
         3 => 
         array (
-          'Range' => '5000000-7999999',
+          'Range' => '6000000-7999999',
           'Length' => '0',
         ),
         4 => 
@@ -9240,7 +9436,7 @@ $groups = array (
       ),
     ),
   ),
-  242 => 
+  243 => 
   array (
     'Prefix' => '978-99982',
     'Agency' => 'Benin',
@@ -9260,28 +9456,28 @@ $groups = array (
         ),
         2 => 
         array (
-          'Range' => '5000000-5999999',
+          'Range' => '5000000-6299999',
           'Length' => '2',
         ),
         3 => 
         array (
-          'Range' => '6000000-8999999',
+          'Range' => '6300000-8999999',
           'Length' => '0',
         ),
         4 => 
         array (
-          'Range' => '9000000-9499999',
+          'Range' => '9000000-9699999',
           'Length' => '3',
         ),
         5 => 
         array (
-          'Range' => '9500000-9999999',
+          'Range' => '9700000-9999999',
           'Length' => '0',
         ),
       ),
     ),
   ),
-  243 => 
+  244 => 
   array (
     'Prefix' => '978-99983',
     'Agency' => 'El Salvador',
@@ -9317,7 +9513,38 @@ $groups = array (
       ),
     ),
   ),
-  244 => 
+  245 => 
+  array (
+    'Prefix' => '978-99985',
+    'Agency' => 'Tajikistan',
+    'Rules' => 
+    array (
+      'Rule' => 
+      array (
+        0 => 
+        array (
+          'Range' => '0000000-5499999',
+          'Length' => '0',
+        ),
+        1 => 
+        array (
+          'Range' => '5500000-5999999',
+          'Length' => '2',
+        ),
+        2 => 
+        array (
+          'Range' => '6000000-9499999',
+          'Length' => '0',
+        ),
+        3 => 
+        array (
+          'Range' => '9500000-9999999',
+          'Length' => '3',
+        ),
+      ),
+    ),
+  ),
+  246 => 
   array (
     'Prefix' => '979-10',
     'Agency' => 'France',
@@ -9353,7 +9580,7 @@ $groups = array (
       ),
     ),
   ),
-  245 => 
+  247 => 
   array (
     'Prefix' => '979-11',
     'Agency' => 'Korea, Republic',
@@ -9389,7 +9616,7 @@ $groups = array (
       ),
     ),
   ),
-  246 => 
+  248 => 
   array (
     'Prefix' => '979-12',
     'Agency' => 'Italy',
@@ -9404,20 +9631,30 @@ $groups = array (
         ),
         1 => 
         array (
-          'Range' => '2000000-2009999',
+          'Range' => '2000000-2999999',
           'Length' => '3',
         ),
         2 => 
         array (
-          'Range' => '2010000-7999999',
+          'Range' => '3000000-5949999',
           'Length' => '0',
         ),
         3 => 
         array (
+          'Range' => '5950000-5999999',
+          'Length' => '4',
+        ),
+        4 => 
+        array (
+          'Range' => '6000000-7999999',
+          'Length' => '0',
+        ),
+        5 => 
+        array (
           'Range' => '8000000-8499999',
           'Length' => '5',
         ),
-        4 => 
+        6 => 
         array (
           'Range' => '8500000-9999999',
           'Length' => '0',
@@ -9425,7 +9662,7 @@ $groups = array (
       ),
     ),
   ),
-  247 => 
+  249 => 
   array (
     'Prefix' => '979-8',
     'Agency' => 'United States',
@@ -9435,27 +9672,37 @@ $groups = array (
       array (
         0 => 
         array (
-          'Range' => '00000000-59999999',
+          'Range' => '0000000-1999999',
           'Length' => '0',
         ),
         1 => 
         array (
-          'Range' => '6000000-6999999',
-          'Length' => '4',
+          'Range' => '2000000-2199999',
+          'Length' => '3',
         ),
         2 => 
         array (
-          'Range' => '70000000-98499999',
+          'Range' => '2200000-5499999',
           'Length' => '0',
         ),
         3 => 
         array (
-          'Range' => '9850000-9850009',
-          'Length' => '7',
+          'Range' => '5500000-6999999',
+          'Length' => '4',
         ),
         4 => 
         array (
-          'Range' => '98500100-99999999',
+          'Range' => '7000000-9849999',
+          'Length' => '0',
+        ),
+        5 => 
+        array (
+          'Range' => '9850000-9850009',
+          'Length' => '7',
+        ),
+        6 => 
+        array (
+          'Range' => '9850010-9999999',
           'Length' => '0',
         ),
       ),
