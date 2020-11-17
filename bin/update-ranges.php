@@ -19,14 +19,20 @@ include('vendor/autoload.php');
 
 echo "Requesting range information...\n";
 $client = new Client();
-$res = $client->request('POST', 'https://www.isbn-international.org/?q=bl_proxy/GetRangeInformations', [
+$url = 'https://www.isbn-international.org/?q=bl_proxy/GetRangeInformations';
+$res = $client->request('POST', $url, [
     'form_params' => [
         'format' => 1,
         'language' => 'en',
         'translatedTexts' => 'Printed;Last Change'
     ]
 ]);
+
 $result = json_decode($res->getBody()->getContents());
+if ($result === null || !property_exists($result, 'result')) {
+    exit("The ISBN range API at $url is currently unavailable, exiting...\n");
+}
+
 $value = $result->result->value;
 $filename = $result->result->filename;
 $url = sprintf('https://www.isbn-international.org/?q=download_range/%s/%s', $value, $filename);
