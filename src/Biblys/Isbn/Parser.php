@@ -1,0 +1,179 @@
+<?php
+
+/*
+ * This file is part of the biblys/isbn package.
+ *
+ * (c) Clément Bourgoin
+ *
+ * This package is Open Source Software. For the full copyright and license
+ * information, please view the LICENSE file which was distributed with this
+ * source code.
+ */
+
+namespace Biblys\Isbn;
+
+class Parser
+{
+    // FIXME: Create custom exceptions for each case
+    const ERROR_EMPTY = 'No code provided',
+        ERROR_INVALID_CHARACTERS = 'Invalid characters in the code',
+        ERROR_INVALID_LENGTH = 'Code is too short or too long',
+        ERROR_INVALID_PRODUCT_CODE = 'Product code should be 978 or 979',
+        ERROR_INVALID_COUNTRY_CODE = 'Country code is unknown';
+
+    public static function parse($input)
+    {
+        if (empty($input)) {
+            throw new IsbnParsingException(static::ERROR_EMPTY);
+        }
+
+        $inputWithoutHyphens = self::_stripHyphens($input);
+        $inputWithoutChecksum = self::_stripChecksum($inputWithoutHyphens);
+
+        if (!is_numeric($inputWithoutChecksum)) {
+            throw new IsbnParsingException(static::ERROR_INVALID_CHARACTERS);
+        }
+
+        $result = self::_extractProductCode($inputWithoutChecksum);
+        $inputWithoutProductCode = $result[0];
+        $productCode = $result[1];
+
+        $result = self::_extractCountryCode($inputWithoutProductCode, $productCode);
+        $inputWithoutCountryCode = $result[0];
+        $countryCode = $result[1];
+
+        $result = self::_extractPublisherCode($inputWithoutCountryCode, $productCode, $countryCode);
+        $agencyCode = $result[0];
+        $publisherCode = $result[1];
+        $publicationCode = $result[2];
+
+        return [
+            "productCode" => $productCode,
+            "countryCode" => $countryCode,
+            "agencyCode" => $agencyCode,
+            "publisherCode" => $publisherCode,
+            "publicationCode" => $publicationCode,
+        ];
+    }
+
+    private static function _stripHyphens($input)
+    {
+        $replacements = array('-', '_', ' ');
+        $input = str_replace($replacements, '', $input);
+
+        return $input;
+    }
+
+    private static function _stripChecksum($input)
+    {
+        $length = strlen($input);
+
+        if ($length == 13 || $length == 10) {
+            $input = substr_replace($input, "", -1);
+            return $input;
+        }
+
+        if ($length == 12 || $length == 9) {
+            return $input;
+        }
+
+        throw new IsbnParsingException(static::ERROR_INVALID_LENGTH);
+    }
+
+    private static function _extractProductCode($input)
+    {
+        if (strlen($input) == 9) {
+            return [$input, 978];
+        }
+
+        $first3 = substr($input, 0, 3);
+        if ($first3 == 978 || $first3 == 979) {
+            $input = substr($input, 3);
+            return [$input, $first3];
+        }
+
+        throw new IsbnParsingException(static::ERROR_INVALID_PRODUCT_CODE);
+    }
+
+    private static function _extractCountryCode($input, $productCode)
+    {
+
+        // Get the seven first digits
+        $first7 = substr($input, 0, 7);
+
+        // Select the right set of rules according to the product code
+        $ranges = new Ranges();
+        $prefixes = $ranges->getPrefixes();
+        foreach ($prefixes as $p) {
+            if ($p['Prefix'] == $productCode) {
+                $rules = $p['Rules']['Rule'];
+                break;
+            }
+        }
+
+        // Select the right rule
+        foreach ($rules as $r) {
+            $ra = explode('-', $r['Range']);
+            if ($first7 >= $ra[0] && $first7 <= $ra[1]) {
+                $length = $r['Length'];
+                break;
+            }
+        }
+
+        // Country code is invalid
+        if (!isset($length) || $length === "0") {
+            throw new IsbnParsingException(static::ERROR_INVALID_COUNTRY_CODE);
+        };
+
+        $countryCode = substr($input, 0, $length);
+        $input = substr($input, $length);
+
+        return [$input, $countryCode];
+    }
+
+    /**
+     * Remove and save Publisher Code and Publication Code
+     */
+    private static function _extractPublisherCode($input, $productCode, $countryCode)
+    {
+        // Get the seven first digits or less
+        $first7 = substr($input, 0, 7);
+        $inputLength = strlen($first7);
+
+        // Select the right set of rules according to the agency (product + country code)
+        $ranges = new Ranges();
+        $groups = $ranges->getGroups();
+        foreach ($groups as $g) {
+            if ($g['Prefix'] <> $productCode . '-' . $countryCode) {
+                continue;
+            }
+
+            $rules = $g['Rules']['Rule'];
+            $agency = $g['Agency'];
+
+            // Select the right rule
+            foreach ($rules as $rule) {
+
+                // Get min and max value in range
+                // and trim values to match code length
+                $range = explode('-', $rule['Range']);
+                $min = substr($range[0], 0, $inputLength);
+                $max = substr($range[1], 0, $inputLength);
+
+                // If first 7 digits is smaller than min
+                // or greater than max, continue to next rule
+                if ($first7 < $min || $first7 > $max) {
+                    continue;
+                }
+
+                $length = $rule['Length'];
+
+                $publisherCode = substr($input, 0, $length);
+                $publicationCode = substr($input, $length);
+
+                return [$agency, $publisherCode, $publicationCode];
+            }
+            break;
+        }
+    }
+}
