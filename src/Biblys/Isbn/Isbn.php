@@ -343,8 +343,6 @@ class Isbn
                 }
             }
 
-            \var_dump($sum);
-
             $sum = (10 - ($sum % 10)) % 10;
         }
 
