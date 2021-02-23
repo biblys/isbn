@@ -6,9 +6,9 @@ This package can be used to:
 
 - validate an ISBN code
 - convert codes between ISBN-10, ISBN-13 and EAN (without hyphens) formats
+- format an ISBN as a GTIN-14 string (for use in packing and shipping)
 - calculate the checksum digit
 - show the registration agency (country or language)
-- format an ISBN as a GTIN-14 string (for use in packing and shipping)
 
 [CHANGELOG](https://github.com/biblys/isbn/releases)
 
@@ -17,7 +17,7 @@ This package can be used to:
 Install with composer:
 
 ```console
-composer require biblys/isbn:^2.1.5
+composer require biblys/isbn:^2.2.0
 ```
 
 ## Usage
@@ -27,11 +27,8 @@ Use case: converting an EAN (9782843449499) to an ISBN-13 (978-2-84344-949-9).
 ```php
 <?php
 
-use Biblys\Isbn\Isbn as Isbn;
-// require_once __DIR__.'/vendor/autoload.php';
-
-$ean = '9782843449499';
-$isbn = new Isbn($ean);
+$ean = "9782843449499";
+$isbn = new Biblys\Isbn\Isbn($ean);
 
 try {
     $isbn->validate();
@@ -47,11 +44,8 @@ Use case: outputting an EAN (9782843449499) as a GTIN-14-formatted string with t
 ```php
 <?php
 
-use Biblys\Isbn\Isbn as Isbn;
-// require_once __DIR__.'/vendor/autoload.php';
-
-$ean = '9782843449499';
-$isbn = new Isbn($ean);
+$ean = "9782843449499";
+$isbn = new Biblys\Isbn\Isbn($ean);
 
 try {
     $isbn->validate();

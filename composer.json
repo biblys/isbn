@@ -1,10 +1,11 @@
 {
   "name": "biblys/isbn",
   "description": "A PHP library to convert and validate ISBNs & EANs",
-  "time": "2020-11-17",
+  "time": "2021-02-23",
   "keywords": [
     "ISBN",
     "EAN",
+    "GTIN",
     "Book"
   ],
   "license": "MIT",
@@ -12,7 +13,7 @@
   "authors": [
     {
       "name": "Clement Bourgoin",
-      "email": "cb@nokto.net"
+      "email": "c@iwzr.fr"
     }
   ],
   "support": {
@@ -33,11 +34,8 @@
   "scripts": {
     "test": "vendor/bin/phpunit tests",
     "update-ranges": "php bin/update-ranges.php",
-    "docker:install": 
-      "docker run --rm -v $PWD:/app prooph/composer:${PHP_VERSION:-7.4} install",
-    "docker:test": 
-      "@composer docker:install && docker run --rm -v $PWD:/app prooph/composer:${PHP_VERSION:-7.4} test",
-    "docker:update-ranges": 
-      "@composer docker:install && docker run --rm -v $PWD:/app prooph/composer:${PHP_VERSION:-7.4} update-ranges"
+    "docker:install": "docker run --rm -v $PWD:/app prooph/composer:${PHP_VERSION:-7.4} install",
+    "docker:test": "@composer docker:install && docker run --rm -v $PWD:/app prooph/composer:${PHP_VERSION:-7.4} test",
+    "docker:update-ranges": "@composer docker:install && docker run --rm -v $PWD:/app prooph/composer:${PHP_VERSION:-7.4} update-ranges"
   }
 }
