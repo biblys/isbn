@@ -32,7 +32,7 @@ class Isbn
     // Checksum character
     private $_checksum;
     // Prefix for GTIN-14 formatting
-    private $_prefix;
+    private $_gtin14Prefix;
     // Input code
     private $_input;
     // Is the code a valid ISBN
@@ -122,12 +122,14 @@ class Isbn
         }
 
         if ($format == 'GTIN-14') {
-            $this->setPrefix($prefix);
+            $this->setGtin14Prefix($prefix);
+        } else {
+            $this->setGtin14Prefix(NULL);
         }
 
         $this->calculateChecksum($format);
 
-        $A = $this->getPrefix();
+        $A = $this->getGtin14Prefix();
         $B = $this->getProduct();
         $C = $this->getCountry();
         $D = $this->getPublisher();
@@ -330,17 +332,18 @@ class Isbn
                 $sum = 'X';
             }
         } else {
-            $code = $this->getPrefix().$this->getProduct().$this->getCountry().$this->getPublisher().$this->getPublication();
-            $c = str_split($code);
+            $code = $this->getGtin14Prefix().$this->getProduct().$this->getCountry().$this->getPublisher().$this->getPublication();
+            $c = array_reverse(str_split($code));
 
-            for ($i = count($c) - 1; $i >= 0; $i--)
-            {
-                if ($i & 1) { // If current array key is odd
-                    $sum += $c[$i];
+            foreach ($c as $k => $v) {
+                if ($k & 1) { // If current array key is odd
+                    $sum += $v;
                 } else { // If current array key is even
-                    $sum += $c[$i] * 3;
+                    $sum += $v * 3;
                 }
             }
+
+            \var_dump($sum);
 
             $sum = (10 - ($sum % 10)) % 10;
         }
@@ -381,9 +384,9 @@ class Isbn
         $this->_agency = $agency;
     }
 
-    private function setPrefix($prefix)
+    private function setGtin14Prefix($prefix)
     {
-        $this->_prefix = $prefix;
+        $this->_gtin14Prefix = $prefix;
     }
 
     /* GETTERS */
@@ -418,9 +421,9 @@ class Isbn
         return $this->_agency;
     }
 
-    public function getPrefix()
+    public function getGtin14Prefix()
     {
-        return $this->_prefix;
+        return $this->_gtin14Prefix;
     }
 
     public function getErrors()
