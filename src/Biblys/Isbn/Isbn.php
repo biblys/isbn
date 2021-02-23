@@ -113,7 +113,8 @@ class Isbn
 
     /**
      * Format an ISBN according to specified format
-     * @param string $format (ISBN-10, ISBN-13, EAN, GTIN-14)
+     * @param string $format (ISBN-10, ISBN-13, EAN, GTIN-14), default EAN
+     * @param string $prefix The prefix to use when formatting, default 1
      */
     public function format($format = 'EAN', $prefix = 1)
     {
