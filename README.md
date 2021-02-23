@@ -1,6 +1,6 @@
 # biblys/isbn
 
-[![CircleCI](https://circleci.com/gh/biblys/isbn.svg?style=shield)](https://circleci.com/gh/biblys/isbn)
+[![tests](https://github.com/biblys/isbn/actions/workflows/ci-php.yml/badge.svg)](https://github.com/biblys/isbn/actions/workflows/ci-php.yml)
 
 This package can be used to:
 
