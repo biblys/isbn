@@ -21,29 +21,32 @@ class Isbn
           ERROR_INVALID_PRODUCT_CODE = 'Product code should be 978 or 979',
           ERROR_INVALID_COUNTRY_CODE = 'Country code is unknown';
 
-    private $_product;
     // GS1 Product Code (978 or 979 for books)
-    private $_country;
+    private $_product;
     // Registrant group (country) code
-    private $_publisher;
+    private $_country;
     // Registrant (publisher) Code
-    private $_publication;
+    private $_publisher;
     // Publication code
-    private $_checksum;
+    private $_publication;
     // Checksum character
-    private $_input;
+    private $_checksum;
+    // Prefix for GTIN-14 formatting
+    private $_gtin14Prefix;
     // Input code
-    private $_isValid = true;
+    private $_input;
     // Is the code a valid ISBN
-    private $_errors = array();
+    private $_isValid = true;
     // Why is the code invalid
-    private $_format = 'EAN';
+    private $_errors = array();
     // Output format
-    private $_prefixes;
+    private $_format = 'EAN';
     // XML ranges file prefixes
-    private $_groups;
+    private $_prefixes;
     // XML ranges file groups
-            private $_agency; // ISBN Agency
+    private $_groups;
+    // ISBN Agency
+    private $_agency;
 
     /**
      * @var Ranges
@@ -110,28 +113,47 @@ class Isbn
 
     /**
      * Format an ISBN according to specified format
-     * @param string $format (ISBN-10, ISBN-13, EAN)
+     * @param string $format (ISBN-10, ISBN-13, EAN, GTIN-14), default EAN
+     * @param string $prefix The prefix to use when formatting, default 1
      */
-    public function format($format = 'EAN')
+    public function format($format = 'EAN', $prefix = 1)
     {
         if (!$this->isValid()) {
             throw new \Exception('Cannot format invalid ISBN: '.$this->getErrors());
         }
 
+        if ($format == 'GTIN-14') {
+            $this->setGtin14Prefix($prefix);
+        } else {
+            $this->setGtin14Prefix(NULL);
+        }
+
         $this->calculateChecksum($format);
 
-        $A = $this->getProduct();
-        $B = $this->getCountry();
-        $C = $this->getPublisher();
-        $D = $this->getPublication();
-        $E = $this->getChecksum();
+        $A = $this->getGtin14Prefix();
+        $B = $this->getProduct();
+        $C = $this->getCountry();
+        $D = $this->getPublisher();
+        $E = $this->getPublication();
+        $F = $this->getChecksum();
 
-        if ($format == 'ISBN-10') {
-            return $B.'-'.$C.'-'.$D.'-'.$E;
-        } elseif ($format == 'ISBN-13' || $format == 'ISBN') {
-            return $A.'-'.$B.'-'.$C.'-'.$D.'-'.$E;
-        } else {
-            return $A.$B.$C.$D.$E;
+        switch ($format) {
+            case 'ISBN-10':
+                return "$C-$D-$E-$F";
+            break;
+
+            case 'ISBN-13':
+            case 'ISBN':
+                return "$B-$C-$D-$E-$F";
+            break;
+
+            case 'GTIN-14':
+                return $A.$B.$C.$D.$E.$F;
+            break;
+
+            default:
+                return $B.$C.$D.$E.$F;
+            break;
         }
     }
 
@@ -311,9 +333,17 @@ class Isbn
                 $sum = 'X';
             }
         } else {
-            $code = $this->getProduct().$this->getCountry().$this->getPublisher().$this->getPublication();
-            $c = str_split($code);
-            $sum = (($c[1] + $c[3] + $c[5] + $c[7] + $c[9] + $c[11]) * 3) + ($c[0] + $c[2] + $c[4] + $c[6] + $c[8] + $c[10]);
+            $code = $this->getGtin14Prefix().$this->getProduct().$this->getCountry().$this->getPublisher().$this->getPublication();
+            $c = array_reverse(str_split($code));
+
+            foreach ($c as $k => $v) {
+                if ($k & 1) { // If current array key is odd
+                    $sum += $v;
+                } else { // If current array key is even
+                    $sum += $v * 3;
+                }
+            }
+
             $sum = (10 - ($sum % 10)) % 10;
         }
 
@@ -353,6 +383,11 @@ class Isbn
         $this->_agency = $agency;
     }
 
+    private function setGtin14Prefix($prefix)
+    {
+        $this->_gtin14Prefix = $prefix;
+    }
+
     /* GETTERS */
 
     public function getProduct()
@@ -383,6 +418,11 @@ class Isbn
     public function getAgency()
     {
         return $this->_agency;
+    }
+
+    public function getGtin14Prefix()
+    {
+        return $this->_gtin14Prefix;
     }
 
     public function getErrors()

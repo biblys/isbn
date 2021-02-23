@@ -57,6 +57,12 @@ class testIsbn extends TestCase
         $this->assertEquals($isbn10->format('ISBN-10'), "3-464-60352-0");
     }
 
+	public function testFormatGtin14()
+	{
+		$isbn = new Isbn('9783464603529');
+		$this->assertEquals($isbn->format('GTIN-14'), '19783464603526');
+	}
+
     public function testMauritiusRange()
     {
         $isbn = new Isbn('9786130971311');

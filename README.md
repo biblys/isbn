@@ -8,6 +8,7 @@ This package can be used to:
 - convert codes between ISBN-10, ISBN-13 and EAN (without hyphens) formats
 - calculate the checksum digit
 - show the registration agency (country or language)
+- format an ISBN as a GTIN-14 string (for use in packing and shipping)
 
 [CHANGELOG](https://github.com/biblys/isbn/releases)
 
@@ -36,6 +37,26 @@ try {
     $isbn->validate();
     $isbn13 = $isbn->format("ISBN-13");
     echo "ISBN-13: $isbn13";
+} catch(Exception $e) {
+    echo "An error occured while parsing $ean: ".$e->getMessage();
+}
+```
+
+Use case: outputting an EAN (9782843449499) as a GTIN-14-formatted string with the prefix 1.
+
+```php
+<?php
+
+use Biblys\Isbn\Isbn as Isbn;
+// require_once __DIR__.'/vendor/autoload.php';
+
+$ean = '9782843449499';
+$isbn = new Isbn($ean);
+
+try {
+    $isbn->validate();
+    $gtin14 = $isbn->format("GTIN-14", 1);
+    echo "GTIN-14: $gtin14";
 } catch(Exception $e) {
     echo "An error occured while parsing $ean: ".$e->getMessage();
 }
