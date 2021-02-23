@@ -1,6 +1,6 @@
 # biblys/isbn
 
-[![tests](https://github.com/biblys/isbn/actions/workflows/ci-php.yml/badge.svg)](https://github.com/biblys/isbn/actions/workflows/ci-php.yml)
+[![tests](https://github.com/biblys/isbn/actions/workflows/tests.yml/badge.svg)](https://github.com/biblys/isbn/actions/workflows/tests.yml)
 
 This package can be used to:
 
