@@ -21,16 +21,10 @@ use PHPUnit\Framework\TestCase;
 
 class testIsbn extends TestCase
 {
-    protected $isbn;
-
-    public function setUp(): void
-    {
-        $this->isbn = new Isbn('9782207258040');
-    }
-
     public function testIsValid()
     {
-        $this->assertTrue($this->isbn->isValid());
+        $isbn = new Isbn('9782207258040');
+        $this->assertTrue($isbn->isValid());
     }
 
     public function testIsNotValid()
@@ -48,7 +42,8 @@ class testIsbn extends TestCase
 
     public function testFormatIsbn13()
     {
-        $this->assertEquals($this->isbn->format('ISBN-13'), "978-2-207-25804-0");
+        $isbn = new Isbn('9782207258040');
+        $this->assertEquals($isbn->format('ISBN-13'), "978-2-207-25804-0");
     }
 
     public function testFormatIsbn10()
@@ -57,11 +52,11 @@ class testIsbn extends TestCase
         $this->assertEquals($isbn10->format('ISBN-10'), "3-464-60352-0");
     }
 
-	public function testFormatGtin14()
-	{
-		$isbn = new Isbn('9783464603529');
-		$this->assertEquals($isbn->format('GTIN-14'), '19783464603526');
-	}
+    public function testFormatGtin14()
+    {
+        $isbn = new Isbn('9783464603529');
+        $this->assertEquals($isbn->format('GTIN-14'), '19783464603526');
+    }
 
     public function testMauritiusRange()
     {
@@ -125,9 +120,9 @@ class testIsbn extends TestCase
      */
     public function testValidateMexicanIsbn()
     {
-      $isbn = new Isbn("9700764923");
-      $this->assertTrue($isbn->isValid());
-      $this->assertEquals($isbn->format("ISBN-13"), "978-970-07-6492-4");
+        $isbn = new Isbn("9700764923");
+        $this->assertTrue($isbn->isValid());
+        $this->assertEquals($isbn->format("ISBN-13"), "978-970-07-6492-4");
     }
 
     /**
@@ -138,7 +133,7 @@ class testIsbn extends TestCase
     {
         $this->expectException("Exception");
         $this->expectExceptionMessage("Invalid characters in the code");
-        
+
         $isbn = new Isbn("34995031X");
         $isbn->validate();
     }
