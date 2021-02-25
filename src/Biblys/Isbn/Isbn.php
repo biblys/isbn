@@ -82,14 +82,12 @@ class Isbn
             $this->setGtin14Prefix(NULL);
         }
 
-        $this->calculateChecksum($format);
-
         $A = $this->getGtin14Prefix();
         $B = $this->getProduct();
         $C = $this->getCountry();
         $D = $this->getPublisher();
         $E = $this->getPublication();
-        $F = $this->getChecksum();
+        $F = Formatter::calculateChecksum($format, $B, $C, $D, $E, $A);
 
         switch ($format) {
             case 'ISBN-10':
@@ -129,39 +127,6 @@ class Isbn
         $this->_errors[] = (string) $error;
     }
 
-    /**
-     * Calculate checksum character
-     */
-    private function calculateChecksum($format = 'EAN')
-    {
-        $sum = null;
-
-        if ($format == 'ISBN-10') {
-            $code = $this->getCountry() . $this->getPublisher() . $this->getPublication();
-            $c = str_split($code);
-            $sum = (11 - (($c[0] * 10) + ($c[1] * 9) + ($c[2] * 8) + ($c[3] * 7) + ($c[4] * 6) + ($c[5] * 5) + ($c[6] * 4) + ($c[7] * 3) + ($c[8] * 2)) % 11) % 11;
-            if ($sum == 10) {
-                $sum = 'X';
-            }
-        } else {
-            $code = $this->getGtin14Prefix() . $this->getProduct() . $this->getCountry() . $this->getPublisher() . $this->getPublication();
-            $c = array_reverse(str_split($code));
-
-            foreach ($c as $k => $v) {
-                if ($k & 1) { // If current array key is odd
-                    $sum += $v;
-                } else { // If current array key is even
-                    $sum += $v * 3;
-                }
-            }
-
-            $sum = (10 - ($sum % 10)) % 10;
-        }
-
-        $this->setChecksum($sum);
-    }
-
-
     /* SETTERS */
 
     private function setProduct($product)
@@ -182,11 +147,6 @@ class Isbn
     private function setPublication($publication)
     {
         $this->_publication = $publication;
-    }
-
-    private function setChecksum($checksum)
-    {
-        $this->_checksum = $checksum;
     }
 
     private function setAgency($agency)
