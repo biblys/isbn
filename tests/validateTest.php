@@ -21,9 +21,6 @@ use PHPUnit\Framework\TestCase;
 
 class testValidateIsbn extends TestCase
 {
-    /**
-     * Validate method should return true for a valid ISBN
-     */
     public function testValidateValidIsbn()
     {
         $isbn = new Isbn('9782843449499');
@@ -31,9 +28,29 @@ class testValidateIsbn extends TestCase
     }
 
     /**
+     * Non-regression test for Github issue #6
+     * https://github.com/biblys/isbn/issues/6
+     */
+    public function testValidateIsbn10WithChecksumX()
+    {
+        $isbn = new Isbn('80-7203-717-X');
+        $this->assertTrue($isbn->validate());
+    }
+
+    /**
+     * Non-regression test for Github issue #21
+     * https://github.com/biblys/isbn/issues/21
+     */
+    public function testValidateMexicanIsbn()
+    {
+        $isbn = new Isbn("9700764923");
+        $this->assertTrue($isbn->validate());
+    }
+
+    /**
      * Validate method should throw of an invalid ISBN
      */
-    public function testValidateInvalidIsbn()
+    public function testValidateInvalidProductCode()
     {
         $this->expectException("Exception");
         $this->expectExceptionMessage("Product code should be 978 or 979");
@@ -41,9 +58,33 @@ class testValidateIsbn extends TestCase
         $isbn->validate();
     }
 
+    public function testValidateInvalidCharacters()
+    {
+        $this->expectException("Exception");
+        $this->expectExceptionMessage("Invalid characters in the code");
+        $isbn = new Isbn('5780AAC728440');
+        $isbn->validate();
+    }
+
+    public function testIsbnWithInvalidProductCode()
+    {
+        $this->expectException("Exception");
+        $this->expectExceptionMessage("Product code should be 978 or 979");
+        $isbn = new Isbn('6897896354577');
+        $isbn->validate();
+    }
+
+    public function testIsbnWithInvalidCountryCode()
+    {
+        $this->expectException("Exception");
+        $this->expectExceptionMessage("Country code is unknown");
+        $isbn = new Isbn('9792887382562');
+        $isbn->validate();
+    }
+
     /**
-     * Invalid ISBN should not be validated
-     * Github issue #22: https://github.com/biblys/isbn/issues/22
+     * Non regression-test for Github issue #22
+     * https://github.com/biblys/isbn/issues/22
      */
     public function testOtherInvalidIsbn()
     {
