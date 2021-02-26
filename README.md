@@ -22,39 +22,55 @@ composer require biblys/isbn:^2.2.0
 
 ## Usage
 
+### Formatting
+
 Use case: converting an EAN (9782843449499) to an ISBN-13 (978-2-84344-949-9).
 
 ```php
 <?php
 
-$ean = "9782843449499";
-$isbn = new Biblys\Isbn\Isbn($ean);
+use Biblys\Isbn\ISBN;
 
 try {
-    $isbn->validate();
-    $isbn13 = $isbn->format("ISBN-13");
-    echo "ISBN-13: $isbn13";
+    $input = "9782843449499";
+    $isbn13 = ISBN::convertToIsbn13($input);
+    echo "ISBN-13: $isbn13"; // Prints ISBN-13: 978-2-84344-949-9
 } catch(Exception $e) {
-    echo "An error occured while parsing $ean: ".$e->getMessage();
+    echo "An error occured while attempting to format ISBN $input: ".$e->getMessage();
 }
 ```
 
-Use case: outputting an EAN (9782843449499) as a GTIN-14-formatted string with the prefix 1.
+All formating methods:
+
+- `ISBN::convertToIsbn10`
+- `ISBN::convertToIsbn13`
+- `ISBN::convertToEan13`
+- `ISBN::convertToGtin14`
+
+### Validating
+
+Use case: validating an incorrectly formed ISBN-13 (978-2-843-44949-9, should
+be 978-2-84344-949-9).
 
 ```php
 <?php
 
-$ean = "9782843449499";
-$isbn = new Biblys\Isbn\Isbn($ean);
+use Biblys\Isbn\ISBN;
 
 try {
-    $isbn->validate();
-    $gtin14 = $isbn->format("GTIN-14", 1);
-    echo "GTIN-14: $gtin14";
-} catch(Exception $e) {
-    echo "An error occured while parsing $ean: ".$e->getMessage();
+    $input = "978-2-84344-949-9";
+    $isbn13 = ISBN::validateAsIsbn13($input);
+    echo "ISBN $isbn13 is valid!";
+} catch(Exception $e) { // Will throw because third hyphen is misplaced
+    echo "ISBN $input is invalid: ".$e->getMessage();
 }
 ```
+
+All validating methods:
+
+- `ISBN::validateAsIsbn10`
+- `ISBN::validateAsIbsn13`
+- `ISBN::validateAsEan13`
 
 ## Test
 
