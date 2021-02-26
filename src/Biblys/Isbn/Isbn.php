@@ -157,7 +157,6 @@ class Isbn
     private $_isbnAgencyCode;
     private $_checksumCharacter;
     private $_gtin14Prefix;
-    private $_isValid = true;
     private $_errors = array();
 
     public function __construct($code = null)
@@ -172,7 +171,6 @@ class Isbn
             $this->_publisherCode = $parsedCode["publisherCode"];
             $this->_publicationCode = $parsedCode["publicationCode"];
         } catch (IsbnParsingException $exception) {
-            $this->_isValid = false;
             $this->_errors[] = $exception->getMessage();
         }
     }
@@ -183,7 +181,12 @@ class Isbn
      */
     public function isValid()
     {
-        return (bool) $this->_isValid;
+        try {
+            $this->validate();
+            return true;
+        } catch (\Exception $exception) {
+            return false;
+        }
     }
 
     /**
