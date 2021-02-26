@@ -14,26 +14,18 @@ namespace Biblys\Isbn;
 
 class Isbn
 {
-    // GS1 Product Code (978 or 979 for books)
-    private $_product;
-    // Registrant group (country) code
-    private $_country;
-    // Registrant (publisher) Code
-    private $_publisher;
-    // Publication code
-    private $_publication;
-    // Checksum character
-    private $_checksum;
-    // Prefix for GTIN-14 formatting
-    private $_gtin14Prefix;
-    // Input code
+    // FIXME: remove private class properties
+    // (kept for retrocompatibility)
     private $_input;
-    // Is the code a valid ISBN
+    private $_gs1productCode;
+    private $_countryCode;
+    private $_publisherCode;
+    private $_publicationCode;
+    private $_isbnAgencyCode;
+    private $_checksumCharacter;
+    private $_gtin14Prefix;
     private $_isValid = true;
-    // Why is the code invalid
     private $_errors = array();
-    // ISBN Agency
-    private $_agency;
 
     public function __construct($code = null)
     {
@@ -41,26 +33,52 @@ class Isbn
 
         try {
             $parsedCode = Parser::parse($code);
-
-            $this->setProduct($parsedCode["productCode"]);
-            $this->setCountry($parsedCode["countryCode"]);
-            $this->setAgency($parsedCode["agencyCode"]);
-            $this->setPublisher($parsedCode["publisherCode"]);
-            $this->setPublication($parsedCode["publicationCode"]);
+            $this->_gs1productCode = $parsedCode["productCode"];
+            $this->_countryCode = $parsedCode["countryCode"];
+            $this->_isbnAgencyCode = $parsedCode["agencyCode"];
+            $this->_publisherCode = $parsedCode["publisherCode"];
+            $this->_publicationCode = $parsedCode["publicationCode"];
         } catch (IsbnParsingException $exception) {
-            $this->setValid(false);
-            $this->addError($exception->getMessage());
+            $this->_isValid = false;
+            $this->_errors[] = $exception->getMessage();
         }
     }
 
-    /* Check methods */
+    /* Validation methods */
 
     /**
      * Check if ISBN is valid
+     * @return boolean true if the ISBN is valid
      */
     public function isValid()
     {
         return (bool) $this->_isValid;
+    }
+
+    /**
+     * Returns a list of errors if ISBN is invalid
+     * @return string the error list
+     */
+    public function getErrors()
+    {
+        $errors = '[' . $this->_input . ']';
+        foreach ($this->_errors as $e) {
+            $errors .= ' ' . $e;
+        }
+        return $errors;
+    }
+
+    /**
+     * Throws an exception if ISBN is invalid
+     */
+    public function validate()
+    {
+        $errors = $this->_errors;
+        if ($errors) {
+            throw new \Exception($errors[0]);
+        }
+
+        return true;
     }
 
     /* Format methods */
@@ -75,7 +93,7 @@ class Isbn
         try {
             return Formatter::format($this->_input, $format, $prefix);
         } catch (IsbnParsingException $exception) {
-            // FIXME: remove message customization on next major version
+            // FIXME: remove message customization
             // (kept for retrocompatibility)
             throw new IsbnParsingException(
                 "Cannot format invalid ISBN: [$this->_input] " . $exception->getMessage()
@@ -83,109 +101,41 @@ class Isbn
         }
     }
 
-    // Private methods
-
-    /**
-     * Set ISBN Validity
-     */
-    private function setValid($isValid)
-    {
-        $this->_isValid = (bool) $isValid;
-    }
-
-    /**
-     * Add to error log
-     */
-    private function addError($error)
-    {
-        $this->_errors[] = (string) $error;
-    }
-
-    /* SETTERS */
-
-    private function setProduct($product)
-    {
-        $this->_product = $product;
-    }
-
-    private function setCountry($country)
-    {
-        $this->_country = $country;
-    }
-
-    private function setPublisher($publisher)
-    {
-        $this->_publisher = $publisher;
-    }
-
-    private function setPublication($publication)
-    {
-        $this->_publication = $publication;
-    }
-
-    private function setAgency($agency)
-    {
-        $this->_agency = $agency;
-    }
-
-    private function setGtin14Prefix($prefix)
-    {
-        $this->_gtin14Prefix = $prefix;
-    }
-
-    /* GETTERS */
+    /* Public getters */
+    // FIXME: remove in next major version (breaking change)
 
     public function getProduct()
     {
-        return $this->_product;
+        return $this->_gs1productCode;
     }
 
     public function getCountry()
     {
-        return $this->_country;
+        return $this->_countryCode;
     }
 
     public function getPublisher()
     {
-        return $this->_publisher;
+        return $this->_publisherCode;
     }
 
     public function getPublication()
     {
-        return $this->_publication;
+        return $this->_publicationCode;
     }
 
     public function getChecksum()
     {
-        return $this->_checksum;
+        return $this->_checksumCharacter;
     }
 
     public function getAgency()
     {
-        return $this->_agency;
+        return $this->_isbnAgencyCode;
     }
 
     public function getGtin14Prefix()
     {
         return $this->_gtin14Prefix;
-    }
-
-    public function getErrors()
-    {
-        $errors = '[' . $this->_input . ']';
-        foreach ($this->_errors as $e) {
-            $errors .= ' ' . $e;
-        }
-        return $errors;
-    }
-
-    public function validate()
-    {
-        $errors = $this->_errors;
-        if ($errors) {
-            throw new \Exception($errors[0]);
-        }
-
-        return true;
     }
 }
