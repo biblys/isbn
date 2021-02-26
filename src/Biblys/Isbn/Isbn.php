@@ -204,11 +204,7 @@ class Isbn
      */
     public function validate()
     {
-        $errors = $this->_errors;
-        if ($errors) {
-            throw new \Exception($errors[0]);
-        }
-
+        Parser::parse($this->_input);
         return true;
     }
 
