@@ -72,40 +72,14 @@ class Isbn
      */
     public function format($format = 'EAN', $prefix = 1)
     {
-        if (!$this->isValid()) {
-            throw new \Exception('Cannot format invalid ISBN: ' . $this->getErrors());
-        }
-
-        if ($format == 'GTIN-14') {
-            $this->setGtin14Prefix($prefix);
-        } else {
-            $this->setGtin14Prefix(NULL);
-        }
-
-        $A = $this->getGtin14Prefix();
-        $B = $this->getProduct();
-        $C = $this->getCountry();
-        $D = $this->getPublisher();
-        $E = $this->getPublication();
-        $F = Formatter::calculateChecksum($format, $B, $C, $D, $E, $A);
-
-        switch ($format) {
-            case 'ISBN-10':
-                return "$C-$D-$E-$F";
-                break;
-
-            case 'ISBN-13':
-            case 'ISBN':
-                return "$B-$C-$D-$E-$F";
-                break;
-
-            case 'GTIN-14':
-                return $A . $B . $C . $D . $E . $F;
-                break;
-
-            default:
-                return $B . $C . $D . $E . $F;
-                break;
+        try {
+            return Formatter::format($this->_input, $format, $prefix);
+        } catch (IsbnParsingException $exception) {
+            // FIXME: remove message customization on next major version
+            // (kept for retrocompatibility)
+            throw new IsbnParsingException(
+                "Cannot format invalid ISBN: [$this->_input] " . $exception->getMessage()
+            );
         }
     }
 

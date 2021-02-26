@@ -14,7 +14,34 @@ namespace Biblys\Isbn;
 
 class Formatter
 {
-    public static function calculateChecksum($format, $productCode, $countryCode, $publisherCode, $publicationCode, $gtin14prefix)
+    public static function format($input, $format, $gtin14prefix)
+    {
+        $parsedInput = Parser::parse($input);
+
+        $productCode = $parsedInput['productCode'];
+        $countryCode = $parsedInput['countryCode'];
+        $publisherCode = $parsedInput['publisherCode'];
+        $publicationCode = $parsedInput['publicationCode'];
+        $checksum = self::_calculateChecksum($format, $productCode, $countryCode, $publisherCode, $publicationCode, $gtin14prefix);
+
+        switch ($format) {
+            case 'ISBN-10':
+                return "$countryCode-$publisherCode-$publicationCode-$checksum";
+
+            case 'ISBN-13':
+            case 'ISBN':
+                return "$productCode-$countryCode-$publisherCode-$publicationCode-$checksum";
+
+            case 'GTIN-14':
+                return $gtin14prefix . $productCode . $countryCode . $publisherCode . $publicationCode . $checksum;
+
+            case 'EAN':
+            default: // TODO: throw if $format is not one of the above choices
+                return $productCode . $countryCode . $publisherCode . $publicationCode . $checksum;
+        }
+    }
+
+    private static function _calculateChecksum($format, $productCode, $countryCode, $publisherCode, $publicationCode, $gtin14prefix)
     {
         if ($format === 'ISBN-10') {
             return self::_calculateChecksumForIsbn10Format($countryCode, $publisherCode, $publicationCode);
