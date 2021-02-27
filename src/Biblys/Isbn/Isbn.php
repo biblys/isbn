@@ -65,6 +65,24 @@ class Isbn
         return Formatter::format($input, 'EAN-13');
     }
 
+    /**
+     * Converts input into a GTIN-14
+     *
+     * GTIN-14 are 14 characters long and does not include hyphens.
+     *
+     * // Returns 19783464603526
+     * $isbn10 = ISBN::convertToGtin14("9783464603529", 1);
+     *
+     * @param string $input A string to convert
+     * @param int $prefix A int to preprend (defaults to 1)
+     *
+     * @return string
+     */
+    static public function convertToGtin14(string $input, int $prefix = 1): string
+    {
+        return Formatter::format($input, 'GTIN-14', $prefix);
+    }
+
     /* Legacy non static properties and methods (backward compatibility) */
     // FIXME: deprecate and remove on next major version
 
