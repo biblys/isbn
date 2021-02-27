@@ -14,8 +14,26 @@ namespace Biblys\Isbn;
 
 class Isbn
 {
-    // FIXME: remove private class properties
-    // (kept for retrocompatibility)
+    /**
+     * Converts input into an ISBN-10
+     *
+     * ISBN-10 are 10 characters long and includes hyphens.
+     *
+     * // Returns 3-464-60352-0
+     * $isbn10 = ISBN::convertToIsbn10("9783464603529");
+     *
+     * @param string $input A string to convert
+     *
+     * @return string
+     */
+    static public function convertToIsbn10(string $input): string
+    {
+        return Formatter::format($input, 'ISBN-10');
+    }
+
+    /* Legacy non static properties and methods (backward compatibility) */
+    // FIXME: deprecate and remove on next major version
+
     private $_input;
     private $_gs1productCode;
     private $_countryCode;
@@ -44,10 +62,8 @@ class Isbn
         }
     }
 
-    /* Validation methods */
-
     /**
-     * Check if ISBN is valid
+     * Checks if ISBN is valid
      * @return boolean true if the ISBN is valid
      */
     public function isValid()
@@ -81,10 +97,8 @@ class Isbn
         return true;
     }
 
-    /* Format methods */
-
     /**
-     * Format an ISBN according to specified format
+     * Formats an ISBN according to specified format
      * @param string $format (ISBN-10, ISBN-13, EAN, GTIN-14), default EAN
      * @param string $prefix The prefix to use when formatting, default 1
      */
@@ -100,9 +114,6 @@ class Isbn
             );
         }
     }
-
-    /* Public getters */
-    // FIXME: remove in next major version (breaking change)
 
     public function getProduct()
     {
