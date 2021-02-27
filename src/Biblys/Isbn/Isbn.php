@@ -104,6 +104,27 @@ class Isbn
         }
     }
 
+    /**
+     * Validates input as a correctly formed ISBN-13
+     *
+     * // Throws because second hyphen is misplaced
+     * ISBN::validateAsIsbn13("978-220-7-25804-0");
+     *
+     * @param string $input A string to validate
+     *
+     * @throws IsbnValidationException
+     */
+    static public function validateAsIsbn13(string $input): void
+    {
+        $expected = Formatter::formatAsIsbn13($input);
+
+        if ($input !== $expected) {
+            throw new IsbnValidationException(
+                "$input is not a valid ISBN-13. Expected $expected."
+            );
+        }
+    }
+
     /* Legacy non static properties and methods (backward compatibility) */
     // FIXME: deprecate and remove on next major version
 
