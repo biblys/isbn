@@ -237,26 +237,46 @@ class Isbn
     /**
      * Formats an ISBN according to specified format
      *
+     * @deprecated
+     *
      * @param string $format (ISBN-10, ISBN-13, EAN-13, GTIN-14), default EAN-13
      * @param string $prefix The prefix to use when formatting, default 1
+     *
+     * @return string the formatted ISBN
      */
     public function format($format = 'EAN-13', $prefix = 1)
     {
         try {
             switch ($format) {
                 case 'ISBN-10':
+                    trigger_error(
+                        "Isbn->format is deprecated and will be removed in the future. Use the Isbn::convertToIsbn10 method instead. Learn more: https://git.io/JtAEx",
+                        E_USER_DEPRECATED
+                    );
                     return Formatter::formatAsIsbn10($this->_input);
 
                 case 'ISBN-13':
                 case 'ISBN':
+                    trigger_error(
+                        "Isbn->format is deprecated and will be removed in the future. Use the Isbn::convertToIsbn13 method instead. Learn more: https://git.io/JtAEx",
+                        E_USER_DEPRECATED
+                    );
                     return Formatter::formatAsIsbn13($this->_input);
 
                 case 'GTIN-14':
+                    trigger_error(
+                        "Isbn->format is deprecated and will be removed in the future. Use the Isbn::convertToGtin14 method instead. Learn more: https://git.io/JtAEx",
+                        E_USER_DEPRECATED
+                    );
                     return Formatter::formatAsGtin14($this->_input, $prefix);
 
                 case 'EAN-13':
                 case 'EAN':
                 default:
+                    trigger_error(
+                        "Isbn->format is deprecated and will be removed in the future. Use the Isbn::convertToEan13 method instead. Learn more: https://git.io/JtAEx",
+                        E_USER_DEPRECATED
+                    );
                     return Formatter::formatAsEan13($this->_input);
             }
         } catch (IsbnParsingException $exception) {

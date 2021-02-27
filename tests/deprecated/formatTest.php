@@ -21,6 +21,23 @@ use PHPUnit\Framework\TestCase;
 
 class testFormatIsbn extends TestCase
 {
+    protected function setUp(): void
+    {
+        PHPUnit\Framework\Error\Deprecated::$enabled = false;
+    }
+
+    public function testDeprecatedNotice()
+    {
+        PHPUnit\Framework\Error\Deprecated::$enabled = true;
+        $this->expectException('PHPUnit\Framework\Error\Deprecated');
+        $this->expectExceptionMessage(
+            "Isbn->format is deprecated and will be removed in the future. Use the Isbn::convertToIsbn13 method instead. Learn more: https://git.io/JtAEx"
+        );
+
+        $isbn = new Isbn('9782207258040');
+        $isbn->format('ISBN-13');
+    }
+
     public function testFormatIsbn13()
     {
         $isbn = new Isbn('9782207258040');
@@ -55,23 +72,5 @@ class testFormatIsbn extends TestCase
     {
         $isbn = new Isbn('9786130971311');
         $this->assertEquals($isbn->format('ISBN-13'), "978-613-0-97131-1");
-    }
-
-    public function testIsbnWithInvalidProductCode()
-    {
-        $this->expectException("Exception");
-        $this->expectExceptionMessage("Cannot format invalid ISBN: [6897896354577] Product code should be 978 or 979");
-        $isbn = new Isbn('6897896354577');
-
-        $isbn->format('EAN');
-    }
-
-    public function testIsbnWithInvalidCountryCode()
-    {
-        $this->expectException("Exception");
-        $this->expectExceptionMessage("Cannot format invalid ISBN: [9792887382562] Country code is unknown");
-        $isbn = new Isbn('9792887382562');
-
-        $this->assertEquals($isbn->format('EAN'), '9792887382562');
     }
 }
