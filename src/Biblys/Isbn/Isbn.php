@@ -48,6 +48,23 @@ class Isbn
         return Formatter::format($input, 'ISBN-13');
     }
 
+    /**
+     * Converts input into an EAN-13
+     *
+     * EAN-13 are 13 characters long and does not include hyphens.
+     *
+     * // Returns 9782207258040
+     * $isbn10 = ISBN::convertToEan13("978-2-207-25804-0");
+     *
+     * @param string $input A string to convert
+     *
+     * @return string
+     */
+    static public function convertToEan13(string $input): string
+    {
+        return Formatter::format($input, 'EAN-13');
+    }
+
     /* Legacy non static properties and methods (backward compatibility) */
     // FIXME: deprecate and remove on next major version
 
