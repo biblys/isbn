@@ -43,17 +43,21 @@ class Formatter
 
     private static function _calculateChecksum($format, $productCode, $countryCode, $publisherCode, $publicationCode, $gtin14prefix)
     {
-        if ($format === 'ISBN-10') {
-            return self::_calculateChecksumForIsbn10Format($countryCode, $publisherCode, $publicationCode);
-        }
+        switch ($format) {
+            case 'ISBN-10':
+                return self::_calculateChecksumForIsbn10Format($countryCode, $publisherCode, $publicationCode);
 
-        if ($format === 'ISBN-13') {
-            return self::_calculateChecksumForIsbn13Format($productCode, $countryCode, $publisherCode, $publicationCode);
-        }
+            case 'ISBN-13':
+            case 'ISBN':
+            case 'EAN':
+                return self::_calculateChecksumForIsbn13Format($productCode, $countryCode, $publisherCode, $publicationCode);
 
-        if ($format === 'GTIN-14') {
-            $productCodeWithPrefix = $gtin14prefix . $productCode;
-            return self::_calculateChecksumForIsbn13Format($productCodeWithPrefix, $countryCode, $publisherCode, $publicationCode);
+            case 'GTIN-14':
+                $productCodeWithPrefix = $gtin14prefix . $productCode;
+                return self::_calculateChecksumForIsbn13Format($productCodeWithPrefix, $countryCode, $publisherCode, $publicationCode);
+
+            default:
+                throw new \InvalidArgumentException("Cannot calculate checksum for unknown format $format");
         }
     }
 
