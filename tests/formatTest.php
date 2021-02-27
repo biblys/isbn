@@ -39,6 +39,12 @@ class testFormatIsbn extends TestCase
         $this->assertEquals($isbn10->format('EAN'), "9782207258040");
     }
 
+    public function testFormatEan_13()
+    {
+        $isbn10 = new Isbn("978-2-207-25804-0");
+        $this->assertEquals($isbn10->format('EAN-13'), "9782207258040");
+    }
+
     public function testFormatGtin14()
     {
         $isbn = new Isbn('9783464603529');

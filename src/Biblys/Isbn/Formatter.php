@@ -29,14 +29,15 @@ class Formatter
                 return "$countryCode-$publisherCode-$publicationCode-$checksum";
 
             case 'ISBN-13':
-            case 'ISBN':
+            case 'ISBN': // FIXME: remove unclear argument (breaking change)
                 return "$productCode-$countryCode-$publisherCode-$publicationCode-$checksum";
 
             case 'GTIN-14':
                 return $gtin14prefix . $productCode . $countryCode . $publisherCode . $publicationCode . $checksum;
 
-            case 'EAN':
-            default: // TODO: throw if $format is not one of the above choices
+            case 'EAN-13':
+            case 'EAN': // FIXME: remove unclear argument (breaking change)
+            default: // FIXME: throw if $format is unknown (breaking change)
                 return $productCode . $countryCode . $publisherCode . $publicationCode . $checksum;
         }
     }
@@ -48,8 +49,9 @@ class Formatter
                 return self::_calculateChecksumForIsbn10Format($countryCode, $publisherCode, $publicationCode);
 
             case 'ISBN-13':
-            case 'ISBN':
-            case 'EAN':
+            case 'EAN-13':
+            case 'ISBN': // FIXME: remove unclear argument (breaking change)
+            case 'EAN': // FIXME: remove unclear argument (breaking change)
                 return self::_calculateChecksumForIsbn13Format($productCode, $countryCode, $publisherCode, $publicationCode);
 
             case 'GTIN-14':
