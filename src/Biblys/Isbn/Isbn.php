@@ -157,7 +157,6 @@ class Isbn
     private $_isbnAgencyCode;
     private $_checksumCharacter;
     private $_gtin14Prefix;
-    private $_errors = array();
 
     public function __construct($code = null)
     {
@@ -171,7 +170,8 @@ class Isbn
             $this->_publisherCode = $parsedCode["publisherCode"];
             $this->_publicationCode = $parsedCode["publicationCode"];
         } catch (IsbnParsingException $exception) {
-            $this->_errors[] = $exception->getMessage();
+            // FIXME in next major version (breaking change)
+            // For backward compatibility reason, instanciating should not throw
         }
     }
 
@@ -195,11 +195,11 @@ class Isbn
      */
     public function getErrors()
     {
-        $errors = '[' . $this->_input . ']';
-        foreach ($this->_errors as $e) {
-            $errors .= ' ' . $e;
+        try {
+            $this->validate();
+        } catch (\Exception $exception) {
+            return '[' . $this->_input . '] ' . $exception->getMessage();
         }
-        return $errors;
     }
 
     /**
@@ -238,7 +238,7 @@ class Isbn
             }
         } catch (IsbnParsingException $exception) {
             // FIXME: remove message customization
-            // (kept for retrocompatibility)
+            // (kept for backward compatibility)
             throw new IsbnParsingException(
                 "Cannot format invalid ISBN: [$this->_input] " . $exception->getMessage()
             );
