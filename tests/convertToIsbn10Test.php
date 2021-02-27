@@ -16,14 +16,14 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Biblys\Isbn\ISBN;
+use Biblys\Isbn\Isbn;
 use PHPUnit\Framework\TestCase;
 
 class testConvertToIsbn10 extends TestCase
 {
     public function testFormatIsbn10()
     {
-        $isbn10 = ISBN::convertToIsbn10("9783464603529");
+        $isbn10 = Isbn::convertToIsbn10("9783464603529");
         $this->assertEquals(
             "3-464-60352-0",
             $isbn10,
@@ -33,7 +33,7 @@ class testConvertToIsbn10 extends TestCase
 
     public function testFormatIsbn10WithX()
     {
-        $isbn10 = ISBN::convertToIsbn10("978-80-7203-717-9");
+        $isbn10 = Isbn::convertToIsbn10("978-80-7203-717-9");
         $this->assertEquals(
             "80-7203-717-X",
             $isbn10,
@@ -47,6 +47,6 @@ class testConvertToIsbn10 extends TestCase
         // FIXME: Improve message: Input contains invalid characters "ABC"
         $this->expectExceptionMessage("Invalid characters in the code");
 
-        ISBN::convertToIsbn10("ABC-80-7203-7");
+        Isbn::convertToIsbn10("ABC-80-7203-7");
     }
 }

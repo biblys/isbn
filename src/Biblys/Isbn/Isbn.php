@@ -20,7 +20,7 @@ class Isbn
      * ISBN-10 are 10 characters long and includes hyphens.
      *
      * // Returns 3-464-60352-0
-     * $isbn10 = ISBN::convertToIsbn10("9783464603529");
+     * $isbn10 = Isbn::convertToIsbn10("9783464603529");
      *
      * @param string $input A string to convert
      *
@@ -37,7 +37,7 @@ class Isbn
      * ISBN-13 are 13 characters long and includes hyphens.
      *
      * // Returns 978-2-207-25804-0
-     * $isbn10 = ISBN::convertToIsbn13("9782207258040");
+     * $isbn10 = Isbn::convertToIsbn13("9782207258040");
      *
      * @param string $input A string to convert
      *
@@ -54,7 +54,7 @@ class Isbn
      * EAN-13 are 13 characters long and does not include hyphens.
      *
      * // Returns 9782207258040
-     * $isbn10 = ISBN::convertToEan13("978-2-207-25804-0");
+     * $isbn10 = Isbn::convertToEan13("978-2-207-25804-0");
      *
      * @param string $input A string to convert
      *
@@ -71,7 +71,7 @@ class Isbn
      * GTIN-14 are 14 characters long and does not include hyphens.
      *
      * // Returns 19783464603526
-     * $isbn10 = ISBN::convertToGtin14("9783464603529", 1);
+     * $isbn10 = Isbn::convertToGtin14("9783464603529", 1);
      *
      * @param string $input A string to convert
      * @param int $prefix A int to preprend (defaults to 1)
@@ -87,7 +87,7 @@ class Isbn
      * Validates input as a correctly formed ISBN-10
      *
      * // Throws because second hyphen is misplaced
-     * ISBN::validateAsIsbn10("3-46460-352-0");
+     * Isbn::validateAsIsbn10("3-46460-352-0");
      *
      * @param string $input A string to validate
      *
@@ -108,7 +108,7 @@ class Isbn
      * Validates input as a correctly formed ISBN-13
      *
      * // Throws because second hyphen is misplaced
-     * ISBN::validateAsIsbn13("978-220-7-25804-0");
+     * Isbn::validateAsIsbn13("978-220-7-25804-0");
      *
      * @param string $input A string to validate
      *
@@ -129,7 +129,7 @@ class Isbn
      * Validates input as a correctly formed EAN-13
      *
      * // Throws because checksum character is invalid
-     * ISBN::validateAsEan13("9782207258045");
+     * Isbn::validateAsEan13("9782207258045");
      *
      * @param string $input A string to validate
      *

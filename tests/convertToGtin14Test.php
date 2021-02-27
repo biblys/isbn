@@ -16,14 +16,14 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Biblys\Isbn\ISBN;
+use Biblys\Isbn\Isbn;
 use PHPUnit\Framework\TestCase;
 
 class testConvertToGtin14 extends TestCase
 {
     public function testFormatGtin14()
     {
-        $gtin14 = ISBN::convertToGtin14("9783464603529", 2);
+        $gtin14 = Isbn::convertToGtin14("9783464603529", 2);
         $this->assertEquals(
             "29783464603523",
             $gtin14,
@@ -33,7 +33,7 @@ class testConvertToGtin14 extends TestCase
 
     public function testFormatGtin14WithDefaultPrefix()
     {
-        $gtin14 = ISBN::convertToGtin14("9783464603529");
+        $gtin14 = Isbn::convertToGtin14("9783464603529");
         $this->assertEquals(
             "19783464603526",
             $gtin14,
@@ -46,6 +46,6 @@ class testConvertToGtin14 extends TestCase
         $this->expectException("Biblys\Isbn\IsbnParsingException");
         $this->expectExceptionMessage("Invalid characters in the code");
 
-        ISBN::convertToGtin14("ABC-80-7203-7", 1);
+        Isbn::convertToGtin14("ABC-80-7203-7", 1);
     }
 }

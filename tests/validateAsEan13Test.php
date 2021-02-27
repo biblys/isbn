@@ -16,14 +16,14 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Biblys\Isbn\ISBN;
+use Biblys\Isbn\Isbn;
 use PHPUnit\Framework\TestCase;
 
 class testValidateAsEan13 extends TestCase
 {
     public function testValidIsbn()
     {
-        ISBN::validateAsEan13("9782207258040");
+        Isbn::validateAsEan13("9782207258040");
 
         $this->expectNotToPerformAssertions("It should not throw");
     }
@@ -33,7 +33,7 @@ class testValidateAsEan13 extends TestCase
         $this->expectException("Biblys\Isbn\IsbnParsingException");
         $this->expectExceptionMessage("Invalid characters in the code");
 
-        ISBN::validateAsEan13("9782SPI258040");
+        Isbn::validateAsEan13("9782SPI258040");
     }
 
     public function testIsbnWithHyphens()
@@ -41,7 +41,7 @@ class testValidateAsEan13 extends TestCase
         $this->expectException("Biblys\Isbn\IsbnValidationException");
         $this->expectExceptionMessage("978-2-207-25804-0 is not a valid EAN-13. Expected 9782207258040.");
 
-        ISBN::validateAsEan13("978-2-207-25804-0");
+        Isbn::validateAsEan13("978-2-207-25804-0");
     }
 
     public function testIsbnWithIncorrectCheckum()
@@ -49,6 +49,6 @@ class testValidateAsEan13 extends TestCase
         $this->expectException("Biblys\Isbn\IsbnValidationException");
         $this->expectExceptionMessage("9782207258049 is not a valid EAN-13. Expected 9782207258040.");
 
-        ISBN::validateAsEan13("9782207258049");
+        Isbn::validateAsEan13("9782207258049");
     }
 }

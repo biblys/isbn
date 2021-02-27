@@ -16,14 +16,14 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Biblys\Isbn\ISBN;
+use Biblys\Isbn\Isbn;
 use PHPUnit\Framework\TestCase;
 
 class testConvertToEan13 extends TestCase
 {
     public function testFormatEan13()
     {
-        $ean13 = ISBN::convertToEan13("978-2-207-25804-0");
+        $ean13 = Isbn::convertToEan13("978-2-207-25804-0");
         $this->assertEquals(
             "9782207258040",
             $ean13,
@@ -36,6 +36,6 @@ class testConvertToEan13 extends TestCase
         $this->expectException("Biblys\Isbn\IsbnParsingException");
         $this->expectExceptionMessage("Invalid characters in the code");
 
-        ISBN::convertToEan13("ABC-80-7203-7");
+        Isbn::convertToEan13("ABC-80-7203-7");
     }
 }
