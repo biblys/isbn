@@ -63,8 +63,11 @@ class Formatter
         return $prefix . $productCode . $countryCode . $publisherCode . $publicationCode . $checksum;
     }
 
-    private static function _calculateChecksumForIsbn10Format($countryCode, $publisherCode, $publicationCode)
-    {
+    private static function _calculateChecksumForIsbn10Format(
+        string $countryCode,
+        string $publisherCode,
+        string $publicationCode
+    ): string {
         $code = $countryCode . $publisherCode . $publicationCode;
         $chars = str_split($code);
 
@@ -86,8 +89,12 @@ class Formatter
         return $checksum;
     }
 
-    private static function _calculateChecksumForIsbn13Format($productCode, $countryCode, $publisherCode, $publicationCode)
-    {
+    private static function _calculateChecksumForIsbn13Format(
+        string $productCode,
+        string $countryCode,
+        string $publisherCode,
+        string $publicationCode
+    ): string {
         $checksum = null;
 
         $code = $productCode . $countryCode . $publisherCode . $publicationCode;
