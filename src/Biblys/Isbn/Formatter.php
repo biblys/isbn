@@ -14,7 +14,7 @@ namespace Biblys\Isbn;
 
 class Formatter
 {
-    public static function format($input, $format, $gtin14prefix)
+    public static function format($input, $format, $gtin14prefix = '')
     {
         $parsedInput = Parser::parse($input);
 
