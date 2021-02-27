@@ -28,7 +28,7 @@ class Isbn
      */
     static public function convertToIsbn10(string $input): string
     {
-        return Formatter::format($input, 'ISBN-10');
+        return Formatter::formatAsIsbn10($input);
     }
 
     /**
@@ -45,7 +45,7 @@ class Isbn
      */
     static public function convertToIsbn13(string $input): string
     {
-        return Formatter::format($input, 'ISBN-13');
+        return Formatter::formatAsIsbn13($input);
     }
 
     /**
@@ -62,7 +62,7 @@ class Isbn
      */
     static public function convertToEan13(string $input): string
     {
-        return Formatter::format($input, 'EAN-13');
+        return Formatter::formatAsEan13($input);
     }
 
     /**
@@ -80,7 +80,7 @@ class Isbn
      */
     static public function convertToGtin14(string $input, int $prefix = 1): string
     {
-        return Formatter::format($input, 'GTIN-14', $prefix);
+        return Formatter::formatAsGtin14($input, $prefix);
     }
 
     /* Legacy non static properties and methods (backward compatibility) */
@@ -151,13 +151,29 @@ class Isbn
 
     /**
      * Formats an ISBN according to specified format
-     * @param string $format (ISBN-10, ISBN-13, EAN, GTIN-14), default EAN
+     *
+     * @param string $format (ISBN-10, ISBN-13, EAN-13, GTIN-14), default EAN-13
      * @param string $prefix The prefix to use when formatting, default 1
      */
-    public function format($format = 'EAN', $prefix = 1)
+    public function format($format = 'EAN-13', $prefix = 1)
     {
         try {
-            return Formatter::format($this->_input, $format, $prefix);
+            switch ($format) {
+                case 'ISBN-10':
+                    return Formatter::formatAsIsbn10($this->_input);
+
+                case 'ISBN-13':
+                case 'ISBN':
+                    return Formatter::formatAsIsbn13($this->_input);
+
+                case 'GTIN-14':
+                    return Formatter::formatAsGtin14($this->_input, $prefix);
+
+                case 'EAN-13':
+                case 'EAN':
+                default:
+                    return Formatter::formatAsEan13($this->_input);
+            }
         } catch (IsbnParsingException $exception) {
             // FIXME: remove message customization
             // (kept for retrocompatibility)
