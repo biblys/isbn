@@ -21,6 +21,23 @@ use PHPUnit\Framework\TestCase;
 
 class testValidateIsbn extends TestCase
 {
+    protected function setUp(): void
+    {
+        PHPUnit\Framework\Error\Deprecated::$enabled = false;
+    }
+
+    public function testDeprecatedNotice(): void
+    {
+        PHPUnit\Framework\Error\Deprecated::$enabled = true;
+        $this->expectException('PHPUnit\Framework\Error\Deprecated');
+        $this->expectExceptionMessage(
+            "Isbn->validate is deprecated and will be removed in the future. Use Isbn::validateAs… methods instead. Learn more: https://git.io/JtAEx"
+        );
+
+        $isbn = new Isbn('9782843449499');
+        $isbn->validate();
+    }
+
     public function testValidateValidIsbn()
     {
         $isbn = new Isbn('9782843449499');
@@ -45,53 +62,5 @@ class testValidateIsbn extends TestCase
     {
         $isbn = new Isbn("9700764923");
         $this->assertTrue($isbn->validate());
-    }
-
-    /**
-     * Validate method should throw of an invalid ISBN
-     */
-    public function testValidateInvalidProductCode()
-    {
-        $this->expectException("Exception");
-        $this->expectExceptionMessage("Product code should be 978 or 979");
-        $isbn = new Isbn('6752843449499');
-        $isbn->validate();
-    }
-
-    public function testValidateInvalidCharacters()
-    {
-        $this->expectException("Exception");
-        $this->expectExceptionMessage("Invalid characters in the code");
-        $isbn = new Isbn('5780AAC728440');
-        $isbn->validate();
-    }
-
-    public function testIsbnWithInvalidProductCode()
-    {
-        $this->expectException("Exception");
-        $this->expectExceptionMessage("Product code should be 978 or 979");
-        $isbn = new Isbn('6897896354577');
-        $isbn->validate();
-    }
-
-    public function testIsbnWithInvalidCountryCode()
-    {
-        $this->expectException("Exception");
-        $this->expectExceptionMessage("Country code is unknown");
-        $isbn = new Isbn('9792887382562');
-        $isbn->validate();
-    }
-
-    /**
-     * Non regression-test for Github issue #22
-     * https://github.com/biblys/isbn/issues/22
-     */
-    public function testOtherInvalidIsbn()
-    {
-        $this->expectException("Exception");
-        $this->expectExceptionMessage("Invalid characters in the code");
-
-        $isbn = new Isbn("34995031X");
-        $isbn->validate();
     }
 }

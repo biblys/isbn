@@ -59,4 +59,49 @@ class testValidateAsIsbn13 extends TestCase
 
         Isbn::validateAsIsbn13("978-2-207-25804-2");
     }
+
+    public function testValidateInvalidProductCode()
+    {
+        $this->expectException("Exception");
+        $this->expectExceptionMessage("Product code should be 978 or 979");
+
+
+        Isbn::validateAsIsbn13('6752843449499');
+    }
+
+    public function testValidateInvalidCharacters()
+    {
+        $this->expectException("Exception");
+        $this->expectExceptionMessage("Invalid characters in the code");
+
+        Isbn::validateAsIsbn13('5780AAC728440');
+    }
+
+    public function testIsbnWithInvalidProductCode()
+    {
+        $this->expectException("Exception");
+        $this->expectExceptionMessage("Product code should be 978 or 979");
+
+        Isbn::validateAsIsbn13('6897896354577');
+    }
+
+    public function testIsbnWithInvalidCountryCode()
+    {
+        $this->expectException("Exception");
+        $this->expectExceptionMessage("Country code is unknown");
+
+        Isbn::validateAsIsbn13('9792887382562');
+    }
+
+    /**
+     * Non regression-test for Github issue #22
+     * https://github.com/biblys/isbn/issues/22
+     */
+    public function testOtherInvalidIsbn()
+    {
+        $this->expectException("Exception");
+        $this->expectExceptionMessage("Invalid characters in the code");
+
+        Isbn::validateAsIsbn13("34995031X");
+    }
 }

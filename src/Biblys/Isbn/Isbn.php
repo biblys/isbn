@@ -190,7 +190,7 @@ class Isbn
         );
 
         try {
-            $this->validate();
+            Parser::parse($this->_input);
             return true;
         } catch (\Exception $exception) {
             return false;
@@ -199,6 +199,9 @@ class Isbn
 
     /**
      * Returns a list of errors if ISBN is invalid
+     *
+     * @deprecated
+     *
      * @return string the error list
      */
     public function getErrors()
@@ -209,7 +212,7 @@ class Isbn
         );
 
         try {
-            $this->validate();
+            Parser::parse($this->_input);
         } catch (\Exception $exception) {
             return '[' . $this->_input . '] ' . $exception->getMessage();
         }
@@ -217,9 +220,16 @@ class Isbn
 
     /**
      * Throws an exception if ISBN is invalid
+     *
+     * @deprecated
      */
     public function validate()
     {
+        trigger_error(
+            "Isbn->validate is deprecated and will be removed in the future. Use Isbn::validateAs… methods instead. Learn more: https://git.io/JtAEx",
+            E_USER_DEPRECATED
+        );
+
         Parser::parse($this->_input);
         return true;
     }
