@@ -125,6 +125,27 @@ class Isbn
         }
     }
 
+    /**
+     * Validates input as a correctly formed EAN-13
+     *
+     * // Throws because checksum character is invalid
+     * ISBN::validateAsEan13("9782207258045");
+     *
+     * @param string $input A string to validate
+     *
+     * @throws IsbnValidationException
+     */
+    static public function validateAsEan13(string $input): void
+    {
+        $expected = Formatter::formatAsEan13($input);
+
+        if ($input !== $expected) {
+            throw new IsbnValidationException(
+                "$input is not a valid EAN-13. Expected $expected."
+            );
+        }
+    }
+
     /* Legacy non static properties and methods (backward compatibility) */
     // FIXME: deprecate and remove on next major version
 
