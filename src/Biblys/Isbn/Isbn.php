@@ -31,6 +31,23 @@ class Isbn
         return Formatter::format($input, 'ISBN-10');
     }
 
+    /**
+     * Converts input into an ISBN-13
+     *
+     * ISBN-13 are 13 characters long and includes hyphens.
+     *
+     * // Returns 978-2-207-25804-0
+     * $isbn10 = ISBN::convertToIsbn13("9782207258040");
+     *
+     * @param string $input A string to convert
+     *
+     * @return string
+     */
+    static public function convertToIsbn13(string $input): string
+    {
+        return Formatter::format($input, 'ISBN-13');
+    }
+
     /* Legacy non static properties and methods (backward compatibility) */
     // FIXME: deprecate and remove on next major version
 
