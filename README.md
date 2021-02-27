@@ -29,11 +29,11 @@ Use case: converting an EAN (9782843449499) to an ISBN-13 (978-2-84344-949-9).
 ```php
 <?php
 
-use Biblys\Isbn\ISBN;
+use Biblys\Isbn\Isbn;
 
 try {
     $input = "9782843449499";
-    $isbn13 = ISBN::convertToIsbn13($input);
+    $isbn13 = Isbn::convertToIsbn13($input);
     echo "ISBN-13: $isbn13"; // Prints ISBN-13: 978-2-84344-949-9
 } catch(Exception $e) {
     echo "An error occured while attempting to format ISBN $input: ".$e->getMessage();
@@ -42,10 +42,10 @@ try {
 
 All formating methods:
 
-- `ISBN::convertToIsbn10`
-- `ISBN::convertToIsbn13`
-- `ISBN::convertToEan13`
-- `ISBN::convertToGtin14`
+- `Isbn::convertToIsbn10`
+- `Isbn::convertToIsbn13`
+- `Isbn::convertToEan13`
+- `Isbn::convertToGtin14`
 
 ### Validating
 
@@ -55,12 +55,12 @@ be 978-2-84344-949-9).
 ```php
 <?php
 
-use Biblys\Isbn\ISBN;
+use Biblys\Isbn\Isbn;
 
 try {
     $input = "978-2-84344-949-9";
-    $isbn13 = ISBN::validateAsIsbn13($input);
-    echo "ISBN $isbn13 is valid!";
+    Isbn::validateAsIsbn13($input);
+    echo "ISBN $input is valid!";
 } catch(Exception $e) { // Will throw because third hyphen is misplaced
     echo "ISBN $input is invalid: ".$e->getMessage();
 }
@@ -68,9 +68,9 @@ try {
 
 All validating methods:
 
-- `ISBN::validateAsIsbn10`
-- `ISBN::validateAsIbsn13`
-- `ISBN::validateAsEan13`
+- `Isbn::validateAsIsbn10`
+- `Isbn::validateAsIbsn13`
+- `Isbn::validateAsEan13`
 
 ## Test
 
