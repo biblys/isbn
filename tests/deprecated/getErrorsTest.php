@@ -21,8 +21,21 @@ use PHPUnit\Framework\TestCase;
 
 class testGetErrors extends TestCase
 {
+    public function testDeprecatedNotice()
+    {
+        PHPUnit\Framework\Error\Deprecated::$enabled = true;
+        $this->expectException('PHPUnit\Framework\Error\Deprecated');
+        $this->expectExceptionMessage(
+            "Isbn->getErrors is deprecated and will be removed in the future. Use Isbn::validateAs… methods instead. Learn more: https://git.io/JtAEx"
+        );
+
+        $isbn = new Isbn("6897896354577");
+        $isbn->getErrors();
+    }
+
     public function testInvalidIsbn()
     {
+        PHPUnit\Framework\Error\Deprecated::$enabled = false;
         $isbn = new Isbn("6897896354577");
         $this->assertEquals($isbn->getErrors(), '[6897896354577] Product code should be 978 or 979');
     }
