@@ -83,6 +83,27 @@ class Isbn
         return Formatter::formatAsGtin14($input, $prefix);
     }
 
+    /**
+     * Validates input as a correctly formed ISBN-10
+     *
+     * // Throws because second hyphen is misplaced
+     * ISBN::validateAsIsbn10("3-46460-352-0");
+     *
+     * @param string $input A string to validate
+     *
+     * @throws IsbnValidationException
+     */
+    static public function validateAsIsbn10(string $input): void
+    {
+        $expected = Formatter::formatAsIsbn10($input);
+
+        if ($input !== $expected) {
+            throw new IsbnValidationException(
+                "$input is not a valid ISBN-10. Expected $expected."
+            );
+        }
+    }
+
     /* Legacy non static properties and methods (backward compatibility) */
     // FIXME: deprecate and remove on next major version
 
