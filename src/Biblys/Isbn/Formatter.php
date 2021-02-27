@@ -14,51 +14,60 @@ namespace Biblys\Isbn;
 
 class Formatter
 {
-    public static function format($input, $format, $gtin14prefix)
+    public static function formatAsIsbn10(string $input): string
     {
         $parsedInput = Parser::parse($input);
+        $countryCode = $parsedInput["countryCode"];
+        $publisherCode = $parsedInput["publisherCode"];
+        $publicationCode = $parsedInput["publicationCode"];
+        $checksum = self::_calculateChecksumForIsbn10Format($countryCode, $publisherCode, $publicationCode);
 
+        return "$countryCode-$publisherCode-$publicationCode-$checksum";
+    }
+
+    public static function formatAsIsbn13(string $input): string
+    {
+        $parsedInput = Parser::parse($input);
+        $productCode = $parsedInput['productCode'];
+        $countryCode = $parsedInput["countryCode"];
+        $publisherCode = $parsedInput["publisherCode"];
+        $publicationCode = $parsedInput["publicationCode"];
+        $checksum = self::_calculateChecksumForIsbn13Format($productCode, $countryCode, $publisherCode, $publicationCode);
+
+        return "$productCode-$countryCode-$publisherCode-$publicationCode-$checksum";
+    }
+
+    public static function formatAsEan13(string $input): string
+    {
+        $parsedInput = Parser::parse($input);
+        $productCode = $parsedInput['productCode'];
+        $countryCode = $parsedInput["countryCode"];
+        $publisherCode = $parsedInput["publisherCode"];
+        $publicationCode = $parsedInput["publicationCode"];
+        $checksum = self::_calculateChecksumForIsbn13Format($productCode, $countryCode, $publisherCode, $publicationCode);
+
+        return $productCode . $countryCode . $publisherCode . $publicationCode . $checksum;
+    }
+
+    public static function formatAsGtin14(string $input, int $prefix): string
+    {
+        $parsedInput = Parser::parse($input);
         $productCode = $parsedInput['productCode'];
         $countryCode = $parsedInput['countryCode'];
         $publisherCode = $parsedInput['publisherCode'];
         $publicationCode = $parsedInput['publicationCode'];
-        $checksum = self::_calculateChecksum($format, $productCode, $countryCode, $publisherCode, $publicationCode, $gtin14prefix);
 
-        switch ($format) {
-            case 'ISBN-10':
-                return "$countryCode-$publisherCode-$publicationCode-$checksum";
+        $productCodeWithPrefix = $prefix . $productCode;
+        $checksum = self::_calculateChecksumForIsbn13Format($productCodeWithPrefix, $countryCode, $publisherCode, $publicationCode);
 
-            case 'ISBN-13':
-            case 'ISBN':
-                return "$productCode-$countryCode-$publisherCode-$publicationCode-$checksum";
-
-            case 'GTIN-14':
-                return $gtin14prefix . $productCode . $countryCode . $publisherCode . $publicationCode . $checksum;
-
-            case 'EAN':
-            default: // TODO: throw if $format is not one of the above choices
-                return $productCode . $countryCode . $publisherCode . $publicationCode . $checksum;
-        }
+        return $prefix . $productCode . $countryCode . $publisherCode . $publicationCode . $checksum;
     }
 
-    private static function _calculateChecksum($format, $productCode, $countryCode, $publisherCode, $publicationCode, $gtin14prefix)
-    {
-        if ($format === 'ISBN-10') {
-            return self::_calculateChecksumForIsbn10Format($countryCode, $publisherCode, $publicationCode);
-        }
-
-        if ($format === 'ISBN-13') {
-            return self::_calculateChecksumForIsbn13Format($productCode, $countryCode, $publisherCode, $publicationCode);
-        }
-
-        if ($format === 'GTIN-14') {
-            $productCodeWithPrefix = $gtin14prefix . $productCode;
-            return self::_calculateChecksumForIsbn13Format($productCodeWithPrefix, $countryCode, $publisherCode, $publicationCode);
-        }
-    }
-
-    private static function _calculateChecksumForIsbn10Format($countryCode, $publisherCode, $publicationCode)
-    {
+    private static function _calculateChecksumForIsbn10Format(
+        string $countryCode,
+        string $publisherCode,
+        string $publicationCode
+    ): string {
         $code = $countryCode . $publisherCode . $publicationCode;
         $chars = str_split($code);
 
@@ -80,8 +89,12 @@ class Formatter
         return $checksum;
     }
 
-    private static function _calculateChecksumForIsbn13Format($productCode, $countryCode, $publisherCode, $publicationCode)
-    {
+    private static function _calculateChecksumForIsbn13Format(
+        string $productCode,
+        string $countryCode,
+        string $publisherCode,
+        string $publicationCode
+    ): string {
         $checksum = null;
 
         $code = $productCode . $countryCode . $publisherCode . $publicationCode;
