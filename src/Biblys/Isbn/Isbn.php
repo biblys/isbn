@@ -177,10 +177,18 @@ class Isbn
 
     /**
      * Checks if ISBN is valid
+     *
+     * @deprecated
+     *
      * @return boolean true if the ISBN is valid
      */
     public function isValid()
     {
+        trigger_error(
+            "Isbn->isValid is deprecated and will be removed in the future. Use Isbn::validateAs… methods instead. Learn more: https://git.io/JtAEx",
+            E_USER_DEPRECATED
+        );
+
         try {
             $this->validate();
             return true;

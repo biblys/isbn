@@ -21,6 +21,24 @@ use PHPUnit\Framework\TestCase;
 
 class testIsbnIsValid extends TestCase
 {
+    protected function setUp(): void
+    {
+        PHPUnit\Framework\Error\Deprecated::$enabled = false;
+    }
+
+    public function testDeprecationNotice(): void
+    {
+        PHPUnit\Framework\Error\Deprecated::$enabled = true;
+
+        $this->expectException('PHPUnit\Framework\Error\Deprecated');
+        $this->expectExceptionMessage(
+            "Isbn->isValid is deprecated and will be removed in the future. Use Isbn::validateAs… methods instead. Learn more: https://git.io/JtAEx"
+        );
+
+        $isbn = new Isbn('9782207258040');
+        $isbn->isValid();
+    }
+
     public function testIsValid()
     {
         $isbn = new Isbn('9782207258040');
@@ -43,6 +61,5 @@ class testIsbnIsValid extends TestCase
     {
         $isbn = new Isbn("9700764923");
         $this->assertTrue($isbn->isValid());
-        $this->assertEquals($isbn->format("ISBN-13"), "978-970-07-6492-4");
     }
 }

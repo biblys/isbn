@@ -24,7 +24,6 @@ class testGetErrors extends TestCase
     public function testInvalidIsbn()
     {
         $isbn = new Isbn("6897896354577");
-        $this->assertFalse($isbn->isValid());
         $this->assertEquals($isbn->getErrors(), '[6897896354577] Product code should be 978 or 979');
     }
 }
