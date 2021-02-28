@@ -73,12 +73,15 @@ All validating methods:
 - `Isbn::validateAsIsbn10`
 - `Isbn::validateAsIbsn13`
 - `Isbn::validateAsEan13`
+- `Isbn::isParsable`
+
+[Learn more about validating ISBNs](https://github.com/biblys/isbn/wiki/Validating-ISBNs-using-the-new-public-API)
 
 ## Development
 
 ### Using Gitpod
 
-You can start a dev environnement by clicking 
+You can start a dev environnement by clicking
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/biblys/isbn)
 and start hacking in your browser right away!
 
