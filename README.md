@@ -1,14 +1,15 @@
 # biblys/isbn
 
 [![tests](https://github.com/biblys/isbn/actions/workflows/tests.yml/badge.svg)](https://github.com/biblys/isbn/actions/workflows/tests.yml)
+[![Latest Stable Version](https://poser.pugx.org/biblys/isbn/v/stable)](https://packagist.org/packages/biblys/isbn)
+[![Total Downloads](https://poser.pugx.org/biblys/isbn/downloads)](https://packagist.org/packages/biblys/isbn)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
-This package can be used to:
+biblys/isbn can be used to:
 
-- validate an ISBN code
-- convert codes between ISBN-10, ISBN-13 and EAN (without hyphens) formats
-- format an ISBN as a GTIN-14 string (for use in packing and shipping)
-- calculate the checksum digit
-- show the registration agency (country or language)
+- validate a string against the ISBN-10, ISBN-13 and EAN-13 formats
+- convert an ISBN to ISBN-10, ISBN-13, EAN-13 and GTIN-14 formats
+- parse an ISBN and extract registration agency, publisher code, publication code, checksum, etc.
 
 [CHANGELOG](https://github.com/biblys/isbn/releases)
 
@@ -17,7 +18,7 @@ This package can be used to:
 Install with composer:
 
 ```console
-composer require biblys/isbn:^2.2.0
+composer require biblys/isbn:^2.3.0
 ```
 
 ## Usage
@@ -58,7 +59,7 @@ be 978-2-84344-949-9).
 use Biblys\Isbn\Isbn;
 
 try {
-    $input = "978-2-84344-949-9";
+    $input = "978-2-843-44949-9";
     Isbn::validateAsIsbn13($input);
     echo "ISBN $input is valid!";
 } catch(Exception $e) { // Will throw because third hyphen is misplaced
