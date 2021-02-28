@@ -146,6 +146,26 @@ class Isbn
         }
     }
 
+    /**
+     * Checks that an input can be parsed (and thus, formatted) by the library
+     *
+     * // Returns false because string contains invalid characters
+     * Isbn::validateAsEan13("9782SPI258040");
+     *
+     * @param string $input A string to check for parsability
+     *
+     * @return boolean true if the input can be parsed
+     */
+    static public function isParsable(string $input): bool
+    {
+        try {
+            Parser::parse($input);
+            return true;
+        } catch (IsbnParsingException $exception) {
+            return false;
+        }
+    }
+
     /* Legacy non static properties and methods (backward compatibility) */
     // FIXME: deprecate and remove on next major version
 
