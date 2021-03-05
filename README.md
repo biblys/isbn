@@ -74,7 +74,25 @@ All validating methods:
 - `Isbn::validateAsIbsn13`
 - `Isbn::validateAsEan13`
 
-## Test
+## Development
+
+### Using Gitpod
+
+You can start a dev environnement by clicking 
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/biblys/isbn)
+and start hacking in your browser right away!
+
+### Locally
+
+If you'd rather setup a local dev environnement, you'll need:
+
+- PHP 7.x
+- Composer
+- (Optional) Docker to run tests and debug against different version of PHP
+
+Clone this repository and run `composer install` to get started!
+
+## Tests
 
 Run tests with PHPUnit:
 
