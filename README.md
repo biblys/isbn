@@ -8,8 +8,8 @@
 
 biblys/isbn can be used to:
 
-- validate a string against the ISBN-10, ISBN-13 and EAN-13 formats
-- convert an ISBN to ISBN-10, ISBN-13, EAN-13 and GTIN-14 formats
+- [validate](#validate) a string against the ISBN-10, ISBN-13 and EAN-13 formats
+- [convert](#convert) an ISBN to ISBN-10, ISBN-13, EAN-13 and GTIN-14 formats
 - parse an ISBN and extract registration agency, publisher code, publication code, checksum, etc.
 
 [CHANGELOG](https://github.com/biblys/isbn/releases)
@@ -24,7 +24,7 @@ composer require biblys/isbn:^2.4.0
 
 ## Usage
 
-### Formatting
+### Convert
 
 Use case: converting an EAN (9782843449499) to an ISBN-13 (978-2-84344-949-9).
 
@@ -49,7 +49,7 @@ All formatting methods:
 - `Isbn::convertToEan13`
 - `Isbn::convertToGtin14`
 
-### Validating
+### Validate
 
 Use case: validating an incorrectly formed ISBN-13 (978-2-843-44949-9, should
 be 978-2-84344-949-9).
