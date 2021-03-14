@@ -28,13 +28,14 @@ class testValidateIsbn extends TestCase
 
     public function testDeprecatedNotice(): void
     {
-        PHPUnit\Framework\Error\Deprecated::$enabled = true;
         $this->expectException('PHPUnit\Framework\Error\Deprecated');
         $this->expectExceptionMessage(
             "Isbn->validate is deprecated and will be removed in the future. Use Isbn::validateAs… methods instead. Learn more: https://git.io/JtAEx"
         );
 
         $isbn = new Isbn('9782843449499');
+
+        PHPUnit\Framework\Error\Deprecated::$enabled = true;
         $isbn->validate();
     }
 

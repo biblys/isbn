@@ -21,6 +21,22 @@ use PHPUnit\Framework\TestCase;
 
 class testConstructor extends TestCase
 {
+    protected function setUp(): void
+    {
+        PHPUnit\Framework\Error\Deprecated::$enabled = false;
+    }
+
+    public function testDeprecatedNotice()
+    {
+        PHPUnit\Framework\Error\Deprecated::$enabled = true;
+        $this->expectException('PHPUnit\Framework\Error\Deprecated');
+        $this->expectExceptionMessage(
+            "Instantiating the Isbn class is deprecated and will be removed in the future. Learn more: https://git.io/JqRgc"
+        );
+
+        $isbn = new Isbn('9782207258040');
+    }
+
     /**
      * Non-regression test for Github issue #5
      * https://github.com/biblys/isbn/pull/5

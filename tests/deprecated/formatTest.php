@@ -28,13 +28,14 @@ class testFormatIsbn extends TestCase
 
     public function testDeprecatedNotice()
     {
-        PHPUnit\Framework\Error\Deprecated::$enabled = true;
         $this->expectException('PHPUnit\Framework\Error\Deprecated');
         $this->expectExceptionMessage(
             "Isbn->format is deprecated and will be removed in the future. Use the Isbn::convertToIsbn13 method instead. Learn more: https://git.io/JtAEx"
         );
 
         $isbn = new Isbn('9782207258040');
+
+        PHPUnit\Framework\Error\Deprecated::$enabled = true;
         $isbn->format('ISBN-13');
     }
 
