@@ -49,6 +49,23 @@ class Isbn
     }
 
     /**
+     * Converts input into an ISBN-A
+     *
+     * See https://www.doi.org/factsheets/ISBN-A.html for ISBN-A syntax
+     *
+     * // Returns 10.978.2207/258040
+     * $isbnA = Isbn::convertToIsbnA("9782207258040");
+     *
+     * @param string $input A string to convert
+     *
+     * @return string
+     */
+    static public function convertToIsbnA(string $input): string
+    {
+        return Formatter::formatAsIsbnA($input);
+    }
+
+    /**
      * Converts input into an EAN-13
      *
      * EAN-13 are 13 characters long and does not include hyphens.

@@ -28,7 +28,7 @@ class Formatter
     public static function formatAsIsbn13(string $input): string
     {
         $parsedInput = Parser::parse($input);
-        $productCode = $parsedInput['productCode'];
+        $productCode = $parsedInput["productCode"];
         $countryCode = $parsedInput["countryCode"];
         $publisherCode = $parsedInput["publisherCode"];
         $publicationCode = $parsedInput["publicationCode"];
@@ -37,10 +37,23 @@ class Formatter
         return "$productCode-$countryCode-$publisherCode-$publicationCode-$checksum";
     }
 
+    public static function formatAsIsbnA(string $input): string
+    {
+        $doiPrefix = "10";
+        $parsedInput = Parser::parse($input);
+        $productCode = $parsedInput["productCode"];
+        $countryCode = $parsedInput["countryCode"];
+        $publisherCode = $parsedInput["publisherCode"];
+        $publicationCode = $parsedInput["publicationCode"];
+        $checksum = self::_calculateChecksumForIsbn13Format($productCode, $countryCode, $publisherCode, $publicationCode);
+
+        return "$doiPrefix.$productCode.$countryCode$publisherCode/$publicationCode$checksum";
+    }
+
     public static function formatAsEan13(string $input): string
     {
         $parsedInput = Parser::parse($input);
-        $productCode = $parsedInput['productCode'];
+        $productCode = $parsedInput["productCode"];
         $countryCode = $parsedInput["countryCode"];
         $publisherCode = $parsedInput["publisherCode"];
         $publicationCode = $parsedInput["publicationCode"];
@@ -52,7 +65,7 @@ class Formatter
     public static function formatAsGtin14(string $input, int $prefix): string
     {
         $parsedInput = Parser::parse($input);
-        $productCode = $parsedInput['productCode'];
+        $productCode = $parsedInput["productCode"];
         $countryCode = $parsedInput['countryCode'];
         $publisherCode = $parsedInput['publisherCode'];
         $publicationCode = $parsedInput['publicationCode'];
