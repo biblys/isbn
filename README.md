@@ -19,7 +19,7 @@ biblys/isbn can be used to:
 Install with composer:
 
 ```console
-composer require biblys/isbn:^2.3.0
+composer require biblys/isbn:^2.4.0
 ```
 
 ## Usage
@@ -38,11 +38,11 @@ try {
     $isbn13 = Isbn::convertToIsbn13($input);
     echo "ISBN-13: $isbn13"; // Prints ISBN-13: 978-2-84344-949-9
 } catch(Exception $e) {
-    echo "An error occured while attempting to format ISBN $input: ".$e->getMessage();
+    echo "An error occurred while attempting to format ISBN $input: ".$e->getMessage();
 }
 ```
 
-All formating methods:
+All formatting methods:
 
 - `Isbn::convertToIsbn10`
 - `Isbn::convertToIsbn13`
@@ -81,13 +81,13 @@ All validating methods:
 
 ### Using Gitpod
 
-You can start a dev environnement by clicking
+You can start a dev environment by clicking
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/biblys/isbn)
 and start hacking in your browser right away!
 
 ### Locally
 
-If you'd rather setup a local dev environnement, you'll need:
+If you'd rather set up a local dev environment, you'll need:
 
 - PHP 7.x
 - Composer
@@ -121,7 +121,7 @@ PHP_VERSION=7.1 composer docker:test
 New ISBN ranges may be added from time to time by the
 [International ISBN Agency](https://www.isbn-international.org/). Whenever it
 happens, this library must be updated. If a range update is necessary, please
-open an issue on Github.
+open an issue on GitHub.
 You can also open a pull request after updating the ranges your self with the
 following commands:
 
@@ -138,4 +138,4 @@ composer docker:update-ranges
 
 ## Changelog
 
-[See Github releases](https://github.com/biblys/isbn/releases)
+[See GitHub releases](https://github.com/biblys/isbn/releases)
