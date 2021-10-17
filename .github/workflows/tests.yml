@@ -22,25 +22,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: nanasess/setup-php@master
+    - uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php }}
 
     - name: Validate composer.json and composer.lock
       run: composer validate
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v2
+    - uses: "ramsey/composer-install@v1"
       with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ matrix.php }}-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-${{ matrix.php }}
-
-    - name: Install dependencies
-      if: steps.composer-cache.outputs.cache-hit != 'true'
-      run: composer install --prefer-dist --no-progress --no-suggest
+        dependency-versions: "highest"
 
     - name: Run test suite
       run: composer test
