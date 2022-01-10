@@ -19,7 +19,7 @@ include('vendor/autoload.php');
 
 echo "Requesting range information...\n";
 $client = new Client();
-$url = 'https://www.isbn-international.org/?q=bl_proxy/GetRangeInformations';
+$url = 'https://www.isbn-international.org/bl_proxy/GetRangeInformations';
 $res = $client->request('POST', $url, [
     'form_params' => [
         'format' => 1,
@@ -35,7 +35,7 @@ if ($result === null || !property_exists($result, 'result')) {
 
 $value = $result->result->value;
 $filename = $result->result->filename;
-$url = sprintf('https://www.isbn-international.org/?q=download_range/%s/%s', $value, $filename);
+$url = sprintf('https://www.isbn-international.org/download_range/%s/%s', $value, $filename);
 
 echo "Getting XML from $url...\n";
 $res = $client->request('GET', $url);
