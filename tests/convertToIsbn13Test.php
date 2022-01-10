@@ -38,4 +38,12 @@ class testConvertToIsbn13 extends TestCase
 
         Isbn::convertToIsbn13("ABC-80-7203-7");
     }
+
+    public function testIsbnWithUnknownGroup()
+    {
+        $this->expectException("Biblys\Isbn\IsbnParsingException");
+        $this->expectExceptionMessage("Cannot find any ISBN range matching prefix 978-630");
+
+        Isbn::convertToIsbn13("9786303025575");
+    }
 }
