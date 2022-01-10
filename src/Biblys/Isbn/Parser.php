@@ -19,7 +19,8 @@ class Parser
         ERROR_INVALID_CHARACTERS = 'Invalid characters in the code',
         ERROR_INVALID_LENGTH = 'Code is too short or too long',
         ERROR_INVALID_PRODUCT_CODE = 'Product code should be 978 or 979',
-        ERROR_INVALID_COUNTRY_CODE = 'Country code is unknown';
+        ERROR_INVALID_COUNTRY_CODE = 'Country code is unknown',
+        ERROR_CANNOT_MATCH_RANGE = "Cannot find any ISBN range matching prefix %s";
 
     public static function parse($input)
     {
@@ -143,8 +144,9 @@ class Parser
         // Select the right set of rules according to the agency (product + country code)
         $ranges = new Ranges();
         $groups = $ranges->getGroups();
+        $prefix = $productCode . '-' . $countryCode;
         foreach ($groups as $g) {
-            if ($g['Prefix'] <> $productCode . '-' . $countryCode) {
+            if ($g['Prefix'] <> $prefix) {
                 continue;
             }
 
@@ -173,7 +175,9 @@ class Parser
 
                 return [$agency, $publisherCode, $publicationCode];
             }
-            break;
         }
+        throw new IsbnParsingException(
+            sprintf(static::ERROR_CANNOT_MATCH_RANGE, $prefix)
+        );
     }
 }
