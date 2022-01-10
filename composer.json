@@ -1,7 +1,7 @@
 {
   "name": "biblys/isbn",
   "description": "A PHP library to convert and validate ISBNs",
-  "time": "2021-03-05",
+  "time": "2022-01-10",
   "keywords": [
     "ISBN",
     "EAN",

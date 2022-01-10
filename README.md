@@ -19,7 +19,7 @@ biblys/isbn can be used to:
 Install with composer:
 
 ```console
-composer require biblys/isbn:^2.4.0
+composer require biblys/isbn:^2.5.0
 ```
 
 ## Usage
@@ -72,7 +72,7 @@ try {
 All validating methods:
 
 - `Isbn::validateAsIsbn10`
-- `Isbn::validateAsIbsn13`
+- `Isbn::validateAsIsbn13`
 - `Isbn::validateAsEan13`
 - `Isbn::isParsable`
 
