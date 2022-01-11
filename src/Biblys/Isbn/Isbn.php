@@ -193,6 +193,6 @@ class Isbn
      */
     static public function parse(string $input): ParsedIsbn
     {
-       return Parser::parse($input);
+         return Parser::parse($input);
     }
 }
