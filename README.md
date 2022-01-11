@@ -83,6 +83,28 @@ All validating methods:
 
 [Learn more about validating ISBNs](https://github.com/biblys/isbn/wiki/Validating-ISBNs-using-the-new-public-API)
 
+### Parse
+
+Use case: extracting the publisher code from an ISBN.
+
+```php
+<?php
+use Biblys\Isbn\Isbn;
+
+$input = "9782956420132";
+$isbn = Isbn::parse($input);
+echo $isbn->getRegistrantElement(); // Prints "9564201"
+
+```
+
+`Isbn::parse` returns a `ParsedIsbn` object implementing the following methods:
+- `ParsedIsbn->getGs1Element`:: EAN product code
+- `ParsedIsbn->getRegistrationGroupElement`: Country, geographical region or language aera code
+- `ParsedIsbn->getRegistrantElement`: Publisher (or imprint within a group) code
+- `ParsedIsbn->getPublicationElement`: Publication code
+- `ParsedIsbn->getCheckDigit`: Checksum used for validation
+
+
 ## Development
 
 ### Using Gitpod
