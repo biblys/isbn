@@ -1,10 +1,14 @@
-# biblys/isbn
+# biblys/isbn 3.0 beta
 
 [![tests](https://github.com/biblys/isbn/actions/workflows/tests.yml/badge.svg)](https://github.com/biblys/isbn/actions/workflows/tests.yml)
 [![Latest Stable Version](https://poser.pugx.org/biblys/isbn/v/stable)](https://packagist.org/packages/biblys/isbn)
 [![Total Downloads](https://poser.pugx.org/biblys/isbn/downloads)](https://packagist.org/packages/biblys/isbn)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/biblys/isbn)
+
+:warning: The `next` branch holds the code for the next major version of the library.
+It is experimental, adds support for PHP 8.0 but removes deprecated code. It is not considered stable.
+For a stable version, use the [main branch](https://github.com/biblys/isbn/tree/main) releases instead.
 
 biblys/isbn can be used to:
 
@@ -16,10 +20,12 @@ biblys/isbn can be used to:
 
 ## Installation
 
+Requirements: PHP 7.1 or above
+
 Install with composer:
 
 ```console
-composer require biblys/isbn:^2.5.0
+composer require biblys/isbn:dev-next
 ```
 
 ## Usage
