@@ -16,9 +16,13 @@ class Ranges
 {
     private $prefixes, $groups;
 
-    public function __construct()
+    public function __construct(string $rangesArrayFileName = 'ranges-array.php')
     {
-        include('ranges-array.php');
+        if(file_exists($rangesArrayFileName)) {
+            include($rangesArrayFileName);
+        } else {
+            include('ranges-array.php');
+        }
         $this->prefixes = $prefixes;
         $this->groups = $groups;
     }
