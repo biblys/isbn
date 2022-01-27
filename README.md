@@ -16,7 +16,12 @@ biblys/isbn can be used to:
 
 ## Installation
 
-Install with composer:
+### Requirements
+- PHP 7.x
+  
+If you need to support PHP 8, see [the next branch](https://github.com/biblys/isbn/blob/next/README.md).
+
+### Install with composer
 
 ```console
 composer require biblys/isbn:^2.5.0
