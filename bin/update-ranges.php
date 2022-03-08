@@ -46,33 +46,60 @@ $ranges = (array) simplexml_load_string($xml);
 $ranges = json_encode($ranges);
 $ranges = json_decode($ranges, true);
 
-$prefixes = (array) $ranges['EAN.UCCPrefixes']['EAN.UCC'];
-$groups = (array) $ranges['RegistrationGroups']['Group'];
-
-foreach ($groups as &$group) {
-    // Fix entries with a single "range", converting it to an array
-    if (isset($group['Rules']['Rule']['Range'])) {
-        $group['Rules']['Rule'] = array($group['Rules']['Rule']);
-    }
-}
-
-$file = dirname(__FILE__) . '/../src/Biblys/Isbn/ranges-array.php';
-echo "Saving to $file...\n";
-
-file_put_contents($file,
-    '<?php ' . "\n"
-    . '/*' . "\n"
-    . ' * This file is generated automatically by update-ranges.php, do not edit' . "\n"
-    . ' * manually! See README.md for more info. ' . "\n"
-    . ' *' . "\n"
-    . ' * This file is part of the biblys/isbn package.' . "\n"
-    . ' *' . "\n"
-    . ' * (c) Clément Bourgoin' . "\n"
-    . ' *' . "\n"
-    . ' * This package is Open Source Software. For the full copyright and license' . "\n"
-    . ' * information, please view the LICENSE file which was distributed with this' . "\n"
-    . ' * source code.' . "\n"
-    . ' */' . "\n\n"
-    . '$groups = ' . var_export($groups, TRUE) . ";\n"
-    . '$prefixes = ' . var_export($prefixes, TRUE) . ";\n"
+processRanges(
+    (array)$ranges['EAN.UCCPrefixes']['EAN.UCC'],
+    dirname(__FILE__).'/../src/Biblys/Isbn/prefixes-array.php'
 );
+processRanges(
+    (array) $ranges['RegistrationGroups']['Group'],
+    dirname(__FILE__).'/../src/Biblys/Isbn/groups-array.php'
+);
+
+function processRanges($array, $filePath)
+{
+    $file = fopen($filePath, "w");
+    if (! is_resource($file)) {
+        exit("Could not open $filePath for writing...\n");
+    }
+    fwrite($file, '<?php '."\n"
+                  .'/*'."\n"
+                  .' * This file is generated automatically by update-ranges.php, do not edit'."\n"
+                  .' * manually! See README.md for more info. '."\n"
+                  .' *'."\n"
+                  .' * This file is part of the biblys/isbn package.'."\n"
+                  .' *'."\n"
+                  .' * (c) Clément Bourgoin'."\n"
+                  .' *'."\n"
+                  .' * This package is Open Source Software. For the full copyright and license'."\n"
+                  .' * information, please view the LICENSE file which was distributed with this'."\n"
+                  .' * source code.'."\n"
+                  .' */'."\n\n"
+                  . 'return ['."\n"
+    ) or exit("Error writing to $filePath");
+
+    foreach ($array as $item) {
+        fwrite($file,
+            sprintf(
+                "    %s => [%s, [\n",
+                var_export($item['Prefix'], true),
+                var_export($item['Agency'], true)
+            )) or exit("Error writing to $filePath");
+        $rules = isset($item['Rules']['Rule']['Range']) ? [$item['Rules']['Rule']] : $item['Rules']['Rule'];
+        foreach ($rules as $rule) {
+            $range = explode('-', $rule['Range']);
+            if (count($range) != 2) {
+                exit("malformed Range in XML: {$rule['Range']}");
+            }
+            fwrite($file,
+                sprintf(
+                    "        [%s, %s, %d],\n",
+                    var_export($range[0], true),
+                    var_export($range[1], true),
+                    intval($rule["Length"])
+                )) or exit("Error writing to $filePath");
+        }
+        fwrite($file,"    ]],\n") or exit("Error writing to $filePath");
+    }
+    fwrite($file, '];'."\n") or exit("Error writing to $filePath");
+    fclose($file) or exit("Error closing $filePath");
+}

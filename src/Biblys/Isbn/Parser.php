@@ -105,24 +105,20 @@ class Parser
         // Select the right set of rules according to the product code
         $ranges = new Ranges();
         $prefixes = $ranges->getPrefixes();
-        foreach ($prefixes as $p) {
-            if ($p['Prefix'] == $productCode) {
-                $rules = $p['Rules']['Rule'];
-                break;
-            }
+        if (!isset($prefixes[$productCode])) {
+            throw new IsbnParsingException(static::ERROR_INVALID_COUNTRY_CODE);
         }
 
         // Select the right rule
-        foreach ($rules as $r) {
-            $ra = explode('-', $r['Range']);
-            if ($first7 >= $ra[0] && $first7 <= $ra[1]) {
-                $length = $r['Length'];
+        foreach ($prefixes[$productCode][1] as $r) {
+            if ($first7 >= $r[0] && $first7 <= $r[1]) {
+                $length = $r[2];
                 break;
             }
         }
 
         // Country code is invalid
-        if (!isset($length) || $length === "0") {
+        if (empty($length)) {
             throw new IsbnParsingException(static::ERROR_INVALID_COUNTRY_CODE);
         };
 
@@ -145,37 +141,39 @@ class Parser
         $ranges = new Ranges();
         $groups = $ranges->getGroups();
         $prefix = $productCode . '-' . $countryCode;
-        foreach ($groups as $g) {
-            if ($g['Prefix'] <> $prefix) {
+
+        $g = $groups[$prefix] ?? ["", []];
+        $agency = $g[0];
+        $rules = $g[1];
+
+        // Select the right rule
+        foreach ($rules as $rule) {
+
+            // Get min and max value in range
+            // and trim values to match code length
+            $min = substr($rule[0], 0, $inputLength);
+            $max = substr($rule[1], 0, $inputLength);
+
+            // If first 7 digits is smaller than min
+            // or greater than max, continue to next rule
+            if ($first7 < $min || $first7 > $max) {
                 continue;
             }
 
-            $rules = $g['Rules']['Rule'];
-            $agency = $g['Agency'];
+            $length = $rule[2];
 
-            // Select the right rule
-            foreach ($rules as $rule) {
-
-                // Get min and max value in range
-                // and trim values to match code length
-                $range = explode('-', $rule['Range']);
-                $min = substr($range[0], 0, $inputLength);
-                $max = substr($range[1], 0, $inputLength);
-
-                // If first 7 digits is smaller than min
-                // or greater than max, continue to next rule
-                if ($first7 < $min || $first7 > $max) {
-                    continue;
-                }
-
-                $length = $rule['Length'];
-
-                $publisherCode = substr($input, 0, $length);
-                $publicationCode = substr($input, $length);
-
-                return [$agency, $publisherCode, $publicationCode];
+            if ($length == 0) {
+                throw new IsbnParsingException(
+                    sprintf(static::ERROR_CANNOT_MATCH_RANGE, $prefix)
+                );
             }
+
+            $publisherCode = substr($input, 0, $length);
+            $publicationCode = substr($input, $length);
+
+            return [$agency, $publisherCode, $publicationCode];
         }
+
         throw new IsbnParsingException(
             sprintf(static::ERROR_CANNOT_MATCH_RANGE, $prefix)
         );

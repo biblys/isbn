@@ -18,9 +18,8 @@ class Ranges
 
     public function __construct()
     {
-        include('ranges-array.php');
-        $this->prefixes = $prefixes;
-        $this->groups = $groups;
+        $this->prefixes = include('prefixes-array.php');
+        $this->groups = include('groups-array.php');
     }
 
     public function getPrefixes()
