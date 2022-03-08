@@ -44,6 +44,6 @@ class testConvertToIsbn13 extends TestCase
         $this->expectException("Biblys\Isbn\IsbnParsingException");
         $this->expectExceptionMessage("Cannot find any ISBN range matching prefix 978-630");
 
-        Isbn::convertToIsbn13("9786303025575");
+        Isbn::convertToIsbn13("978630002557");
     }
 }
