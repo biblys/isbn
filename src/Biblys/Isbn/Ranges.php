@@ -14,21 +14,16 @@ namespace Biblys\Isbn;
 
 class Ranges
 {
-    private $prefixes, $groups;
-
-    public function __construct()
-    {
-        $this->prefixes = include('prefixes-array.php');
-        $this->groups = include('groups-array.php');
-    }
+    private static $prefixes = include('prefixes-array.php');
+    private static $groups = include('groups-array.php');
 
     public function getPrefixes()
     {
-        return $this->prefixes;
+        return self:$prefixes;
     }
 
     public function getGroups()
     {
-        return $this->groups;
+        return self:$groups;
     }
 }
