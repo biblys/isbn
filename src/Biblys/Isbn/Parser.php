@@ -103,8 +103,7 @@ class Parser
         $first7 = substr($input, 0, 7);
 
         // Select the right set of rules according to the product code
-        $ranges = new Ranges();
-        $prefixes = $ranges->getPrefixes();
+        $prefixes = Ranges::getPrefixes();
         if (!isset($prefixes[$productCode])) {
             throw new IsbnParsingException(static::ERROR_INVALID_COUNTRY_CODE);
         }
@@ -138,8 +137,7 @@ class Parser
         $inputLength = strlen($first7);
 
         // Select the right set of rules according to the agency (product + country code)
-        $ranges = new Ranges();
-        $groups = $ranges->getGroups();
+        $groups = Ranges::getGroups();
         $prefix = $productCode . '-' . $countryCode;
 
         $g = $groups[$prefix] ?? ["", []];
