@@ -22,7 +22,7 @@ class Parser
         ERROR_INVALID_COUNTRY_CODE = 'Country code is unknown',
         ERROR_CANNOT_MATCH_RANGE = "Cannot find any ISBN range matching prefix %s";
 
-    public static function parse($input)
+    public static function parse(string $input): ParsedIsbn
     {
         if (empty($input)) {
             throw new IsbnParsingException(static::ERROR_EMPTY);
@@ -48,13 +48,13 @@ class Parser
         $publisherCode = $result[1];
         $publicationCode = $result[2];
 
-        return [
-            "productCode" => $productCode,
-            "countryCode" => $countryCode,
-            "agencyCode" => $agencyCode,
-            "publisherCode" => $publisherCode,
-            "publicationCode" => $publicationCode,
-        ];
+        return new ParsedIsbn([
+            "gs1Element" => $productCode,
+            "registrationGroupElement" => $countryCode,
+            "registrationAgencyName" => $agencyCode,
+            "registrantElement" => $publisherCode,
+            "publicationElement" => $publicationCode,
+        ]);
     }
 
     private static function _stripHyphens($input)
@@ -69,12 +69,12 @@ class Parser
     {
         $length = strlen($input);
 
-        if ($length == 13 || $length == 10) {
-            $input = substr_replace($input, "", -1);
+        if ($length == 12 || $length == 9) {
             return $input;
         }
 
-        if ($length == 12 || $length == 9) {
+        if ($length == 13 || $length == 10) {
+            $input = substr_replace($input, "", -1);
             return $input;
         }
 

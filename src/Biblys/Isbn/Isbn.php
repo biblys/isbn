@@ -201,11 +201,11 @@ class Isbn
 
         try {
             $parsedCode = Parser::parse($code);
-            $this->_gs1productCode = $parsedCode["productCode"];
-            $this->_countryCode = $parsedCode["countryCode"];
-            $this->_isbnAgencyCode = $parsedCode["agencyCode"];
-            $this->_publisherCode = $parsedCode["publisherCode"];
-            $this->_publicationCode = $parsedCode["publicationCode"];
+            $this->_gs1productCode = $parsedCode->getGs1Element();
+            $this->_countryCode = $parsedCode->getRegistrationGroupElement();
+            $this->_isbnAgencyCode = $parsedCode->getRegistrationAgencyName();
+            $this->_publisherCode = $parsedCode->getRegistrantElement();
+            $this->_publicationCode = $parsedCode->getPublicationElement();
         } catch (IsbnParsingException $exception) {
             // FIXME in next major version (breaking change)
             // For backward compatibility reason, instanciating should not throw
