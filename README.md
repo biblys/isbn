@@ -17,7 +17,7 @@ biblys/isbn can be used to:
 ## Installation
 
 ### Requirements
-- PHP 7.x
+- PHP 7.2 to 7.4
   
 If you need to support PHP 8, see [the next branch](https://github.com/biblys/isbn/blob/next/README.md).
 

@@ -20,7 +20,7 @@
     "issues": "https://github.com/biblys/isbn/issues"
   },
   "require": {
-    "php": "^7.1"
+    "php": "^7.2"
   },
   "require-dev": {
     "ext-json": "*",
