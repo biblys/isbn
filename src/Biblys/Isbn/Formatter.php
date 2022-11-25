@@ -14,61 +14,76 @@ namespace Biblys\Isbn;
 
 class Formatter
 {
+    /**
+     * @throws IsbnParsingException
+     */
     public static function formatAsIsbn10(string $input): string
     {
         $parsedInput = Parser::parse($input);
-        $countryCode = $parsedInput["countryCode"];
-        $publisherCode = $parsedInput["publisherCode"];
-        $publicationCode = $parsedInput["publicationCode"];
+        $countryCode = $parsedInput->getRegistrationGroupElement();
+        $publisherCode = $parsedInput->getRegistrantElement();
+        $publicationCode = $parsedInput->getPublicationElement();
         $checksum = self::_calculateChecksumForIsbn10Format($countryCode, $publisherCode, $publicationCode);
 
         return "$countryCode-$publisherCode-$publicationCode-$checksum";
     }
 
+    /**
+     * @throws IsbnParsingException
+     */
     public static function formatAsIsbn13(string $input): string
     {
         $parsedInput = Parser::parse($input);
-        $productCode = $parsedInput["productCode"];
-        $countryCode = $parsedInput["countryCode"];
-        $publisherCode = $parsedInput["publisherCode"];
-        $publicationCode = $parsedInput["publicationCode"];
+        $productCode = $parsedInput->getGs1Element();
+        $countryCode = $parsedInput->getRegistrationGroupElement();
+        $publisherCode = $parsedInput->getRegistrantElement();
+        $publicationCode = $parsedInput->getPublicationElement();
         $checksum = self::_calculateChecksumForIsbn13Format($productCode, $countryCode, $publisherCode, $publicationCode);
 
         return "$productCode-$countryCode-$publisherCode-$publicationCode-$checksum";
     }
 
+    /**
+     * @throws IsbnParsingException
+     */
     public static function formatAsIsbnA(string $input): string
     {
         $doiPrefix = "10";
         $parsedInput = Parser::parse($input);
-        $productCode = $parsedInput["productCode"];
-        $countryCode = $parsedInput["countryCode"];
-        $publisherCode = $parsedInput["publisherCode"];
-        $publicationCode = $parsedInput["publicationCode"];
+        $productCode = $parsedInput->getGs1Element();
+        $countryCode = $parsedInput->getRegistrationGroupElement();
+        $publisherCode = $parsedInput->getRegistrantElement();
+        $publicationCode = $parsedInput->getPublicationElement();
         $checksum = self::_calculateChecksumForIsbn13Format($productCode, $countryCode, $publisherCode, $publicationCode);
 
         return "$doiPrefix.$productCode.$countryCode$publisherCode/$publicationCode$checksum";
     }
 
+    /**
+     * @throws IsbnParsingException
+     */
     public static function formatAsEan13(string $input): string
     {
         $parsedInput = Parser::parse($input);
-        $productCode = $parsedInput["productCode"];
-        $countryCode = $parsedInput["countryCode"];
-        $publisherCode = $parsedInput["publisherCode"];
-        $publicationCode = $parsedInput["publicationCode"];
+        $productCode = $parsedInput->getGs1Element();
+        $countryCode = $parsedInput->getRegistrationGroupElement();
+        $publisherCode = $parsedInput->getRegistrantElement();
+        $publicationCode = $parsedInput->getPublicationElement();
         $checksum = self::_calculateChecksumForIsbn13Format($productCode, $countryCode, $publisherCode, $publicationCode);
 
         return $productCode . $countryCode . $publisherCode . $publicationCode . $checksum;
     }
 
+    /**
+     * @throws IsbnParsingException
+     */
     public static function formatAsGtin14(string $input, int $prefix): string
     {
         $parsedInput = Parser::parse($input);
-        $productCode = $parsedInput["productCode"];
-        $countryCode = $parsedInput['countryCode'];
-        $publisherCode = $parsedInput['publisherCode'];
-        $publicationCode = $parsedInput['publicationCode'];
+        $productCode = $parsedInput->getGs1Element();
+        $countryCode = $parsedInput->getRegistrationGroupElement();
+        $publisherCode = $parsedInput->getRegistrantElement();
+        $publicationCode = $parsedInput->getPublicationElement();
 
         $productCodeWithPrefix = $prefix . $productCode;
         $checksum = self::_calculateChecksumForIsbn13Format($productCodeWithPrefix, $countryCode, $publisherCode, $publicationCode);
