@@ -183,6 +183,19 @@ class Isbn
         }
     }
 
+    /**
+     * Returns a parsed isbn
+     *
+     * @param string $input A string to be parsed as an ISBN
+     *
+     * @return ParsedIsbn the parsed isbn object
+     * @throws IsbnParsingException
+     */
+    static public function parse(string $input): ParsedIsbn
+    {
+        return Parser::parse($input);
+    }
+
     /* Legacy non static properties and methods (backward compatibility) */
     // FIXME: deprecate and remove on next major version
 
