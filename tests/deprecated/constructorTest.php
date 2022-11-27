@@ -31,7 +31,7 @@ class testConstructor extends TestCase
         PHPUnit\Framework\Error\Deprecated::$enabled = true;
         $this->expectException('PHPUnit\Framework\Error\Deprecated');
         $this->expectExceptionMessage(
-            "Instantiating the Isbn class is deprecated and will be removed in the future. Learn more: https://git.io/JqRgc"
+            "Instantiating the Isbn class is deprecated and will be removed in the future. Learn more: https://lstu.fr/xhjFGB0c"
         );
 
         $isbn = new Isbn('9782207258040');
