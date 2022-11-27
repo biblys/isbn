@@ -24,7 +24,7 @@ If you need to support PHP 8, see [the next branch](https://github.com/biblys/is
 ### Install with composer
 
 ```console
-composer require biblys/isbn:^2.5.1
+composer require biblys/isbn:^2.6.0
 ```
 
 ## Usage
