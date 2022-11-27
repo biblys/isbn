@@ -12,6 +12,8 @@
 
 namespace Biblys\Isbn;
 
+use Biblys\Isbn\Exception\IsbnParsingException;
+
 class Parser
 {
     // FIXME: Create custom exceptions for each case

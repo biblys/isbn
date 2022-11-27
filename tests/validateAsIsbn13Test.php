@@ -16,6 +16,8 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use Biblys\Isbn\Exception\IsbnParsingException;
+use Biblys\Isbn\Exception\IsbnValidationException;
 use Biblys\Isbn\Isbn;
 use PHPUnit\Framework\TestCase;
 
@@ -30,7 +32,7 @@ class testValidateAsIsbn13 extends TestCase
 
     public function testUnparsableIsbn()
     {
-        $this->expectException("Biblys\Isbn\IsbnParsingException");
+        $this->expectException(IsbnParsingException::class);
         $this->expectExceptionMessage("Invalid characters in the code");
 
         Isbn::validateAsIsbn13("978-2-SPI-25804-0");
@@ -38,7 +40,7 @@ class testValidateAsIsbn13 extends TestCase
 
     public function testIsbnWithMisplacedHyphen()
     {
-        $this->expectException("Biblys\Isbn\IsbnValidationException");
+        $this->expectException(IsbnValidationException::class);
         $this->expectExceptionMessage("978-220-7-25804-0 is not a valid ISBN-13. Expected 978-2-207-25804-0.");
 
         Isbn::validateAsIsbn13("978-220-7-25804-0");
@@ -46,7 +48,7 @@ class testValidateAsIsbn13 extends TestCase
 
     public function testIsbnWithoutHyphens()
     {
-        $this->expectException("Biblys\Isbn\IsbnValidationException");
+        $this->expectException(IsbnValidationException::class);
         $this->expectExceptionMessage("9782207258040 is not a valid ISBN-13. Expected 978-2-207-25804-0.");
 
         Isbn::validateAsIsbn13("9782207258040");
@@ -54,7 +56,7 @@ class testValidateAsIsbn13 extends TestCase
 
     public function testIsbnWithIncorrectCheckum()
     {
-        $this->expectException("Biblys\Isbn\IsbnValidationException");
+        $this->expectException(IsbnValidationException::class);
         $this->expectExceptionMessage("978-2-207-25804-2 is not a valid ISBN-13. Expected 978-2-207-25804-0.");
 
         Isbn::validateAsIsbn13("978-2-207-25804-2");

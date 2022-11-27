@@ -16,6 +16,7 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use Biblys\Isbn\Exception\IsbnParsingException;
 use Biblys\Isbn\Isbn;
 use PHPUnit\Framework\TestCase;
 
@@ -43,7 +44,7 @@ class testConvertToGtin14 extends TestCase
 
     public function testFormatGtin14InvalidIsbn()
     {
-        $this->expectException("Biblys\Isbn\IsbnParsingException");
+        $this->expectException(IsbnParsingException::class);
         $this->expectExceptionMessage("Invalid characters in the code");
 
         Isbn::convertToGtin14("ABC-80-7203-7", 1);

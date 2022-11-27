@@ -12,6 +12,9 @@
 
 namespace Biblys\Isbn;
 
+use Biblys\Isbn\Exception\IsbnParsingException;
+use Biblys\Isbn\Exception\IsbnValidationException;
+
 class Isbn
 {
     /**

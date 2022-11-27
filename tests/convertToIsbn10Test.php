@@ -16,6 +16,7 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use Biblys\Isbn\Exception\IsbnParsingException;
 use Biblys\Isbn\Isbn;
 use PHPUnit\Framework\TestCase;
 
@@ -43,7 +44,7 @@ class testConvertToIsbn10 extends TestCase
 
     public function testFormatIsbn10InvalidIsbn()
     {
-        $this->expectException("Biblys\Isbn\IsbnParsingException");
+        $this->expectException(IsbnParsingException::class);
         // FIXME: Improve message: Input contains invalid characters "ABC"
         $this->expectExceptionMessage("Invalid characters in the code");
 

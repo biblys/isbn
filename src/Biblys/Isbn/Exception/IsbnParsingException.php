@@ -10,8 +10,8 @@
  * source code.
  */
 
-namespace Biblys\Isbn;
+namespace Biblys\Isbn\Exception;
 
-class IsbnValidationException extends \Exception
+class IsbnParsingException extends \Exception
 {
 }
