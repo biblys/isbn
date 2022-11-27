@@ -209,12 +209,13 @@ class Isbn
     private $_gtin14Prefix;
 
     /**
-     * @deprecated
+     * @deprecated Instantiating the Isbn class is deprecated and will be removed in the future.
+     *             Learn more: https://lstu.fr/xhjFGB0c
      */
     public function __construct($code = null)
     {
         trigger_error(
-            "Instantiating the Isbn class is deprecated and will be removed in the future. Learn more: https://git.io/JqRgc",
+            "Instantiating the Isbn class is deprecated and will be removed in the future. Learn more: https://lstu.fr/xhjFGB0c",
             E_USER_DEPRECATED
         );
 
