@@ -13,13 +13,13 @@
 namespace Biblys\Isbn;
 
 use Biblys\Isbn\Exception\EmptyInputException;
+use Biblys\Isbn\Exception\InvalidCharactersException;
 use Biblys\Isbn\Exception\IsbnParsingException;
 
 class Parser
 {
     // FIXME: Create custom exceptions for each case
     const
-        ERROR_INVALID_CHARACTERS = 'Invalid characters in the code',
         ERROR_INVALID_LENGTH = 'Code is too short or too long',
         ERROR_INVALID_PRODUCT_CODE = 'Product code should be 978 or 979',
         ERROR_INVALID_COUNTRY_CODE = 'Country code is unknown',
@@ -27,6 +27,7 @@ class Parser
 
   /**
    * @throws EmptyInputException
+   * @throws InvalidCharactersException
    */
   public static function parse(string $input): ParsedIsbn
     {
@@ -37,8 +38,9 @@ class Parser
         $inputWithoutHyphens = self::_stripHyphens($input);
         $inputWithoutChecksum = self::_stripChecksum($inputWithoutHyphens);
 
-        if (!is_numeric($inputWithoutChecksum)) {
-            throw new IsbnParsingException(static::ERROR_INVALID_CHARACTERS);
+        $invalidCharacters = self::_extractInvalidCharacters($inputWithoutChecksum);
+        if (!empty($invalidCharacters)) {
+            throw new InvalidCharactersException($invalidCharacters);
         }
 
         $result = self::_extractProductCode($inputWithoutChecksum);
@@ -183,5 +185,14 @@ class Parser
         throw new IsbnParsingException(
             sprintf(static::ERROR_CANNOT_MATCH_RANGE, $prefix)
         );
+    }
+
+    /**
+     * @param string $inputWithoutChecksum
+     * @return string
+     */
+    public static function _extractInvalidCharacters(string $inputWithoutChecksum): string
+    {
+        return preg_replace('/[0-9]+/', '', $inputWithoutChecksum);
     }
 }

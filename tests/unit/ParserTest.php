@@ -22,4 +22,17 @@ class ParserTest extends TestCase
     Parser::parse($emptyValue);
   }
 
+  public function testInvalidCharacters()
+  {
+    // given
+    $stringWithInvalidCharacters = "978-1-2345-ABCD-0";
+
+    // then
+    $this->expectException(InvalidCharactersException::class);
+    $this->expectExceptionMessage("Cannot parse string with invalid characters: ABCD");
+
+    // when
+    Parser::parse($stringWithInvalidCharacters);
+  }
+
 }
