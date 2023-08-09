@@ -1,4 +1,4 @@
-# biblys/isbn 3.0 alpha
+# biblys/isbn 3.0
 
 [![tests](https://github.com/biblys/isbn/actions/workflows/tests.yml/badge.svg)](https://github.com/biblys/isbn/actions/workflows/tests.yml)
 [![Latest Stable Version](https://poser.pugx.org/biblys/isbn/v/stable)](https://packagist.org/packages/biblys/isbn)
@@ -6,15 +6,11 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/biblys/isbn)
 
-:warning: The `next` branch holds the code for the next major version of the library.
-It is experimental, adds support for PHP 8.0 but removes deprecated code. It is not considered stable.
-For a stable version, use the [main branch](https://github.com/biblys/isbn/tree/main) releases instead.
-
 biblys/isbn can be used to:
 
 - [validate](#validate) a string against the ISBN-10, ISBN-13 and EAN-13 formats
 - [convert](#convert) an ISBN to ISBN-10, ISBN-13, EAN-13, GTIN-14 and ISBN-A/DOI formats
-- parse an ISBN and extract registration agency, publisher code, publication code, checksum, etc.
+- [parse](#parse) an ISBN to extract registration agency, publisher code, publication code, checksum, etc.
 
 [CHANGELOG](https://github.com/biblys/isbn/releases)
 
@@ -26,7 +22,7 @@ biblys/isbn can be used to:
 Install with composer:
 
 ```console
-composer require biblys/isbn:dev-next
+composer require biblys/isbn:~3.0
 ```
 
 ## Usage
