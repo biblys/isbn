@@ -10,8 +10,12 @@
  * source code.
  */
 
-namespace Biblys\Isbn;
+namespace Biblys\Isbn\Exception;
 
-class IsbnValidationException extends \Exception
+class InvalidCharactersException extends IsbnParsingException
 {
+  public function __construct($invalidCharacters)
+  {
+    parent::__construct("Cannot parse string with invalid characters: $invalidCharacters");
+  }
 }

@@ -16,6 +16,7 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use Biblys\Isbn\Exception\IsbnParsingException;
 use Biblys\Isbn\Isbn;
 use PHPUnit\Framework\TestCase;
 
@@ -33,7 +34,7 @@ class testConvertToIsbnA extends TestCase
 
     public function testFormatIsbnAInvalidIsbn()
     {
-        $this->expectException("Biblys\Isbn\IsbnParsingException");
+        $this->expectException(IsbnParsingException::class);
         $this->expectExceptionMessage("Invalid characters in the code");
 
         Isbn::convertToIsbnA("ABC-80-7203-7");
