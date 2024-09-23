@@ -22,6 +22,9 @@ class Parser
         ERROR_INVALID_COUNTRY_CODE = 'Country code is unknown',
         ERROR_CANNOT_MATCH_RANGE = "Cannot find any ISBN range matching prefix %s";
 
+    /**
+     * @throws IsbnParsingException
+     */
     public static function parse(string $input): ParsedIsbn
     {
         if (empty($input)) {
@@ -60,11 +63,12 @@ class Parser
     private static function _stripHyphens($input)
     {
         $replacements = array('-', '_', ' ');
-        $input = str_replace($replacements, '', $input);
-
-        return $input;
+        return str_replace($replacements, '', $input);
     }
 
+    /**
+     * @throws IsbnParsingException
+     */
     private static function _stripChecksum($input)
     {
         $length = strlen($input);
@@ -74,14 +78,16 @@ class Parser
         }
 
         if ($length == 13 || $length == 10) {
-            $input = substr_replace($input, "", -1);
-            return $input;
+            return substr_replace($input, "", -1);
         }
 
         throw new IsbnParsingException(static::ERROR_INVALID_LENGTH);
     }
 
-    private static function _extractProductCode($input)
+    /**
+     * @throws IsbnParsingException
+     */
+    private static function _extractProductCode($input): array
     {
         if (strlen($input) == 9) {
             return [$input, 978];
@@ -96,7 +102,10 @@ class Parser
         throw new IsbnParsingException(static::ERROR_INVALID_PRODUCT_CODE);
     }
 
-    private static function _extractCountryCode($input, $productCode)
+    /**
+     * @throws IsbnParsingException
+     */
+    private static function _extractCountryCode($input, $productCode): array
     {
 
         // Get the seven first digits
@@ -119,7 +128,7 @@ class Parser
         // Country code is invalid
         if (empty($length)) {
             throw new IsbnParsingException(static::ERROR_INVALID_COUNTRY_CODE);
-        };
+        }
 
         $countryCode = substr($input, 0, $length);
         $input = substr($input, $length);
@@ -129,8 +138,9 @@ class Parser
 
     /**
      * Remove and save Publisher Code and Publication Code
+     * @throws IsbnParsingException
      */
-    private static function _extractPublisherCode($input, $productCode, $countryCode)
+    private static function _extractPublisherCode($input, $productCode, $countryCode): array
     {
         // Get the seven first digits or less
         $first7 = substr($input, 0, 7);
