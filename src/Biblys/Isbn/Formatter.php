@@ -136,8 +136,6 @@ class Formatter
             }
         }
 
-        $checksum = (10 - ($checksum % 10)) % 10;
-
-        return $checksum;
+        return (10 - ($checksum % 10)) % 10;
     }
 }
