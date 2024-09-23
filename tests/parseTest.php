@@ -17,46 +17,56 @@ error_reporting(E_ALL);
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Biblys\Isbn\Isbn;
+use Biblys\Isbn\IsbnParsingException;
 use PHPUnit\Framework\TestCase;
 
-class testParse extends TestCase
+class parseTest extends TestCase
 {
-  public function testParseIsbn()
-  {
-    $isbn = Isbn::parse("9782207258040");
 
-    $this->assertInstanceOf("Biblys\Isbn\ParsedIsbn", $isbn);
-  }
-
-  public function testGetGs1Element()
+    /**
+     * @throws IsbnParsingException
+     */
+    public function testGetGs1Element()
   {
     $isbn = Isbn::parse("9782207258040");
 
     $this->assertEquals("978", $isbn->getGs1Element());
   }
 
-  public function testGetRegistrationGroupElement()
+    /**
+     * @throws IsbnParsingException
+     */
+    public function testGetRegistrationGroupElement()
   {
     $isbn = Isbn::parse("9782207258040");
 
     $this->assertEquals("2", $isbn->getRegistrationGroupElement());
   }
 
-  public function testGetRegistrantElement()
+    /**
+     * @throws IsbnParsingException
+     */
+    public function testGetRegistrantElement()
   {
     $isbn = Isbn::parse("9782207258040");
 
     $this->assertEquals("207", $isbn->getRegistrantElement());
   }
 
-  public function testGetPublicationElement()
+    /**
+     * @throws IsbnParsingException
+     */
+    public function testGetPublicationElement()
   {
     $isbn = Isbn::parse("9782207258040");
 
     $this->assertEquals("25804", $isbn->getPublicationElement());
   }
 
-  public function testGetRegistrationAgencyName()
+    /**
+     * @throws IsbnParsingException
+     */
+    public function testGetRegistrationAgencyName()
   {
     $isbn = Isbn::parse("9782207258040");
 

@@ -3,7 +3,7 @@
 /*
  * This file is part of the biblys/isbn package.
  *
- * (c) Clément Latzarus
+ * © Clément Latzarus
  *
  * This package is Open Source Software. For the full copyright and license
  * information, please view the LICENSE file which was distributed with this
@@ -17,17 +17,26 @@ error_reporting(E_ALL);
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Biblys\Isbn\Isbn;
+use Biblys\Isbn\IsbnParsingException;
+use Biblys\Isbn\IsbnValidationException;
 use PHPUnit\Framework\TestCase;
 
-class testValidateAsEan13 extends TestCase
+class validateAsEan13Test extends TestCase
 {
+    /**
+     * @throws IsbnValidationException
+     * @throws IsbnParsingException
+     */
     public function testValidIsbn()
     {
         Isbn::validateAsEan13("9782207258040");
 
-        $this->expectNotToPerformAssertions("It should not throw");
+        $this->expectNotToPerformAssertions();
     }
 
+    /**
+     * @throws IsbnValidationException
+     */
     public function testUnparsableIsbn()
     {
         $this->expectException("Biblys\Isbn\IsbnParsingException");
@@ -36,6 +45,9 @@ class testValidateAsEan13 extends TestCase
         Isbn::validateAsEan13("9782SPI258040");
     }
 
+    /**
+     * @throws IsbnParsingException
+     */
     public function testIsbnWithHyphens()
     {
         $this->expectException("Biblys\Isbn\IsbnValidationException");
@@ -44,7 +56,10 @@ class testValidateAsEan13 extends TestCase
         Isbn::validateAsEan13("978-2-207-25804-0");
     }
 
-    public function testIsbnWithIncorrectCheckum()
+    /**
+     * @throws IsbnParsingException
+     */
+    public function testIsbnWithIncorrectChecksum()
     {
         $this->expectException("Biblys\Isbn\IsbnValidationException");
         $this->expectExceptionMessage("9782207258049 is not a valid EAN-13. Expected 9782207258040.");

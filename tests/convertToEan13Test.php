@@ -17,10 +17,14 @@ error_reporting(E_ALL);
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Biblys\Isbn\Isbn;
+use Biblys\Isbn\IsbnParsingException;
 use PHPUnit\Framework\TestCase;
 
-class testConvertToEan13 extends TestCase
+class convertToEan13Test extends TestCase
 {
+    /**
+     * @throws IsbnParsingException
+     */
     public function testFormatEan13()
     {
         $ean13 = Isbn::convertToEan13("978-2-207-25804-0");
