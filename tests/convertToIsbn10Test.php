@@ -17,10 +17,14 @@ error_reporting(E_ALL);
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Biblys\Isbn\Isbn;
+use Biblys\Isbn\IsbnParsingException;
 use PHPUnit\Framework\TestCase;
 
-class testConvertToIsbn10 extends TestCase
+class convertToIsbn10Test extends TestCase
 {
+    /**
+     * @throws IsbnParsingException
+     */
     public function testFormatIsbn10()
     {
         $isbn10 = Isbn::convertToIsbn10("9783464603529");
@@ -31,6 +35,9 @@ class testConvertToIsbn10 extends TestCase
         );
     }
 
+    /**
+     * @throws IsbnParsingException
+     */
     public function testFormatIsbn10WithX()
     {
         $isbn10 = Isbn::convertToIsbn10("978-80-7203-717-9");
