@@ -17,11 +17,11 @@ class ParsedIsbn
 {
   // ISBN Users' Manual, International Edition, p. 11-12
   // https://www.kb.se/download/18.71dda82e160c04f1cc412bc/1531827912246/ISBN%20International%20Users%20Manual%20-%207th%20edition.pdf
-  private $_gs1Element = "978";
-  private $_registrationGroupElement = "";
-  private $_registrantElement = "";
-  private $_publicationElement = "";
-  private $_registrationAgencyName = "";
+  private $_gs1Element;
+  private $_registrationGroupElement;
+  private $_registrantElement;
+  private $_publicationElement;
+  private $_registrationAgencyName;
 
   public function __construct(array $elements)
   {
