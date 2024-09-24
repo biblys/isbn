@@ -12,6 +12,8 @@
 
 namespace Biblys\Isbn;
 
-class IsbnValidationException extends \Exception
+use Exception;
+
+class IsbnValidationException extends Exception
 {
 }

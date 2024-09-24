@@ -25,6 +25,7 @@ class Isbn
      * @param string $input A string to convert
      *
      * @return string
+     * @throws IsbnParsingException
      */
     static public function convertToIsbn10(string $input): string
     {
@@ -42,6 +43,7 @@ class Isbn
      * @param string $input A string to convert
      *
      * @return string
+     * @throws IsbnParsingException
      */
     static public function convertToIsbn13(string $input): string
     {
@@ -59,6 +61,7 @@ class Isbn
      * @param string $input A string to convert
      *
      * @return string
+     * @throws IsbnParsingException
      */
     static public function convertToIsbnA(string $input): string
     {
@@ -76,6 +79,7 @@ class Isbn
      * @param string $input A string to convert
      *
      * @return string
+     * @throws IsbnParsingException
      */
     static public function convertToEan13(string $input): string
     {
@@ -94,6 +98,7 @@ class Isbn
      * @param int $prefix A int to preprend (defaults to 1)
      *
      * @return string
+     * @throws IsbnParsingException
      */
     static public function convertToGtin14(string $input, int $prefix = 1): string
     {
@@ -109,6 +114,7 @@ class Isbn
      * @param string $input A string to validate
      *
      * @throws IsbnValidationException
+     * @throws IsbnParsingException
      */
     static public function validateAsIsbn10(string $input): void
     {
@@ -130,6 +136,7 @@ class Isbn
      * @param string $input A string to validate
      *
      * @throws IsbnValidationException
+     * @throws IsbnParsingException
      */
     static public function validateAsIsbn13(string $input): void
     {
@@ -151,6 +158,7 @@ class Isbn
      * @param string $input A string to validate
      *
      * @throws IsbnValidationException
+     * @throws IsbnParsingException
      */
     static public function validateAsEan13(string $input): void
     {
