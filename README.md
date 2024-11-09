@@ -1,4 +1,4 @@
-# biblys/isbn 3.0
+# biblys/isbn
 
 [![tests](https://github.com/biblys/isbn/actions/workflows/tests.yml/badge.svg)](https://github.com/biblys/isbn/actions/workflows/tests.yml)
 [![Latest Stable Version](https://poser.pugx.org/biblys/isbn/v/stable)](https://packagist.org/packages/biblys/isbn)
