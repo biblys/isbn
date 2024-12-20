@@ -160,6 +160,7 @@ Or using a docker container:
 
 ```console
 composer docker:update-ranges
+```
 
 ## Create a minor release after ranges autoupdate
 
