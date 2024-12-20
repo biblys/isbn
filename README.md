@@ -165,7 +165,7 @@ composer docker:update-ranges
 ## Create a minor release after ranges autoupdate
 
 ```shell
-read -p "Pull request number?" PR_NUMBER
+read "Pull request number?PR_NUMBER"
 gh pr merge --auto -dr $PR_NUMBER
 IFS='.' read -r major minor patch <<< "$CURRENT_VERSION"
 NEW_VERSION="$major.$minor.$((patch + 1))"
