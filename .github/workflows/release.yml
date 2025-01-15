@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-tags: true
 
       - name: Get latest tag
         run: echo ::set-output name=tag::$(git describe --tags `git rev-list --tags --max-count=1`)
@@ -23,4 +25,4 @@ jobs:
 
       - name: Create release
         run: |
-          gh release create ${{ steps.bump_version.outputs.version }} --title ${{ steps.bump_version.outputs.version }}
+          gh release create ${{ steps.bump_version.outputs.version }} --title ${{ steps.bump_version.outputs.version }} --latest --generate-notes
