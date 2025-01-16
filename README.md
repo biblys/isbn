@@ -166,13 +166,13 @@ composer docker:update-ranges
 
 ```shell
 read "PR_NUMBER?Pull request number: "
-gh pr merge --auto -dr $PR_NUMBER
-git fetch --tags
-CURRENT_VERSION=$(git tag --sort=-v:refname | head -n 1)
-IFS='.' read -r major minor patch <<< "$CURRENT_VERSION"
-NEW_VERSION="$major.$minor.$((patch + 1))"
-read "RELEASE_NOTES?Release notes: "
-gh release create $NEW_VERSION --title $NEW_VERSION --notes $RELEASE_NOTES
+gh pr merge --auto -dr "$PR_NUMBER" \
+    && git fetch --tags \
+    && CURRENT_VERSION=$(git tag --sort=-v:refname | head -n 1) \
+    && IFS='.' read -r major minor patch <<< "$CURRENT_VERSION" \
+    && NEW_VERSION="$major.$minor.$((patch + 1))" \
+    && read "RELEASE_NOTES?Release notes: " \
+    && gh release create "$NEW_VERSION" --title "$NEW_VERSION" --notes "$RELEASE_NOTES"
 ```
 
 
