@@ -2,7 +2,7 @@ name: Update ISBN ranges
 
 on:
   schedule:
-    - cron: 0 6 * * * # Every day at 6:00 UTC
+    - cron: 0 6 * * 3 # Every wednesday at 6:00 UTC
   workflow_dispatch:
 
 jobs:
