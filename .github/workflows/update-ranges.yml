@@ -25,7 +25,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           base: main
           commit-message: "feat: update ISBN ranges"
           title: ISBN ranges automatic update
