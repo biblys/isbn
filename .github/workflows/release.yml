@@ -15,15 +15,19 @@ jobs:
           fetch-depth: 0
 
       - name: Get latest tag
-        run: echo ::set-output name=tag::$(git describe --tags `git rev-list --tags --max-count=1`)
+        id: get_tag
+        run: echo "tag=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_OUTPUT
 
       - name: Bump version
+        id: bump_version
         run: |
           IFS='.' read -r major minor patch <<< "${{ steps.get_tag.outputs.tag }}"
           echo "Current version: $major.$minor.$patch"
           echo "Bumping patch version..."
-          echo "::set-output name=version::$major.$minor.$((patch + 1))"
+          echo "version=$major.$minor.$((patch + 1))" >> $GITHUB_OUTPUT
 
       - name: Create release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create ${{ steps.bump_version.outputs.version }} --title ${{ steps.bump_version.outputs.version }} --latest --generate-notes
