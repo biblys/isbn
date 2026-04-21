@@ -17,7 +17,7 @@ jobs:
         with:
           php-version: 8.4
 
-      - uses: ramsey/composer-install@v3
+      - uses: ramsey/composer-install@4.0.0
 
       - name: Update ISBN ranges
         run: composer update-ranges
