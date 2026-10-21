@@ -29,8 +29,19 @@ jobs:
           echo "Bumping patch version..."
           echo "version=$major.$minor.$((patch + 1))" >> $GITHUB_OUTPUT
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+
+      - name: List changed registration groups
+        run: |
+          git show "${{ steps.get_tag.outputs.tag }}:src/Biblys/Isbn/groups-array.php" > "$RUNNER_TEMP/previous-groups-array.php"
+          php bin/ranges-changes.php "$RUNNER_TEMP/previous-groups-array.php" src/Biblys/Isbn/groups-array.php > "$RUNNER_TEMP/ranges-changes.md"
+          cat "$RUNNER_TEMP/ranges-changes.md"
+
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create ${{ steps.bump_version.outputs.version }} --title ${{ steps.bump_version.outputs.version }} --latest --generate-notes
+          gh release create ${{ steps.bump_version.outputs.version }} --title ${{ steps.bump_version.outputs.version }} --latest --generate-notes --notes-file "$RUNNER_TEMP/ranges-changes.md"
